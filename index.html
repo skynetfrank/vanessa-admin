@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="materialize/css/materialize.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <title>Admin: Clinica-Dental</title>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="brandName">
+            <img class="logo-dental" src="./images/logoDental.jpg" id="img-logo" alt="logo-dental">
+            <div class="usuario"><span id="usuario"></span><span id="myWidth"></span></div>
+        </div>
+        <div class="navLinks">
+            <ul>
+                <li>
+                    <a href="#" class="modal-trigger menu" data-target="modal-crud" id="link-paciente">
+                        <i class="material-icons left">airline_seat_recline_extra</i>
+                        <span>Pacientes</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#agenda" class="menu" id="link-agenda">
+                        <i class="material-icons left">history_toggle_off</i>
+                        <span>Agenda</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="menu" id="link-dashboard">
+                        <i class="material-icons left">grid_view</i>
+                        <span>Dashboard</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="loginId" class="modal-trigger" data-target="modal-login">
+                        <i class="material-icons left">lock</i>
+                        <span>Entrar</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" id="logout">
+                        <i class="material-icons left">open_in_new</i>
+                        <span>Salir</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <a href="#" class="toggle-button">
+            <span class="linea"></span>
+            <span class="linea"></span>
+            <span class="linea"></span>
+        </a>
+    </nav>
+    <section id="inicio"></section>
+
+    <section id="pacientes"></section>
+
+    <section class="timeline" id="myTimeline">
+        <div class="intro" id="myIntro">
+            <div class="intro-header">
+                <h1>Agenda Pendiente &darr;</h1>
+            </div>
+        </div>
+        <ul id="ul-timeline">
+        </ul>
+    </section>
+
+
+    <div id="div__mostrar"></div>
+    <div id="modal-signup" class="modal"></div>
+    <div id="modal-login" class="modal"></div>
+    <div id="modal-msg" class="modal"></div>
+    <div id="modal-crud" class="modal"></div>
+
+
+    <!---librerias (materialize,firebase y myScripts-->
+
+    <script src="./materialize/js/materialize.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
+    <!---   
+    <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-functions.js"></script>
+    -->
+    <script src="js/firebase-config.js"></script>
+
+    <script defer src="js/material-config.js"></script>
+    <script defer src="js/auth.js"></script>
+    <script defer src="js/index.js"></script>
+    <script src="js/timeline.js"></script>
+</body>
+
+</html>
