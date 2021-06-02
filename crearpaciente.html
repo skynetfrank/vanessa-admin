@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/formulario1.css">
+  <title>Paciente-Historia</title>
+</head>
+
+<body>
+  <div class="testbox">
+    <form action="/">
+      <div class="banner">
+        <h1>Paciente - Historia</h1>
+      </div>
+      <br>
+      <h5>Datos Personales</h5>
+      <div class="item tipoInput">
+        <p>Nombre</p>
+        <input type="text" name="nombre" id="nombre" required />
+        <p>Apellido</p>
+        <input type="text" name="apellido" id="apellido" required />
+      </div>
+      <div class="item tipoInput">
+        <p>Cedula&nbsp</p>
+        <input type="text" name="cedula" id="cedula" required />
+        <p>Fecha_Nacimiento</p>
+        <input type="date" name="fnacimiento" id="fnacimiento" required />
+      </div>
+      <div class="item tipoInput">
+        <p>Celular&nbsp</p>
+        <input type="text" name="celular" id="celular" />
+        <p>Telefono_Local</p>
+        <input type="text" name="tlflocal" id="tlflocal" />
+      </div>
+      <div class="item tipoInput">
+        <p>Email&nbsp&nbsp&nbsp</p>
+        <input type="text" name="email" id="email" />
+        <p>Contacto</p>
+        <input type="text" name="contacto" id="contacto" required />
+      </div>
+
+      <p>Genero:</p>
+      <div class="question">
+        <div class="question-answer" id="div-genero">
+          <input type="radio" value="none" id="radio_1" name="checkgenero" required />
+          <label for="radio_1" class="radio"><span>Hombre</span></label>
+          <input type="radio" value="none" id="radio_2" name="checkgenero" required />
+          <label for="radio_2" class="radio"><span>Mujer</span></label>
+          <input type="radio" value="none" id="radio_3" name="checkgenero" required />
+          <label for="radio_3" class="radio"><span>Diverso</span></label>
+        </div>
+      </div>
+
+      <p>Estado Civil:</p>
+      <div class="question">
+        <div class="question-answer" id="div-edocivil">
+          <input type="radio" value="none" id="radio_4" name="checkedocivil" required />
+          <label for="radio_4" class="radio"><span>Soltero</span></label>
+          <input type="radio" value="none" id="radio_5" name="checkedocivil" required />
+          <label for="radio_5" class="radio"><span>Casado</span></label>
+          <input type="radio" value="none" id="radio_6" name="checkedocivil" required />
+          <label for="radio_6" class="radio"><span>Divorciado</span></label>
+          <input type="radio" value="none" id="radio_7" name="checkedocivil" required />
+          <label for="radio_7" class="radio"><span>Otro</span></label>
+        </div>
+      </div>
+
+      <div class="item">
+        <p>Direccion de habitacion</p>
+        <input type="text" name="direccion1" id="direccion1" placeholder="direccion1" />
+        <input type="text" name="direccion2" id="direccion2" placeholder="direccion2" />
+      </div>
+
+      <h5>Historia Medica</h5>
+      <div class="item tipoInput">
+        <p>Estatura</p>
+        <input type="text" name="estatura" id="estatura" />
+        <p>Peso</p>
+        <input type="text" name="peso" id="peso" />
+      </div>
+      <div class="question">
+        <p>Esta siendo tratado por un m&eacutedico actualmente?</p>
+        <div class="question-answer">
+          <input type="radio" value="none" id="radio_8" name="checktratadopormedico" />
+          <label for="radio_8" class="radio"><span>Si</span></label>
+          <input type="radio" value="none" id="radio_9" name="checktratadopormedico" required />
+          <label for="radio_9" class="radio"><span>No</span></label>
+        </div>
+      </div>
+      <div class="item">
+        <p>Para que enfermedad?</p>
+        <input type="text" name="tratadoporenfermedad" id="tratadoporenfermedad" />
+      </div>
+      <div class="question">
+        <p>Esta tomando algun tipo de Medicamento o Droga?</p>
+        <div class="question-answer">
+          <input type="radio" value="none" id="radio_10" name="checktomamedicamento" id="tomamedicamento" required />
+          <label for="radio_10" class="radio"><span>Si</span></label>
+          <input type="radio" value="none" id="radio_11" name="checktomamedicamento" id="tomamedicamento" required />
+          <label for="radio_11" class="radio"><span>No</span></label>
+        </div>
+      </div>
+      <div class="item">
+        <p>Cuales son esos Medicamentos?</p>
+        <input type="text" name="cualesmedicamentos" id="cualesmedicamentos" required />
+      </div>
+      <div class="item">
+        <p>Describa las dosis para esos medicamentos</p>
+        <input type="text" name="dosismeds" id="dosismeds" />
+      </div>
+
+      <br />
+      <div class="question">
+        <p>Marque si es alergico a los siguientes Medicamentos:</p>
+        <div class="question-answer checkbox-item">
+          <div>
+            <input type="checkbox" value="none" id="check_1" name="checkaspirina" required />
+            <label for="check_1" class="check"><span>Aspirina</span></label>
+            <input type="checkbox" value="none" id="check_2" name="checkpenicilina" required />
+            <label for="check_2" class="check"><span>Penicilina</span></label>
+            <input type="checkbox" value="none" id="check_3" name="checkanestecialocal" required />
+            <label for="check_3" class="check"><span>Anestecia Local</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_4" name="checkcodeina" required />
+            <label for="check_15" class="check"><span>Code&iacutena</span></label>
+
+            <input type="checkbox" value="none" id="check_5" name="checklatex" required />
+            <label for="check_16" class="check"><span>Latex-xxx</span></label>
+
+            <input type="checkbox" value="none" id="check_6" name="checkacrilico" required />
+            <label for="check_17" class="check"><span>Acr&iacutelico</span></label>
+
+          </div>
+
+          <div>
+            <input type="checkbox" value="none" id="check_7" name="checkalergicootro" required />
+            <label for="check_7" class="check"><span>Otro (especifique)</span></label>
+          </div>
+
+        </div>
+      </div>
+      <br />
+      <div class="item textarea">
+
+        <textarea rows="3" placeholder="explique su alergia" name="textalergicootros" required></textarea>
+      </div>
+
+
+      <div class="question">
+
+        <p>Por favor marque solo si su respuesta es positiva</p>
+        <div class="question-answer checkbox-item">
+          <div>
+            <input type="checkbox" value="none" id="check_8" name="checkcirugias" required />
+            <label for="check_8" class="check"><span>Agunas vez ha sido hospitalizado o tuvo una
+                operaci&oacuten?</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_9" name="checklesiones" required />
+            <label for="check_9" class="check"><span>Ha tenido una lesi&oacuten grave en la cabeza o el
+                cuello?</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_11" name="checkdieta" required />
+            <label for="check_11" class="check"><span>Tiene actualmente alguna dieta especial?</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_12" name="checkfumador" required />
+            <label for="check_12" class="check"><span>Es fumador o consume alg&uacuten tipo de tabaco?</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_13" name="checkcontroladas" required />
+            <label for="check_13" class="check"><span>Usa sustancias controladas?</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_14" name="checkembarazada" required />
+            <label for="check_14" class="check"><span>Esta embarazada?</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_15" name="checkanticonceptivos" required />
+            <label for="check_15" class="check"><span>Esta tomando anticonceptivos orales?</span></label>
+          </div>
+          <div>
+            <input type="checkbox" value="none" id="check_16" name="checkamamantando" required />
+            <label for="check_16" class="check"><span>Esta amamantando actualmente?</span></label>
+          </div>
+        </div>
+      </div>
+      <br />
+      <h5>Antecedentes Familiares</h5>
+      <div class="question">
+
+        <p>Existen casos de las siguientes patolog&iacuteas en su familia?</p>
+        <div class="question-answer checkbox-item">
+          <div>
+            <input type="checkbox" value="none" id="check_17" name="checkcancer" required />
+            <label for="check_17" class="check"><span>Cancer</span></label>
+            <input type="checkbox" value="none" id="check_18" name="checktuberculosis" required />
+            <label for="check_18" class="check"><span>Tuberculosis</span></label>
+            <input type="checkbox" value="none" id="check_23" name="checkhiv" required />
+            <label for="check_23" class="check"><span>H.I.V</span></label>
+            <input type="checkbox" value="none" id="check_19" name="checkdiabetes" required />
+            <label for="check_19" class="check"><span>Diabetes</span></label>
+
+          </div>
+
+          <div>
+            <input type="checkbox" value="none" id="check_20" name="checkcardiovasculares" required />
+            <label for="check_20" class="check"><span>Cardiovasculares</span></label>
+            <input type="checkbox" value="none" id="check_21" name="checkhemorragicas" required />
+            <label for="check_21" class="check"><span>Hemorragicas</span></label>
+            <input type="checkbox" value="none" id="check_22" name="checkvenereas" required />
+            <label for="check_22" class="check"><span>Venereas</span></label>
+          </div>
+
+          <div class="item">
+            <p>Alguna otra enfermedad? describala aqu&iacute</p>
+            <input type="text" name="otraenfermedad" />
+          </div>
+          <p>Si posee alg&uacuten h&aacutebito, especifique cual y la frecuencia del mismo</p>
+          <div class="item textarea">
+            <textarea rows="3" placeholder="habitos" name="texthabitos" required></textarea>
+          </div>
+        </div>
+      </div>
+
+      <h5>Consulta</h5>
+      <div class="item">
+        <p>Motivo Principal de la Consulta?</p>
+        <input type="text" name="motivoprincipalconsulta" required />
+      </div>
+      <div class="item">
+        <p>Fecha de ultima consulta</p>
+        <input type="text" name="fechaultimaconsulta" required />
+      </div>
+      <div class="item">
+        <p>Motivo de ultima consula</p>
+        <input type="text" name="motivoultimaconsulta" required />
+      </div>
+
+      <h5>Tratamiento</h5>
+      <div class="item textarea">
+        <textarea rows="5" placeholder="desglose el tratamiento para esta consulta" name="texttratamiento"
+          required></textarea>
+      </div>
+      <br />
+      <div class="btn-block">
+        <button type="submit" href="/">Registrar Informacion</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+
+</html>

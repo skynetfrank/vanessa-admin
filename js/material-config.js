@@ -7,8 +7,10 @@ const modal__crud = document.getElementById("modal-crud");
 document.addEventListener("DOMContentLoaded", () => {
   const modals = document.querySelectorAll('.modal');
   M.Modal.init(modals);
+
   const items = document.querySelectorAll('.collapsible');
   M.Collapsible.init(items);
+
 
 });
 
@@ -62,9 +64,9 @@ modal__crud.innerHTML = `
     </div>
     <div class="pacientes-box">
         <button class="btn cyan z-depth-0" id="btn-agregar-paciente">Nuevo</button>
-        <button class="btn  cyan z-depth-0" id="btn-agregar-paciente">Editar</button>
-        <button class="btn  cyan z-depth-0" id="btn-agregar-paciente">Eliminar</button>
-        <button class="btn  cyan z-depth-0" id="btn-agregar-paciente">Consultar</button>
+        <button class="btn  cyan z-depth-0" id="btn-editar-paciente">Editar</button>
+        <button class="btn  cyan z-depth-0" id="btn-consultar-paciente">Consultar</button>
+        <button class="btn  cyan z-depth-0" id="btn-eliminar-paciente">Eliminar</button>
     </div>
     <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat lime ">Cerrar</a>

@@ -16,7 +16,6 @@ p {
   font-family: Roboto, Arial, sans-serif;
   font-size: 14px;
   color: #666;
-  line-height: 22px;
 }
 
 p {
@@ -34,7 +33,7 @@ h1 {
 h5 {
   margin: 10px 0;
   color: #265a6e;
-  font-size: 1rem;
+  font-size: 1.5rem;
 }
 
 .testbox {
@@ -42,21 +41,12 @@ h5 {
   justify-content: center;
   align-items: center;
   height: inherit;
-  padding: 20px;
-}
-
-form {
-  width: 100%;
-  padding: 20px;
-  border-radius: 6px;
-  background: #fff;
-  box-shadow: 0 0 10px 0 #095484;
+  padding: 10px;
 }
 
 .banner {
   position: relative;
-  height: 80px;
-
+  height: 60px;
   background-color: #265a6e;
   display: flex;
   justify-content: center;
@@ -73,20 +63,66 @@ form {
   height: 100%;
 }
 
+form {
+  width: 100%;
+  padding: 20px;
+  border-radius: 6px;
+  background: #fff;
+  box-shadow: 0 0 5px 0 #095484;
+}
+
+.item.tipoInput {
+  display: flex;
+  align-items: center;
+}
+
+.item.tipoInput > p {
+  margin-bottom: 10px;
+}
+
+.item.tipoInput > input {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+#apellido {
+  width: 555px;
+}
+
+#cedula {
+  width: 100%;
+}
+
+#fnacimiento {
+  width: 400px;
+}
+
+#tlflocal {
+  width: 450px;
+}
+
+#contacto {
+  width: 535px;
+}
+
+#div-genero,#div-edocivil{
+  margin-left: 55px;
+}
+
 input,
 select,
 textarea {
   margin-bottom: 10px;
-  border: 1px solid #ccc;
+  border: 1px solid rgb(177, 177, 177);
   border-radius: 3px;
 }
 
 input {
   width: calc(100% - 10px);
-  padding: 5px;
+  padding: 4px;
 }
 
-::placeholder{
+::placeholder {
   color: rgb(168, 165, 165);
 }
 
@@ -108,8 +144,7 @@ textarea {
 .item:hover p,
 .item:hover i,
 .question:hover p,
-.question label:hover
-a {
+.question label:hover a {
   color: #095484;
 }
 
@@ -123,31 +158,10 @@ a {
 
 .item {
   position: relative;
-  margin: 10px 0;
 }
 
 input[type="date"]::-webkit-inner-spin-button {
   display: none;
-}
-
-.item i,
-input[type="date"]::-webkit-calendar-picker-indicator {
-  position: absolute;
-  font-size: 20px;
-  color: #a9a9a9;
-}
-
-.item i {
-  right: 2%;
-  top: 30px;
-  z-index: 1;
-}
-
-[type="date"]::-webkit-calendar-picker-indicator {
-  right: 1%;
-  z-index: 2;
-  opacity: 0;
-  cursor: pointer;
 }
 
 input[type="radio"],
@@ -164,7 +178,7 @@ label.check {
 }
 
 .question span {
-  margin-left: 30px;
+  margin-left: 22px;
 }
 
 span.required {
@@ -191,7 +205,7 @@ label.radio:before {
 }
 
 label.check:before {
-  top: 2px;
+  
   width: 16px;
   height: 16px;
   border-radius: 2px;
@@ -273,6 +287,29 @@ button:hover {
 
 @media (min-width: 768px) {
   form {
-    width: 50%;
+    width: 60%;
   }
+}
+
+@media (max-width: 600px) {
+  .item.tipoInput {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  label > span {
+    line-height: 20px;
+  }
+
+  #apellido,
+  #fnacimiento,
+  #tlflocal,
+  #contacto {
+    width: 100%;
+  }
+
+  #div-genero,#div-edocivil{
+  margin-left: 0px;
+}
 }

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/odograma.css">
+  <title>Odontograma</title>
+</head>
+
+<body>
+  <h1>Examen Clinico Intraoral - Odontograma</h1>
+  <div id="sidebar">
+    <div class="colorButtons">
+      <h3>Colores</h3>
+      <button id="btncolor-blanco" class="btn-color"></button>
+      <button id="btncolor-negro" class="btn-color"></button>
+      <button id="btncolor-naranja" class="btn-color"></button>
+      <button id="btncolor-rojo" class="btn-color"></button>
+      <button id="btncolor-azul" class="btn-color"></button>
+      <button id="btncolor-verde" class="btn-color"></button>
+      <div class="div-color-actual">
+        <label for="">Color Actual:</label>
+        <button id="color-actual" class="btn-color"></button>
+      </div>
+    </div>
+    <hr>
+    <h3>Herramientas</h3>
+    <div id="div-figuras">
+      <button id="marcador" class="btn comando"><img src="images/marker-icon.png" alt=""></button>
+      <button id="extraccion" class="btn comando"><img src="images/extracion.png" alt=""></button>
+      <button id="caries" class="btn comando"><img src="images/caries.png" alt=""></button>
+      <button id="ausente" class="btn comando"><img src="images/perpendicular.png" alt=""></button>
+      <button id="fractura" class="btn comando"><img src="images/fractura.png" alt=""></button>
+      <button id="lineaH" class="btn comando"><img src="images/paralelasH.png" alt=""></button>
+      <button id="lineaV" class="btn comando"><img src="images/paralelasV.png" alt=""></button>
+      <button id="boxup" class="btn comando"><img src="images/box-up.png" alt=""></button>
+      <button id="boxdown" class="btn comando"><img src="images/box-down.png" alt=""></button>
+      <button id="implante" class="btn comando"><img src="images/implante.png" alt=""></button>
+      <button id="eraser" class="btn comando"><img src="images/eraser-icon.png" alt=""></button>
+      <button id="clear" class="btn comando"><img src="images/broom-icon.png" alt=""></button>
+
+    </div>
+
+    <hr>
+
+
+    <div class="guardar">
+      <a id="saveToImage">Guardar Odograma</a>
+    </div>
+
+  </div>
+  <span id="myH3"></span>
+  <script src="js/odograma.js"></script>
+</body>
+
+</html>
