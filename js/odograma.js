@@ -11,6 +11,26 @@ const MARCAR_BOX_DOWN = 9;
 const MARCAR_IMPLANTE = 10;
 const MARCAR_BORRAR = 11;
 const MARCAR_LIMPIAR = 12;
+const MARCAR_PUENTE_FIJO = 13;
+const MARCAR_REMOVIBLE = 14;
+const MARCAR_HIPERSENSE = 15;
+const MARCAR_APICAL = 16;
+const MARCAR_FISTULA = 17;
+const MARCAR_EMPAQ_ALIMENTO = 18;
+const MARCAR_INFRAOCLUSION = 19;
+const MARCAR_PROFUNDIDAD_SONDAJE = 20;
+const MARCAR_INSERSION_CLINICA = 21;
+const MARCAR_SANGRAMIENTO_SONDAJE = 22;
+const MARCAR_MUCOSA_MASTICADORA = 23;
+const MARCAR_DEFECTO_MUCOGINGIVAL = 24;
+const MARCAR_MOVILIDAD_DENTARIA = 25;
+const MARCAR_COMPROMISO_FURCACION = 26;
+const MARCAR_PROTESIS_DEFECTUOSA = 27;
+const MARCAR_FRENILLO = 28;
+const MARCAR_EXTRUSION = 29;
+const MARCAR_INCLINACION = 30;
+const MARCAR_ROTACION = 31;
+
 
 
 const SIN_SELECCION = 0;
@@ -22,7 +42,7 @@ var body = document.getElementsByTagName("body")[0];
 var ctx = canvas.getContext('2d');
 var linesArray = [];
 currentSize = 3;
-var currentColor = "rgb(200,20,100)";
+var currentColor = "#ffffff";
 var currentAction = SIN_SELECCION;
 var currentBg = "white";
 var odogramaOriginal = document.getElementById("img-hidden");
@@ -35,6 +55,8 @@ odograma.src = "images/odograma1.jpg"
 
 odograma.addEventListener('load', () => {
   createCanvas();
+  document.getElementById("marcador").focus();
+
 });
 // INITIAL LAUNCH
 
@@ -43,7 +65,7 @@ odograma.addEventListener('load', () => {
 
 function createCanvas() {
   canvas.id = "canvas";
-  canvas.width = 700;
+  canvas.width = 650;
   canvas.height = 500;
   canvas.style.zIndex = 8;
   canvas.style.position = "absolute";
@@ -53,7 +75,6 @@ function createCanvas() {
   body.appendChild(canvas);
   ctx.drawImage(odograma, 20, 20, 600, 461);
 }
-
 
 
 // BUTTON COLORES EVENT HANDLERS
@@ -81,9 +102,7 @@ document.getElementById("btncolor-verde").addEventListener('click', () => {
   currentColor = "#008800";
   document.getElementById("color-actual").style.backgroundColor = currentColor;
 });
-document.getElementById('eraser').addEventListener('click', eraser);
 
-document.getElementById('clear').addEventListener('click', createCanvas);
 
 //descargar archivo (guardar)
 document.getElementById('saveToImage').addEventListener('click', function () {
@@ -108,11 +127,6 @@ document.getElementById("marcador").addEventListener("click", () => {
   btnOff();
   document.getElementById("marcador").classList.toggle("activo");
 });
-document.getElementById("fractura").addEventListener("click", () => {
-  currentAction = MARCAR_FRACTURA;
-  btnOff();
-  document.getElementById("fractura").classList.toggle("activo");
-});
 
 document.getElementById("ausente").addEventListener("click", () => {
   currentAction = DIENTE_AUSENTE;
@@ -132,17 +146,9 @@ document.getElementById("lineaV").addEventListener("click", () => {
   document.getElementById("lineaV").classList.toggle("activo");
 });
 
-document.getElementById("boxup").addEventListener("click", () => {
-  currentAction = MARCAR_BOX_UP;
-  btnOff();
-  document.getElementById("boxup").classList.toggle("activo");
-});
 
-document.getElementById("boxdown").addEventListener("click", () => {
-  currentAction = MARCAR_BOX_DOWN;
-  btnOff();
-  document.getElementById("boxdown").classList.toggle("activo");
-});
+
+
 
 document.getElementById("implante").addEventListener("click", () => {
   currentAction = MARCAR_IMPLANTE;
@@ -160,11 +166,139 @@ document.getElementById("clear").addEventListener("click", () => {
   currentAction = MARCAR_LIMPIAR;
   btnOff();
   document.getElementById("clear").classList.toggle("activo");
+  createCanvas();
+});
+
+document.getElementById("puenteFijo").addEventListener("click", () => {
+  currentAction = MARCAR_PUENTE_FIJO;
+  btnOff();
+  document.getElementById("puenteFijo").classList.toggle("activo");
+});
+
+document.getElementById("removible").addEventListener("click", () => {
+  currentAction = MARCAR_REMOVIBLE;
+  btnOff();
+  document.getElementById("removible").classList.toggle("activo");
+});
+
+document.getElementById("hipersense").addEventListener("click", () => {
+  currentAction = MARCAR_HIPERSENSE;
+  btnOff();
+  document.getElementById("hipersense").classList.toggle("activo");
+});
+
+document.getElementById("apical").addEventListener("click", () => {
+  currentAction = MARCAR_APICAL;
+  btnOff();
+  document.getElementById("apical").classList.toggle("activo");
+});
+
+document.getElementById("fistula").addEventListener("click", () => {
+  currentAction = MARCAR_FISTULA;
+  btnOff();
+  document.getElementById("fistula").classList.toggle("activo");
+});
+
+document.getElementById("empaq-alimento").addEventListener("click", () => {
+  currentAction = MARCAR_EMPAQ_ALIMENTO;
+  btnOff();
+  document.getElementById("empaq-alimento").classList.toggle("activo");
+});
+
+document.getElementById("infraoclusion").addEventListener("click", () => {
+  currentAction = MARCAR_INFRAOCLUSION;
+  btnOff();
+  document.getElementById("infraoclusion").classList.toggle("activo");
+});
+
+//*********************************************************************************************** */
+
+document.getElementById("profundidad-sondaje").addEventListener("click", () => {
+  currentAction = MARCAR_PROFUNDIDAD_SONDAJE;
+  btnOff();
+  document.getElementById("profundidad-sondaje").classList.toggle("activo");
+});
+
+document.getElementById("nivel-insersion").addEventListener("click", () => {
+  currentAction = MARCAR_INSERSION_CLINICA;
+  btnOff();
+  document.getElementById("nivel-insersion").classList.toggle("activo");
+});
+
+
+document.getElementById("sangramiento-sondaje").addEventListener("click", () => {
+  currentAction = MARCAR_SANGRAMIENTO_SONDAJE;
+  btnOff();
+  document.getElementById("sangramiento-sondaje").classList.toggle("activo");
+});
+
+document.getElementById("mucosa-masticadora").addEventListener("click", () => {
+  currentAction = MARCAR_MUCOSA_MASTICADORA;
+  btnOff();
+  document.getElementById("mucosa-masticadora").classList.toggle("activo");
+});
+
+document.getElementById("defecto-mucogingival").addEventListener("click", () => {
+  currentAction = MARCAR_DEFECTO_MUCOGINGIVAL;
+  btnOff();
+  document.getElementById("defecto-mucogingival").classList.toggle("activo");
+});
+
+document.getElementById("movilidad-dentaria").addEventListener("click", () => {
+  currentAction = MARCAR_MOVILIDAD_DENTARIA;
+  btnOff();
+  document.getElementById("movilidad-dentaria").classList.toggle("activo");
+});
+
+document.getElementById("compromiso-furcacion").addEventListener("click", () => {
+  currentAction = MARCAR_COMPROMISO_FURCACION;
+  btnOff();
+  document.getElementById("compromiso-furcacion").classList.toggle("activo");
+});
+
+
+document.getElementById("protesis-defectuosa").addEventListener("click", () => {
+  currentAction = MARCAR_PROTESIS_DEFECTUOSA;
+  btnOff();
+  document.getElementById("protesis-defectuosa").classList.toggle("activo");
+});
+
+document.getElementById("frenillo").addEventListener("click", () => {
+  currentAction = MARCAR_FRENILLO;
+  btnOff();
+  document.getElementById("frenillo").classList.toggle("activo");
+});
+
+document.getElementById("extrusion").addEventListener("click", () => {
+  currentAction = MARCAR_EXTRUSION;
+  btnOff();
+  document.getElementById("extrusion").classList.toggle("activo");
+});
+
+document.getElementById("inclinacion").addEventListener("click", () => {
+  currentAction = MARCAR_INCLINACION;
+  btnOff();
+  document.getElementById("inclinacion").classList.toggle("activo");
+});
+
+document.getElementById("rotacion").addEventListener("click", () => {
+  currentAction = MARCAR_ROTACION;
+  btnOff();
+  document.getElementById("rotacion").classList.toggle("activo");
 });
 
 
 
 
+
+
+
+
+
+
+
+
+//*********************************************************************************************** */
 
 
 
@@ -211,11 +345,44 @@ function getMousePos(canvas, evt) {
   };
 }
 
+
+//boundaries check
+function esAplicable(pos) {
+  //el click  esta dentro de la zona dibujable
+  if (!((pos.x > 20) && (pos.y > 245 && pos.y < 270))) {
+    return true
+  } else {
+    return false
+  }
+}
+
+function esOutside(posx, posy) {
+
+  if ((posx >= 0 && posx <= 20)) {
+    return true;
+  }
+  if ((posx >= 620 && posx <= 650)) {
+    return true;
+  }
+
+  if ((posy >= 0 && posy <= 20)) {
+    return true;
+  }
+  if ((posy >= 483 && posy <= 500)) {
+    return true;
+  }
+
+  if ((posx > 20) && (posy > 245 && posy < 270)) {
+    return true;
+  }
+  return false
+}
+
 // ON MOUSE DOWN DIBUJA UNA LINEA POLIGONAL MIENTRAS SE TENGA EL MOUSE PRESIONADO
 
 function mousedown(canvas, evt) {
   if (currentAction === SIN_SELECCION) {
-    alert("No has seleccionado ningun comando")
+    //alert("No has seleccionado ningun comando")
     return
   }
   (console.log("mousedown CurrenAction: ", currentAction));
@@ -243,8 +410,6 @@ function mousedown(canvas, evt) {
 // ON MOUSE MOVE
 
 function mousemove(canvas, evt) {
-  console.log("mouse move CurrentAction: ", currentAction);
-
   if (currentAction === MARCAR_AREA) {
     if (isMouseDown) {
       console.log("el mouse esta down");
@@ -256,7 +421,6 @@ function mousemove(canvas, evt) {
       }
     }
   }
-
 }
 
 // STORE DATA
@@ -308,9 +472,91 @@ function mouseup(evt) {
     boxDown(position.x, position.y);
   }
 
-  if(currentAction===MARCAR_IMPLANTE){
+  if (currentAction === MARCAR_IMPLANTE) {
     implante(position.x, position.y)
   }
+
+  if (currentAction === MARCAR_PUENTE_FIJO) {
+    puenteFijo(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_REMOVIBLE) {
+    removible(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_HIPERSENSE) {
+    hipersense(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_APICAL) {
+    apical(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_FISTULA) {
+    fistula(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_EMPAQ_ALIMENTO) {
+    empaqAlim(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_INFRAOCLUSION) {
+    infraoclusion(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_PROFUNDIDAD_SONDAJE) {
+    profundidadSondaje(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_INSERSION_CLINICA) {
+    nivelInsersionClinica(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_SANGRAMIENTO_SONDAJE) {
+    sangramientoSondaje(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_MUCOSA_MASTICADORA) {
+    mucosaMasticadora(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_DEFECTO_MUCOGINGIVAL) {
+    defectoMucogingival(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_MOVILIDAD_DENTARIA) {
+    movilidadDentariaI(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_COMPROMISO_FURCACION) {
+    compromisoFurcacion(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_PROTESIS_DEFECTUOSA) {
+    protesisDefectuosa(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_FRENILLO) {
+    frenillo(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_EXTRUSION) {
+    extrusion(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_INCLINACION) {
+    inclinacion(position.x, position.y)
+  }
+
+  if (currentAction === MARCAR_ROTACION) {
+    rotacion(position.x, position.y)
+  }
+
+
+
+
+
+
 
 
 
@@ -322,130 +568,383 @@ function mouseup(evt) {
 }
 
 
-function esAplicable(pos) {
 
-  //el click  esta dentro de la zona dibujable
-  if (!((pos.x > 20) && (pos.y > 245 && pos.y < 270))) {
-    return true
-  } else {
-    return false
-  }
-}
+
+
+
+//SIMBOLOGIA DEL ODONTOGRAMA 
 
 function extraccion(posx, posy) {
 
-  if (((posx - 20) < 15) || ((posx - 20) > 585)) {
-    console.log("fuera de boundaries");
-    return
+  //verificar que no se hizo click en areas no dibujable (fuera del cuadro de odontograma)
+  if (esOutside(posx, posy)) {
+    return false;
   }
-
-
-  let posx2 = calibrarX(posx);
-  let posy2 = calibrarY(posy);
-  //console.log("calibrar X: ", posx, "calibrar y: ", posy);
-
-
   ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgb(0, 0, 255)";
   ctx.beginPath();
-  ctx.moveTo(posx2 - 15, posy2 - 70);
-  ctx.lineTo(posx2 + 15, posy2 + 70); // Red line
+  ctx.moveTo(posx - 15, calibrarY(posy) - 70);
+  ctx.lineTo(posx + 15, calibrarY(posy) + 70); // Red line
   ctx.closePath();
   ctx.stroke();
 
-  ctx.strokeStyle = "rgb(0, 0, 255)";
   ctx.beginPath();
-  ctx.moveTo(posx2 + 15, posy2 - 70);
-  ctx.lineTo(posx2 - 15, posy2 + 70); // Red line
+  ctx.moveTo(posx + 15, calibrarY(posy) - 70);
+  ctx.lineTo(posx - 15, calibrarY(posy) + 70); // Red line
   ctx.closePath();
   ctx.stroke();
-
-  /* ctx.strokeStyle = "rgb(255, 0, 0)";
-  ctx.strokeRect(25, 45, 40, 200); // Red square */
-
-
-
-  /*  ctx.strokeRect(180, 40, 100, 100); // Red square
-   ctx.strokeStyle = "rgb(0, 0, 0)";
-   ctx.strokeRect(320, 40, 100, 100); // Black square */
 }
 
 function ausente(posx, posy) {
+  //verificar que no se hizo click en areas no dibujable (fuera del cuadro de odontograma)
+  if (esOutside(posx, posy)) {
+    return false;
+  }
+  ctx.beginPath();
+  ctx.moveTo(posx, calibrarY(posy) - 95);
+  ctx.lineTo(posx, calibrarY(posy) + 90); // Red line
+  ctx.closePath();
+  ctx.stroke();
+}
 
-  if (((posx - 20) < 15) || ((posx - 20) > 585)) {
-    console.log("fuera de boundaries");
-    return
+function paralelasV(x, y) {
+  ctx.strokeStyle = "rgb(0, 0,255)";
+  ctx.moveTo(x - 3, y);
+  ctx.lineTo(x - 3, y - 10);
+  ctx.moveTo(x + 2, y);
+  ctx.lineTo(x + 2, y - 10);
+  ctx.moveTo(x - 3, y);
+  ctx.lineTo(x - 3, y + 10);
+  ctx.moveTo(x + 2, y);
+  ctx.lineTo(x + 2, y + 10);
+  ctx.stroke();
+}
+
+function puenteFijo(x, y) {
+  console.log("puenteFijo");
+  if (esOutside(x, y)) {
+    return false;
   }
 
-
-  let posx2 = calibrarX(posx);
-  let posy2 = calibrarY(posy);
-  //console.log("calibrar X: ", posx, "calibrar y: ", posy);
-
-
-  /* ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgb(0, 0, 255)";
+  let xoffset = 12
+  x = x - xoffset;
   ctx.beginPath();
-  ctx.moveTo(posx2 - 15, posy2 - 70);
-  ctx.lineTo(posx2 + 15, posy2 + 70); // Red line
+  ctx.arc(x, y, 4, 0, 2 * Math.PI);
+  ctx.fillStyle = currentColor;
+  ctx.fill();
+
+  ctx.lineTo(x + 20, y); // Red line
+
+  ctx.arc(x + 25, y, 4, 0, 2 * Math.PI);
+  ctx.fillStyle = currentColor;
+  ctx.fill();
+
   ctx.closePath();
   ctx.stroke();
- */
-  ctx.strokeStyle = "rgb(0, 0, 255)";
+}
+
+function implante(x, y) {
+
+  y = y - 5
+
+  ctx.lineWidth = 3;
+  ctx.moveTo(x, y); //295,250  
+  ctx.lineTo(x + 10, y);
+  ctx.moveTo(x, y);
+  ctx.lineTo(x - 10, y);
+
+  ctx.moveTo(x, y);
+  ctx.lineTo(x, y + 7);
+
+  ctx.moveTo(x, y + 8);
+  ctx.lineTo(x + 10, y + 8);
+  ctx.moveTo(x, y + 8);
+  ctx.lineTo(x - 10, y + 8);
+
+  ctx.stroke();
+}
+
+function removible(x, y) {
+
+  if (esOutside(x, y)) {
+    return false;
+  }
+
+  x = x - 15;
+  ctx.lineWidth = 2;
+
   ctx.beginPath();
-  ctx.moveTo(posx2 + 15, posy2 - 70);
-  ctx.lineTo(posx2 - 15, posy2 + 70); // Red line
+  moveTo(x, y)
+  ctx.arc(x, y, 3, 0, 2 * Math.PI);
+  ctx.fillStyle = currentColor;
+  ctx.fill();
   ctx.closePath();
+
+  ctx.lineTo(x + 10, y - 6);
+  ctx.lineTo(x + 17, y);
+  ctx.lineTo(x + 25, y - 6);
+  ctx.lineTo(x + 32, y);
   ctx.stroke();
 
-  /* ctx.strokeStyle = "rgb(255, 0, 0)";
-  ctx.strokeRect(25, 45, 40, 200); // Red square */
+  ctx.beginPath();
+  ctx.arc(x + 35, y, 3, 0, 2 * Math.PI);
+  ctx.fillStyle = currentColor;
+  ctx.fill();
+  ctx.closePath();
+
+  ctx.stroke();
+}
+
+
+function hipersense(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  y = y - 15;
+  x = x - 5
+  ctx.lineWidth = 2;
+  console.log(x, y)
+  ctx.beginPath();
+  moveTo(x, y);
+  ctx.lineTo(x, y);
+  ctx.lineTo(x + 8, y + 4);
+  ctx.lineTo(x, y + 8);
+  ctx.lineTo(x + 8, y + 12);
+  ctx.lineTo(x, y + 16);
+  ctx.lineTo(x + 8, y + 20);
+  ctx.lineTo(x, y + 24);
+
+  ctx.fillStyle = currentColor;
+  ctx.stroke();
+}
+
+function apical(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(x, y, 6, 0, 2 * Math.PI);
+  ctx.strokeStyle = currentColor;
+  ctx.closePath();
+  ctx.stroke();
+}
+
+function fistula(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  ctx.lineWidth = 2;
+  ctx.beginPath();
+  ctx.arc(x, y, 7, 0, 2 * Math.PI);
+  ctx.fillStyle = currentColor;
+  ctx.fill();
+  ctx.closePath();
+  ctx.stroke();
+}
+
+
+function empaqAlim(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  ctx.font = "bold 20px serif"
+
+  ctx.fillStyle = currentColor;
+  ctx.fillText("E", x - 7, y + 5);
+
+
+}
+
+function infraoclusion(x, y) {
 
 
 
-  /*  ctx.strokeRect(180, 40, 100, 100); // Red square
-   ctx.strokeStyle = "rgb(0, 0, 0)";
-   ctx.strokeRect(320, 40, 100, 100); // Black square */
+  x = x - 5;
+  y = y - 5
+
+  ctx.lineWidth = 2;
+  ctx.fillStyle = currentColor;
+  ctx.moveTo(x + 5, y - 10);
+  ctx.lineTo(x + 5, y)
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 10, y)
+  ctx.lineTo(x + 5, y + 15);
+  ctx.fill();
+  ctx.closePath();
+  ctx.stroke();
+}
+
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
+
+
+function extrusion(x, y) {
+
+  ctx.lineWidth = 2;
+  ctx.fillStyle = currentColor;
+  x = x - 5;
+  // ctx.moveTo(x + 5, y - 10);
+
+  //ctx.lineTo(x + 5, y)
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 5, y - 15)
+  ctx.lineTo(x + 10, y);
+
+
+  ctx.moveTo(x + 5, y);
+  ctx.lineTo(x + 5, y + 10)
+
+  ctx.fill();
+  ctx.closePath();
+  ctx.stroke();
+}
+
+function inclinacion(x, y) {
+
+  ctx.lineWidth = 2;
+  ctx.fillStyle = currentColor;
+  y = y - 5;
+  //triangulo
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 10, y + 5)
+  ctx.lineTo(x, y + 10);
+
+
+  ctx.moveTo(x + 5, y + 5);
+  ctx.lineTo(x - 10, y + 5)
+
+  ctx.fill();
+  ctx.closePath();
+  ctx.stroke();
+}
+
+
+function rotacion(x, y) {
+
+  ctx.lineWidth = 2;
+  ctx.fillStyle = currentColor;
+
+  // ctx.moveTo(x + 5, y - 10);
+
+  //ctx.lineTo(x + 5, y)
+  ctx.moveTo(x, y);
+  ctx.lineTo(x + 5, y - 15)
+  ctx.lineTo(x + 10, y);
+  ctx.moveTo(x, y);
+  ctx.fill();
+
+  //ctx.moveTo(x-10, y);
+  ctx.arc(x - 5, y, 10, 0, Math.PI, false);
+
+
+  //ctx.moveTo(x + 5, y);
+  //ctx.lineTo(x + 5, y + 10)
+
+
+
+  ctx.stroke();
 }
 
 
 
 
 
+function profundidadSondaje(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
 
+  x = x - 5;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-function crearLegos() {
-  ctx.strokeStyle = "rgb(0, 0,255)";
-  //ctx.strokeRect(25, 45, 40, 200); // Red square */
-  //ctx.strokeRect(180, 40, 100, 100); // Red square
-  //ctx.strokeStyle = "rgb(0, 0, 0)";
-  //ctx.strokeRect(320, 40, 100, 100); // Black square
-
-
-
-
-  ctx.moveTo(300, 250);
-  ctx.lineTo(300, 270);
-  ctx.lineTo(320, 270)
-  ctx.lineTo(320, 250)
-  ctx.stroke();
+  ctx.font = "bold 20px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("PS", x - 7, y + 5);
 }
+
+function nivelInsersionClinica(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+
+  x = x - 8;
+  ctx.font = "bold 20px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("NIC", x - 7, y + 5);
+}
+
+function sangramientoSondaje(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+
+  x = x - 5;
+  ctx.font = "bold 20px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("S.S", x - 7, y + 5);
+}
+
+function mucosaMasticadora(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  x = x - 5;
+  ctx.font = "bold 20px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("M.M", x - 7, y + 5);
+}
+
+function defectoMucogingival(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  x = x - 8;
+  ctx.font = "bold 20px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("D.M.G", x - 7, y + 5);
+}
+
+
+function movilidadDentariaI(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  x = x - 10;
+  ctx.font = "bold 15px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("M.O.V.", x - 7, y + 5);
+}
+
+function compromisoFurcacion(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  x = x - 5
+  ctx.font = "bold 15px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("C.F.", x - 7, y + 5);
+}
+
+function protesisDefectuosa(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+  x = x - 5;
+  ctx.font = "bold 15px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("P.D.", x - 7, y + 5);
+}
+
+function frenillo(x, y) {
+  if (esOutside(x, y)) {
+    return false;
+  }
+
+  ctx.font = "20px serif"
+  ctx.fillStyle = currentColor;
+  ctx.fillText("Y", x - 7, y + 5);
+}
+
+
 
 function boxUp(x, y) {
   ctx.strokeStyle = "rgb(0, 0,255)";
@@ -468,21 +967,16 @@ function boxDown(x, y) {
 function paralelasH(x, y) {
   ctx.strokeStyle = "rgb(0, 0,255)";
   console.log("cordenadas recibidas: ", x, y);
+  x = x - 10;
+  y = y - 3;
   ctx.moveTo(x, y);
-  ctx.lineTo(x + 25, y);
+  ctx.lineTo(x + 20, y);
   ctx.moveTo(x, y + 5);
-  ctx.lineTo(x + 25, y + 5);
+  ctx.lineTo(x + 20, y + 5);
   ctx.stroke();
 }
 
-function paralelasV(x, y) {
-  ctx.strokeStyle = "rgb(0, 0,255)";
-  ctx.moveTo(x, y);
-  ctx.lineTo(x, y - 20);
-  ctx.moveTo(x + 5, y);
-  ctx.lineTo(x + 5, y - 20);
-  ctx.stroke();
-}
+
 
 function fractura(x, y) {
   ctx.strokeStyle = currentColor;
@@ -495,32 +989,9 @@ function fractura(x, y) {
   ctx.stroke();
 }
 
-function implante(x, y) {
-  ctx.strokeStyle = "rgb(0, 0,255)";
-  ctx.lineWidth=2;
-  ctx.moveTo(x,y); //295,250
-  ctx.lineTo(x+15, y);
-  ctx.moveTo(x, y+5);
-  ctx.lineTo(x+15, y+5);
-  ctx.moveTo(x, y+10);
-  ctx.lineTo(x+15, y+10)
-
-  y=y+20
-  
-
-  ctx.moveTo(x,y);//300,270
-  ctx.lineTo(x+5, y);
-  ctx.moveTo(x+5, y);
-  ctx.lineTo(x+5, y-20);
-  ctx.moveTo(x+10, y);
-  ctx.lineTo(x+10, y-20);
-  ctx.stroke();
-}
 
 function lineaPerpendicular() {
   ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgb(0, 0,255)";
-
   ctx.moveTo(300, 250);
   ctx.lineTo(290, 270)
 
@@ -544,14 +1015,7 @@ function extractIcon() {
 
 
 
-//CALIBRAR POSICION DEL MARCADOR EXTRACCION
-function calibrarX(x) {
-  if (x >= 290 && x <= 315) {
-    let newx = 302;
-    return newx
-  }
-  return x;
-};
+//CALIBRAR POSICION AL MEDIO DEL CUADRANTE (HORIZONTALMENTE)
 
 function calibrarY(y) {
   if (y >= 257 && y <= 500) {
@@ -574,6 +1038,4 @@ function btnOff() {
       el.classList.toggle("activo");
     }
   })
-
-
 }

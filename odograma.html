@@ -13,45 +13,65 @@
   <h1>Examen Clinico Intraoral - Odontograma</h1>
   <div id="sidebar">
     <div class="colorButtons">
-      <h3>Colores</h3>
-      <button id="btncolor-blanco" class="btn-color"></button>
-      <button id="btncolor-negro" class="btn-color"></button>
-      <button id="btncolor-naranja" class="btn-color"></button>
-      <button id="btncolor-rojo" class="btn-color"></button>
-      <button id="btncolor-azul" class="btn-color"></button>
-      <button id="btncolor-verde" class="btn-color"></button>
+      <div>
+        <button id="btncolor-blanco" class="btn-color"></button>
+        <button id="btncolor-negro" class="btn-color"></button>
+        <button id="btncolor-naranja" class="btn-color"></button>
+        <button id="btncolor-rojo" class="btn-color"></button>
+        <button id="btncolor-azul" class="btn-color"></button>
+        <button id="btncolor-verde" class="btn-color"></button>
+      </div>
       <div class="div-color-actual">
-        <label for="">Color Actual:</label>
+        <label for="color-actual">seleccionado</label>
         <button id="color-actual" class="btn-color"></button>
       </div>
+
     </div>
+
+
     <hr>
-    <h3>Herramientas</h3>
+    <h3>SIMBOLOS</h3>
     <div id="div-figuras">
       <button id="marcador" class="btn comando"><img src="images/marker-icon.png" alt=""></button>
-      <button id="extraccion" class="btn comando"><img src="images/extracion.png" alt=""></button>
       <button id="caries" class="btn comando"><img src="images/caries.png" alt=""></button>
-      <button id="ausente" class="btn comando"><img src="images/perpendicular.png" alt=""></button>
-      <button id="fractura" class="btn comando"><img src="images/fractura.png" alt=""></button>
-      <button id="lineaH" class="btn comando"><img src="images/paralelasH.png" alt=""></button>
+      <button id="extraccion" class="btn comando"><img src="images/extracion.png" alt=""></button>
+      <button id="ausente" class="btn comando"><img src="images/ausente.png" alt=""></button>
+      <button id="puenteFijo" class="btn comando"><img src="images/puentefijo.png" alt=""></button>
       <button id="lineaV" class="btn comando"><img src="images/paralelasV.png" alt=""></button>
-      <button id="boxup" class="btn comando"><img src="images/box-up.png" alt=""></button>
-      <button id="boxdown" class="btn comando"><img src="images/box-down.png" alt=""></button>
+      <button id="lineaH" class="btn comando"><img src="images/paralelasH.png" alt=""></button>
       <button id="implante" class="btn comando"><img src="images/implante.png" alt=""></button>
+      <button id="removible" class="btn comando"><img src="images/removible.png" alt=""></button>
+      <button id="hipersense" class="btn comando"><img src="images/hipersense.png" alt=""></button>
+      <button id="apical" class="btn comando"><img src="images/apical.png" alt=""></button>
+      <button id="fistula" class="btn comando"><img src="images/fistula.png" alt=""></button>
+      <button id="empaq-alimento" class="btn comando"><img src="images/empaq-alimentos.png" alt=""></button>
+      <button id="infraoclusion" class="btn comando"><img src="images/infraoclusion.png" alt=""></button>
+      <button id="extrusion" class="btn comando"><img src="images/extrusion.png" alt=""></button>
+      <button id="inclinacion" class="btn comando"><img src="images/inclinacion.png" alt=""></button>
+      <button id="rotacion" class="btn comando"><img src="images/rotacion.png" alt=""></button>
+
+
+      <button id="profundidad-sondaje" class="btn comando">PS</button>
+      <button id="nivel-insersion" class="btn comando">NIC</button>
+      <button id="sangramiento-sondaje" class="btn comando">SS.</button>
+      <button id="mucosa-masticadora" class="btn comando">MM</button>
+      <button id="defecto-mucogingival" class="btn comando">DMG</button>
+      <button id="movilidad-dentaria" class="btn comando">MOV</button>
+      <button id="compromiso-furcacion" class="btn comando">CF</button>
+      <button id="protesis-defectuosa" class="btn comando">PD</button>
+      <button id="frenillo" class="btn comando">Y</button>
       <button id="eraser" class="btn comando"><img src="images/eraser-icon.png" alt=""></button>
       <button id="clear" class="btn comando"><img src="images/broom-icon.png" alt=""></button>
-
+      <button id="simbolox16" class="btn comando"><img src="images/tools-icon.png" alt=""></button>
+      <button id="simbolox17" class="btn comando"><img src="images/tools-icon.png" alt=""></button>
     </div>
-
     <hr>
-
-
     <div class="guardar">
       <a id="saveToImage">Guardar Odograma</a>
     </div>
-
+    <span id="myH3"></span>
   </div>
-  <span id="myH3"></span>
+
   <script src="js/odograma.js"></script>
 </body>
 

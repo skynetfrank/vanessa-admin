@@ -109,6 +109,18 @@ form {
   margin-left: 55px;
 }
 
+
+#div-odontograma{
+  display: flex;
+}
+
+#div-odontograma > a{
+text-decoration: none;
+margin-right: 15px;
+}
+
+
+
 input,
 select,
 textarea {
