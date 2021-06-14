@@ -46,7 +46,7 @@ modal__login.innerHTML = `<div class="modal-content">
                     <input type="password" id="login-password" required />
                     <label for="login-password">ingresa una clave (password)</label> 
                 </div>
-                <button class="btn inicio lime z-depth-0">enviar</button>                
+                <button class="btn inicio  lime darken-3 z-depth-0">Iniciar Sesion</button>
             </form>
         </div>`
 

@@ -6,11 +6,12 @@ const mostrarData = document.getElementById("div__mostrar");
 const agenda = document.getElementById("link-agenda");
 const paciente = document.getElementById("link-paciente");
 const btnAddPaciente = document.getElementById("btn-agregar-paciente");
-const btnConsultarPaciente = document.getElementById("btn-consultar-paciente");
+const btnVerHistoria = document.getElementById("btn-ver-paciente");
 const btnCrearPaciente = document.getElementById("img-crear-paciente");
-
-
 var pacientex = [];
+
+
+
 
 function formatearFecha(nfecha) {
   var info = nfecha.split('-').reverse().join('/');
@@ -23,6 +24,7 @@ agenda.addEventListener('click', () => {
   document.getElementById("section-crear-paciente").style.display = "none"
   document.getElementById("pacientes").style.display = "none"
   document.getElementById("myTimeline").style.display = "initial"
+  navLinks.classList.toggle('active');
 
   let timeLista = document.getElementById("ul-timeline");
 
@@ -58,17 +60,10 @@ agenda.addEventListener('click', () => {
 
 
 
-
-window.addEventListener("load", function () {
-
-});
-
-
-
 auth.onAuthStateChanged(async (user) => {
 
   if (user) {
-    usuarioActual.innerHTML = 'hola: ' + user.email;
+    usuarioActual.innerHTML = user.email;
     document.getElementById("loginId").style.display = "none";
     document.getElementById("logout").style.display = "block";
 
@@ -94,7 +89,7 @@ auth.onAuthStateChanged(async (user) => {
     document.querySelectorAll(".img-menu").forEach((icon) => {
       console.log("icons==>:", icon);
       icon.style.pointerEvents = "none";
-      icon.style.opacity = "0.2";
+
     })
   }
 })
@@ -110,10 +105,6 @@ document.getElementById("img-logo").addEventListener("click", () => {
   document.getElementById("myTimeline").style.display = "none"
 });
 
-btnAddPaciente.addEventListener('click', (ev) => {
-  ev.preventDefault();
-  window.open('formulario1.html', '_self');
-});
 
 
 //CONSULTAR TODOS LOS PACIENTES
@@ -124,37 +115,68 @@ paciente.addEventListener('click', (ev) => {
   document.getElementById("pacientes").style.display = "inline-block"
   navLinks.classList.toggle('active');
   ev.preventDefault();
-  M.Modal.getInstance(modal__crud).close();
-
-
+ 
   const allPacientes = async () => {
-    const getPacientes = await db.collection('users')
+    const getPacientes = await db.collection('pacientes')
       .onSnapshot(querysnapshot => {
         let table = document.getElementById('pacientes-tbody')
         table.innerHTML = ''
+
+        //loop de la consulta de todos los pacientes
         querysnapshot.forEach((doc) => {
 
           let data = doc.data();
-          let row = `<tr>     <td id="td-id-hidden">${doc.id}</td>
+          console.log("doc.id: ", doc.id);
+          let row = `<tr> 
+                            <td class="td-id-hidden">${doc.id}</td>                          
                             <td>${data.nombre}</td>
                             <td>${data.apellido}</td>
-                            <td>${data.cedula}</td>
-                            <td>
-                            <button class="td-btn" id="btn-editar-paciente"> 
-                                <img src="images/edit-icon24.png" alt="imagen">
-                            </button>
-                            <button class="td-btn" id="btn-ver-paciente">
-                             <img src="images/search-icon24.png" alt="imagen">
-                            </button>
-                            <button class="td-btn tooltipped"  id="btn-eliminar-paciente" data-position="bottom" data-tooltip="algo">
-                             <img src="images/delete-paciente-icon24.png"  alt="imagen">
-                            </button>
-                            
-                            
+                            <td>${data.edad}</td>
+                             <td>${data.cedula}</td>
+                            <td>${data.celular}</td>
+                            <td class="ver-paciente">                             
+                              <button class="td-btn" id="btn-control-paciente" data-id=${doc.id}  data-nom=${data.nombre} data-ape=${data.apellido}>
+                               Control
+                             </button>
+                              <button  class="td-btn" id="btn-ver-paciente" data-id=${doc.id}  data-nom=${data.nombre} data-ape=${data.apellido}>
+                               Editar
+                             </button>
+                               </button>
+                              <button  class="td-btn" id="btn-eliminar-paciente" data-id=${doc.id}>
+                               Eliminar
+                             </button>
                             </td>
                       </tr>`;
           table.innerHTML += row
-        })
+
+          //seleccionar todos los botones de la tabla
+          const btnVerPaciente = document.querySelectorAll(".td-btn");
+          //loop de botones de la tabla
+          btnVerPaciente.forEach((boton) => {
+            boton.addEventListener('click', (e) => {
+              pacienteSeleccionado = e.target.dataset.id;
+              localStorage.setItem('pacienteActual', JSON.stringify(pacienteSeleccionado));
+              localStorage.setItem('nombrePaciente', JSON.stringify(e.target.dataset.nom));
+              localStorage.setItem('apellidoPaciente', JSON.stringify(e.target.dataset.ape));
+              console.log("ID-SELECCIONADO: ", e.target.dataset.id)
+
+              if (e.target.id == "btn-ver-paciente") {
+                window.open('editarpaciente.html');
+              }
+              if (e.target.id == "btn-control-paciente") {
+                window.open('controlasistencias.html');
+              }
+              if (e.target.id == "btn-eliminar-paciente") {
+                deleteAsistencia(pacienteSeleccionado);
+              }
+            });
+          });//fin del  forEach para loop de todos los botones de la table
+
+        }) //Fin del forEach del querysnapshot (loop de la consulta de todos los pacientes)
+
+
+
+
         if (table.innerHTML === '') {
           document.getElementById("mostrar-citas").style.display = "none";
         }
@@ -170,8 +192,36 @@ btnCrearPaciente.addEventListener('click', () => {
   document.getElementById("inicio").style.display = "none"
   document.getElementById("myTimeline").style.display = "none"
   document.getElementById("section-crear-paciente").style.display = "initial"
-
-
 })
+
+async function deleteAsistencia(id) {
+
+  const controlAsist = await db.collection('controlasistencias')
+    .where('idPaciente', '==', id)
+    .get()
+    .then((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
+        controlActual = doc.id;
+            
+
+      });     
+    })
+    .catch((error) => {
+      console.log("Error al Eliminar Controles de Asistencia: ", error);
+    });
+
+
+
+  const eliminar = confirm("Esta Seguro que quiere Eliminar este Paciente?");
+  if (eliminar) {
+    await db.collection("pacientes").doc(id).delete();
+    await db.collection("controlasistencias").where('idPaciente', '==', id)
+      .delete();
+  }
+
+
+
+}
+
 
 

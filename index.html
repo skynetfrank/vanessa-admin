@@ -13,7 +13,7 @@
 <body>
     <nav class="navbar">
         <div class="brandName">
-            <img class="logo-dental" src="./images/logodrvanessa.png" id="img-logo" alt="logo-dental">
+            <img class="logo-dental" src="./images/logoDental.jpg" id="img-logo" alt="logo">
             <div class="usuario"><span id="usuario"></span><span id="myWidth"></span></div>
         </div>
         <div class="navLinks">
@@ -73,19 +73,23 @@
 
         <div class="div-tabla">
             <div id="div-pacientes-titulo">
-                <h3>Pacientes Registrados</h3>
+               
                 <a href="crearpaciente.html ">
-                    <img id="img-crear-paciente" src="images/crear-paciente-icon.png" alt="icon" >
+                    <img id="img-crear-paciente" src="images/crear-paciente-icon.png" alt="icon" >                  
                 </a>
+                <p class="bottom10">Paciente Nuevo</p>
+                <h3>Pacientes Registrados</h3>
             </div>
             <table id="tabla-paciente" class="striped highlight">
                 <thead>
                     <tr>
-                        <th id="th-id-hidden">id</th>
+                        <th id="th-id-hidden">id</th>                        
                         <th>Nombre</th>
                         <th>Apellido</th>
-                        <th>Cedula</th>
-                        <th>accion</th>
+                        <th>Edad</th>
+                        <th>Ced&uacutela</th>
+                        <th>Tel&eacutefono</th>
+                        <th>Men&uacute</th>
                     </tr>
                 </thead>
                 <tbody id="pacientes-tbody">
@@ -94,10 +98,9 @@
         </div>
     </section>
 
+   
+
     <section id="section-crear-paciente"></section>
-
-
-
 
     <section class="timeline" id="myTimeline">
         <div class="intro" id="myIntro">
@@ -109,13 +112,11 @@
         </ul>
     </section>
 
-
     <div id="div__mostrar"></div>
     <div id="modal-signup" class="modal"></div>
     <div id="modal-login" class="modal"></div>
     <div id="modal-msg" class="modal"></div>
     <div id="modal-crud" class="modal"></div>
-
 
     <!---librerias (materialize,firebase y myScripts-->
 

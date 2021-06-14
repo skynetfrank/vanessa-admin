@@ -1,3 +1,9 @@
+const idPacienteLocal = JSON.parse(localStorage.getItem('pacienteActual'));
+const nombrePaciente = JSON.parse(localStorage.getItem('nombrePaciente'));
+const apellidoPaciente = JSON.parse(localStorage.getItem('apellidoPaciente'));
+
+
+console.log("ID-Paciente Actual en el odograma:",idPacienteLocal);
 //SETTING CONSTANTES
 const MARCAR_EXTRACCION = 1;
 const MARCAR_CARIES = 2;
@@ -51,7 +57,7 @@ var recortarImagen = document.getElementById("recortarImg");
 var h3 = document.getElementById("myH3");
 var odograma = new Image();
 //asignar ubicacion donde esta la imagen del odograma
-odograma.src = "images/odograma1.jpg"
+odograma.src = "images/odograma1.jpg";
 
 odograma.addEventListener('load', () => {
   createCanvas();
@@ -59,6 +65,18 @@ odograma.addEventListener('load', () => {
 
 });
 // INITIAL LAUNCH
+
+
+
+window.oncontextmenu = (e) => {
+
+  console.log("se disparo el menu contextual")
+}
+
+
+
+
+
 
 
 // CREATE CANVAS
@@ -74,6 +92,9 @@ function createCanvas() {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   body.appendChild(canvas);
   ctx.drawImage(odograma, 20, 20, 600, 461);
+  if(nombrePaciente){
+  document.getElementById("h2-nombre").innerHTML += ' ' + nombrePaciente + ' ' + apellidoPaciente;
+  }
 }
 
 
@@ -106,7 +127,12 @@ document.getElementById("btncolor-verde").addEventListener('click', () => {
 
 //descargar archivo (guardar)
 document.getElementById('saveToImage').addEventListener('click', function () {
-  downloadCanvas(this, 'canvas', 'imagenes/odograma.jpg');
+  console.log(idPacienteLocal);
+  if (!idPacienteLocal) {
+    alert("El ID del paciente no es valido!!..cargue primero el paciente");
+    return
+  }
+  downloadCanvas(this, 'canvas', idPacienteLocal + '.jpg');
 }, false);
 
 //ACCIONES DE LA SIDE-BAR
@@ -326,6 +352,7 @@ canvas.addEventListener('mouseup', mouseup);
 
 function downloadCanvas(link, canvas, filename) {
   link.href = document.getElementById(canvas).toDataURL();
+  // link.download = filename;
   link.download = filename;
 }
 

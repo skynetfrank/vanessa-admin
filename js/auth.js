@@ -25,7 +25,7 @@ boton__logout.addEventListener('click', () => {
             usuarioActual.innerHTML = " ";
             boton__logout.style.display = "none";
             document.getElementById("loginId").style.display = "block";
-            mensaje.innerText = "Sesion Terminada... Hasta la proxima sesion admin!";
+            mensaje.innerText = "Sesion Terminada...! Adios!";
             M.Modal.getInstance(modal__msg).open();
         }).catch((error) => alert(error));
     document.getElementById("loginId").style.visibility = "visible";

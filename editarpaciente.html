@@ -6,18 +6,15 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="css/formulario1.css">
-  <title>Paciente Nuevo</title>
+  <title>Paciente-Historia</title>
 </head>
 
 <body>
   <div class="testbox">
-
-    <form id="historia-form" autocomplete="off">
+    <form id="historia-form">
       <div class="banner nuevo">
-        <h1>Paciente Nuevo</h1>
+        <h1>Historia - Paciente</h1>
       </div>
       <br>
 
@@ -31,25 +28,25 @@
         <input type="text" name="apellido" id="apellido" required />
       </div>
       <div class="item tipoInput">
-        <p>Ced&uacutela&nbsp&nbsp</p>
-        <input type="text" id="cedula" value="" />
+        <p>Cedula&nbsp</p>
+        <input type="text" name="cedula" id="cedula" />
         <p>Fecha_Nacimiento</p>
-        <input type="date" id="fnacimiento" value="" />
+        <input type="date" name="fnacimiento" id="fnacimiento" />
       </div>
       <div class="item tipoInput">
-        <p>Celular&nbsp&nbsp</p>
-        <input type="text" id="celular" value="" />
-        <p>Tel&eacutefono_Local</p>
-        <input type="text" id="tlflocal" value="" />
+        <p>Celular&nbsp</p>
+        <input type="text" name="celular" id="celular" />
+        <p>Telefono_Local</p>
+        <input type="text" name="tlflocal" id="tlflocal" />
       </div>
       <div class="item tipoInput">
-        <p>Email&nbsp&nbsp&nbsp&nbsp</p>
-        <input type="text" id="email" value="" />
+        <p>Email&nbsp&nbsp&nbsp</p>
+        <input type="text" name="email" id="email" />
         <p>Edad</p>
-        <input type="text" id="edad" value="" />
+        <input type="text" name="edad" id="edad" />
       </div>
 
-      <p>G&eacutenero:</p>
+      <p>Genero:</p>
       <div class="question">
         <div class="question-answer" id="div-genero">
           <input type="radio" value="hombre" id="checkgenero1" name="checkgenero" />
@@ -58,7 +55,6 @@
           <label for="checkgenero2" class="radio"><span>Mujer</span></label>
           <input type="radio" value="diverso" id="checkgenero3" name="checkgenero" />
           <label for="checkgenero3" class="radio"><span>Diverso</span></label>
-          <input type="radio" value="" id="checkgenero4" name="checkgenero" checked />
         </div>
       </div>
 
@@ -73,63 +69,60 @@
           <label for="checkedocivil3" class="radio"><span>Divorciado</span></label>
           <input type="radio" id="checkedocivil4" name="checkedocivil" value="otro" />
           <label for="checkedocivil4" class="radio"><span>Otro</span></label>
-          <input type="radio" id="checkedocivil5" name="checkedocivil" value="" checked />
         </div>
       </div>
 
       <div class="item">
-        <p>Direcci&oacuten de habitaci&oacuten</p>
-        <input type="text" id="direccion1" value="" />
+        <p>Direccion de habitacion</p>
+        <input type="text" name="direccion1" id="direccion1" placeholder="direccion1" />
         <p>Contacto Personal</p>
-        <input type="text" id="contacto" placeholder="indique alguna persona de contacto" value="" />
+        <input type="text" name="contacto" id="contacto" placeholder="indique alguna persona de contacto" />
       </div>
 
 
       <div class="div-h5">
-        <h5>Historia M&eacutedica</h5>
+        <h5>Historia Medica</h5>
       </div>
       <div class="item tipoInput">
         <p>Estatura</p>
-        <input type="text" id="estatura" value="" />
+        <input type="text" name="estatura" id="estatura" />
         <p>Peso</p>
-        <input type="text" id="peso" value="" />
+        <input type="text" name="peso" id="peso" />
       </div>
       <div class="question">
         <p>Esta siendo tratado por un m&eacutedico actualmente?</p>
         <div class="question-answer">
-          <input type="radio" id="checktratadopormedico1" name="checktratadopormedico" value="true" />
+          <input type="radio" id="checktratadopormedico1" name="checktratadopormedico" value=true />
           <label for="checktratadopormedico1" class="radio"><span>Si</span></label>
-          <input type="radio" id="checktratadopormedico2" name="checktratadopormedico" value="false" />
+          <input type="radio" id="checktratadopormedico2" name="checktratadopormedico" value=false />
           <label for="checktratadopormedico2" class="radio"><span>No</span></label>
-          <input type="radio" id="checktratadopormedico3" name="checktratadopormedico" value="" checked />
         </div>
       </div>
       <div class="item">
         <p>Para que enfermedad?</p>
-        <input type="text" name="tratadoporenfermedad" id="tratadoporenfermedad" value="" />
+        <input type="text" name="tratadoporenfermedad" id="tratadoporenfermedad" />
       </div>
       <div class="question">
-        <p>Esta tomando algun Medicamento o Droga?</p>
+        <p>Esta tomando algun tipo de Medicamento o Droga?</p>
         <div class="question-answer">
           <input type="radio" id="checktomamedicamento1" name="checktomamedicamento" value="true" />
           <label for="checktomamedicamento1" class="radio"><span>Si</span></label>
           <input type="radio" id="checktomamedicamento2" name="checktomamedicamento" value="false" />
           <label for="checktomamedicamento2" class="radio"><span>No</span></label>
-          <input type="radio" id="checktomamedicamento3" name="checktomamedicamento" value=""  checked/>
         </div>
       </div>
       <div class="item">
-        <p>Cu&aacuteles son esos Medicamentos?</p>
-        <input type="text" name="cualesmedicamentos" id="cualesmedicamentos" value="" />
+        <p>Cuales son esos Medicamentos?</p>
+        <input type="text" name="cualesmedicamentos" id="cualesmedicamentos" />
       </div>
       <div class="item">
         <p>Describa las dosis para esos medicamentos</p>
-        <input type="text" name="dosismeds" id="dosismeds" value="" />
+        <input type="text" name="dosismeds" id="dosismeds" />
       </div>
 
       <br />
       <div class="question">
-        <p>Marque si es al&eacutergico a los siguientes Medicamentos:</p>
+        <p>Marque si es alergico a los siguientes Medicamentos:</p>
         <div class="question-answer checkbox-item">
           <div>
             <input type="checkbox" id="checkaspirina" name="checkaspirina" value="aspirina" />
@@ -142,10 +135,13 @@
           <div>
             <input type="checkbox" id="checkcodeina" name="checkcodeina" value="codeina" />
             <label for="checkcodeina" class="check"><span>Code&iacutena</span></label>
+
             <input type="checkbox" id="checklatex" name="checklatex" value="latex" />
             <label for="checklatex" class="check"><span>Latex-xxx</span></label>
+
             <input type="checkbox" id="checkacrilico" name="checkacrilico" value="acrilico" />
             <label for="checkacrilico" class="check"><span>Acr&iacutelico</span></label>
+
           </div>
 
           <div>
@@ -157,7 +153,7 @@
       </div>
       <br />
       <div class="item textarea">
-        <textarea rows="2" placeholder="explique su alergia" id="textalergicootros" name="textalergicootros"></textarea>
+        <textarea rows="3" placeholder="explique su alergia" id="textalergicootros" name="textalergicootros"></textarea>
       </div>
 
 
@@ -202,7 +198,7 @@
           </div>
           <p>Si posee alg&uacuten h&aacutebito, especifique cual y la frecuencia del mismo</p>
           <div class="item textarea">
-            <textarea rows="2 id=" texthabitos" placeholder="habitos" name="texthabitos"></textarea>
+            <textarea rows="3" id="texthabitos" placeholder="habitos" name="texthabitos"></textarea>
           </div>
         </div>
       </div>
@@ -232,14 +228,14 @@
               value="herenciaCardiovasculares" />
             <label for="checkcardiovasculares" class="check"><span>Cardiovasculares</span></label>
             <input type="checkbox" id="checkhemorragicas" name="checkhemorragicas" value="herenciaHemorragicas" />
-            <label for="checkhemorragicas" class="check"><span>Hemorr&aacutegicas</span></label>
+            <label for="checkhemorragicas" class="check"><span>Hemorragicas</span></label>
             <input type="checkbox" id="checkvenereas" name="checkvenereas" value="herenciaVenereas" />
-            <label for="checkvenereas" class="check"><span>Ven&eacutereas</span></label>
+            <label for="checkvenereas" class="check"><span>Venereas</span></label>
           </div>
 
           <div class="item">
             <p>Alguna otra enfermedad? describala aqu&iacute</p>
-            <input type="text" id="otraenfermedad" name="otraenfermedad" value="" />
+            <input type="text" id="otraenfermedad" name="otraenfermedad" />
           </div>
 
         </div>
@@ -250,16 +246,16 @@
         <h5>Primera Consulta</h5>
       </div>
       <div class="item">
-        <p>Motivo principal de esta Consulta?</p>
-        <input type="text" id="motivoprincipalconsulta" name="motivoprincipalconsulta" value="" />
+        <p>Motivo Principal de la Consulta?</p>
+        <input type="text" id="motivoprincipalconsulta" name="motivoprincipalconsulta" />
       </div>
       <div class="item">
-        <p>Fecha aproximada de &uacuteltima Consulta</p>
-        <input type="text" id="fechaultimaconsulta" name="fechaultimaconsulta" value="" />
+        <p>Fecha de ultima consulta</p>
+        <input type="text" id="fechaultimaconsulta" name="fechaultimaconsulta" />
       </div>
       <div class="item">
-        <p>Motivo de &uacuteltima Consulta</p>
-        <input type="text" id="motivoultimaconsulta" name="motivoultimaconsulta" value="" />
+        <p>Motivo de ultima consula</p>
+        <input type="text" id="motivoultimaconsulta" name="motivoultimaconsulta" />
       </div>
       <div class="question">
         <p>Ha presentado complicaciones?</p>
@@ -268,48 +264,25 @@
           <label for="checkcomplicaciones1" class="radio"><span>Si</span></label>
           <input type="radio" id="checkcomplicaciones2" name="checkcomplicaciones" value="false" />
           <label for="checkcomplicaciones2" class="radio"><span>No</span></label>
-          <input type="radio" id="checkcomplicaciones3" name="checkcomplicaciones" value=""  checked/>
         </div>
       </div>
       <div class="item">
         <p>Describa esas Complicaciones</p>
-        <input type="text" name="cualescomplicaciones" id="cualescomplicaciones" value="" />
+        <input type="text" name="cualescomplicaciones" id="cualescomplicaciones" />
       </div>
+
+
+
+
+
+
 
       <div class="div-h5">
-        <h5>Diagn&oacutestico - Plan de Tratamiento</h5>
+        <h5>Diagnostico - Plan de Tratamiento</h5>
       </div>
       <div class="item textarea">
-        <textarea rows="6" placeholder="desglose el tratamiento para esta consulta" id="texttratamiento"
+        <textarea rows="7" placeholder="desglose el tratamiento para esta consulta" id="texttratamiento"
           name="texttratamiento"></textarea>
-      </div>
-      <br />
-      <div id="div-control-asistencia">
-        <h5>Control de Asistencia (1ra. consulta)</h5>
-        <div class="item">
-          <p>Fecha de esta Cita</p>
-          <input type="date" id="fechacontrolasistencia" name="fechaultimaconsulta" value="" />
-        </div>
-        <p>Procedimientos Realizados</p>
-        <div class="item textarea">
-          <textarea rows="6" placeholder="detalle los procedimientos aplicados en esta cita" id="textcontrolasistencia"
-            name="textcontrolasistencia"></textarea>
-        </div>
-        <div class="item" id="div-ref-monto">
-          <select id="formadepago">
-            <option value="" disabled selected>Forma de Pago</option>
-            <option value="Efectivo">Efectivo$</option>
-            <option value="Transferencia">Transferencia</option>
-            <option value="Pago-Movil">Pago-Movil</option>
-            <option value="Zelle">Zelle</option>
-            <option value="Otro">Otro</option>
-          </select>
-
-          <p>Referencia</p>
-          <input type="text" id="referenciapago" name="referenciapago" value="" />
-          <p>Monto</p>
-          <input type="text" id="montopagado" name="montopagado" value="" />
-        </div>
       </div>
       <br />
 
@@ -321,16 +294,26 @@
       </div>
       <br>
       <div class="btn-block">
-        <button type="submit" id="btn-registrar-paciente"" href=" /">Registrar Nuevo Paciente</button>
+        <button type="submit" id="btn-registrar-paciente"" href=" /">Actualizar Informacion</button>
       </div>
     </form>
+
   </div>
-  <!---LIBRERIAS-->
+
+
+
+
+
+
+
+
+
   <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
   <script src="js/firebase-config.js"></script>
-  <script src="js/crear-paciente.js"></script>
+
+  <script src="js/editar-paciente.js"></script>
 
 </body>
 

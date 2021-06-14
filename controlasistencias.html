@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="materialize/css/materialize.min.css">
+  <link rel="stylesheet" href="css/formulario1.css">
+  <title>Paciente-Historia</title>
+</head>
+
+
+
+<body>
+  <div class="testbox">
+    <form id="control-form">
+      <div class="banner nuevo">
+        <h1 class="control">Control de Asistencias</h1>
+      </div>
+      <div class="chip">
+        <img src="images/paciete-icon.png" alt="img">
+        <span id="span-chip-paciente"></span>
+        <button type="button" class="very-small-btn" id="tiny-btn">X</button>
+      </div>
+      <!---SLIDER -->
+      <div class="slider-container">
+        <div class="carousel carousel-slider center" id="myCarusel">
+
+        </div>
+      </div>
+      <!---FIN DEL SLIDER -->
+      <div id="btn-add-control">
+        <img src="/images/add-control-icon2.png" id="add-control-img" alt="img">
+      </div>
+
+
+      <!---AGREGAR UN NUEVO REGISTRO DE CONTROL DE ASISTENCIA PARA ESTE PACIENTE-->
+      <div id="div-control-asistencia" class="control">
+        <div class="item">
+          <div class="input-field">
+            <input type="date" id="fechacontrolasistencia" />
+            <label for="referenciapago">Fecha Asistencia</label>
+          </div>
+        </div>
+        <p>Procedimientos Realizados</p>
+        <div class="item textarea">
+          <textarea rows="7" placeholder="detalle los procedimientos aplicados en esta cita" id="textcontrolasistencia"
+            name="textcontrolasistencia"></textarea>
+        </div>
+
+        <div class="item" id="div-ref-monto">
+          <select id="formadepago">
+            <option value="" disabled selected>forma de Pago</option>
+            <option value="Efectivo">Efectivo-$</option>
+            <option value="Transferencia">Transferencia</option>
+            <option value="Pago-Movil">Pago-Movil</option>
+            <option value="Zelle">Zelle</option>
+            <option value="Otro">Otros</option>
+          </select>
+          <div class="input-field">
+            <input type="text" id="referenciapago" name="referenciapago" />
+            <label for="referenciapago">Referencia</label>
+          </div>
+          <div class="input-field">
+            <input type="text" id="montopagado" name="montopagado" />
+            <label for="montopagado">Monto</label>
+          </div>
+        </div>
+      </div>
+      <!---FIN DE AGREGAR UN NUEVO REGISTRO DE CONTROL DE ASISTENCIA PARA ESTE PACIENTE-->
+
+      <div class="btn-block control">
+        <button type="submit" id="btn-registrar-paciente"" href=" /">Guardar Asistencia</button>
+      </div>
+
+
+      <!-- ODONTOGRAMA-->
+      <div class="odontograma control" id="div-odontograma">
+        <a href="odograma.html">
+          <h5>ODONTOGRAMA</h5>
+        </a>
+        <a href="odograma.html"><img src="images/odontograma-icon.png" alt="icon"></a>
+      </div>
+      <!-- FIN DE ODONTOGRAMA-->
+ 
+
+
+    </form>
+
+  </div>
+
+  <!--LIBRERIAS-->
+  <script src="./materialize/js/materialize.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
+  <script src="js/firebase-config.js"></script>
+  <script src="js/control-paciente.js"></script>
+</body>
+
+</html>
