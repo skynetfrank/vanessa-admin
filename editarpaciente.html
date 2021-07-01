@@ -11,13 +11,15 @@
 </head>
 
 <body>
+  <span id="span-pestana">Editar</span>
+  <button class="volver"><a href="index.html">volver</a> </button>
   <div class="testbox">
-    <form id="historia-form">
+    <form id="historia-form" autocomplete="off">
+
       <div class="banner nuevo">
         <h1>Historia - Paciente</h1>
       </div>
       <br>
-
       <div class="div-h5">
         <h5>Datos Personales</h5>
       </div>
@@ -28,19 +30,19 @@
         <input type="text" name="apellido" id="apellido" required />
       </div>
       <div class="item tipoInput">
-        <p>Cedula&nbsp</p>
+        <p>Cedula&nbsp&nbsp</p>
         <input type="text" name="cedula" id="cedula" />
         <p>Fecha_Nacimiento</p>
         <input type="date" name="fnacimiento" id="fnacimiento" />
       </div>
       <div class="item tipoInput">
-        <p>Celular&nbsp</p>
+        <p>Celular&nbsp&nbsp</p>
         <input type="text" name="celular" id="celular" />
         <p>Telefono_Local</p>
         <input type="text" name="tlflocal" id="tlflocal" />
       </div>
       <div class="item tipoInput">
-        <p>Email&nbsp&nbsp&nbsp</p>
+        <p>Email&nbsp&nbsp&nbsp&nbsp</p>
         <input type="text" name="email" id="email" />
         <p>Edad</p>
         <input type="text" name="edad" id="edad" />
@@ -72,7 +74,7 @@
         </div>
       </div>
 
-      <div class="item">
+      <div class="item dir">
         <p>Direccion de habitacion</p>
         <input type="text" name="direccion1" id="direccion1" placeholder="direccion1" />
         <p>Contacto Personal</p>
@@ -151,7 +153,6 @@
 
         </div>
       </div>
-      <br />
       <div class="item textarea">
         <textarea rows="3" placeholder="explique su alergia" id="textalergicootros" name="textalergicootros"></textarea>
       </div>
@@ -301,16 +302,10 @@
   </div>
 
 
-
-
-
-
-
-
-
   <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
   <script src="js/firebase-config.js"></script>
 
   <script src="js/editar-paciente.js"></script>

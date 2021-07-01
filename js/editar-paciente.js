@@ -215,8 +215,9 @@ historia.addEventListener('submit', async (e) => {
         checkcardiovasculares,
         checkhemorragicas,
         checkvenereas,
-        otraenfermedad,
+       
       ],
+    otraenfermedad,
     texthabitos,
     motivoprincipalconsulta,
     fechaultimaconsulta,

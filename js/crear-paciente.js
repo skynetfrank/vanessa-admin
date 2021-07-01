@@ -1,13 +1,22 @@
 const historia = document.getElementById("historia-form");
 const dataShower = document.getElementById("dataShow");
 localStorage.clear();
+var date = new Date();
+document.getElementById("fechacontrolasistencia").value = date.getFullYear().toString() + '-' + (date.getMonth() + 1).toString().padStart(2, 0) +
+  '-' + date.getDate().toString().padStart(2, 0);
+
+function autoCapital(cadena) {
+  return cadena.charAt(0).toUpperCase() + cadena.slice(1);
+}
+
+
 
 historia.addEventListener('submit', async (e) => {
+
   e.preventDefault();
 
-
-  const nombre = historia['nombre'].value;
-  const apellido = historia['apellido'].value;
+  const nombre = autoCapital(historia['nombre'].value);
+  const apellido = autoCapital(historia['apellido'].value);
   const cedula = historia['cedula'].value;
   const fnacimiento = historia['fnacimiento'].value;
   const celular = historia['celular'].value;
@@ -63,6 +72,7 @@ historia.addEventListener('submit', async (e) => {
   const cualescomplicaciones = historia['cualescomplicaciones'].value;
   const texttratamiento = historia['texttratamiento'].value;
   const fechacontrolasistencia = historia['fechacontrolasistencia'].value;
+
   const textcontrolasistencia = historia['textcontrolasistencia'].value;
   const formadepago = historia['formadepago'].value;
   const referenciapago = historia['referenciapago'].value;
@@ -127,22 +137,30 @@ historia.addEventListener('submit', async (e) => {
     cualescomplicaciones,
     texttratamiento,
   }
-
+  console.log("Fecha Controlasistencia a guardar: ", paciente.fechacontrolasistencia);
   const { id } = await db.collection('pacientes').add(paciente);
   localStorage.setItem('pacienteActual', JSON.stringify(id));
   //Esta es una Root Coleccion para hacer Join con Pacientes
+
+  document.getElementById("div-odontograma-nuevo").style.display="flex";
+
   const controlAsistencia = {
     idPaciente: id,
     fecha: fechacontrolasistencia,
+    esCita1: true,
     tratamientoAplicado: textcontrolasistencia,
     pago: formadepago,
     referencia: referenciapago,
     monto: montopagado,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   };
+
   await db.collection('controlasistencias').add(controlAsistencia)
-    .then(response => alert("Control Asistencias Agregado OK"))
+    .then(response => alert("Paciente Registrado OK"))
     .catch(error => console.log(error));
   alert
   historia.reset();
+  window.scrollTo(0, 0);
 });
+
 

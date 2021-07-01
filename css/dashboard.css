@@ -1,0 +1,483 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  outline: none;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background-color: #f4f4fb;
+}
+
+h2 {
+  font-size: 18px;
+  padding: 15px 0;
+  color: #201f2b;
+}
+
+/*-------------------------------*/
+
+.dash-navbar {
+  display: flex;
+  position: fixed;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 55px;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  z-index: 2;
+  padding-left: 6rem;
+}
+
+.dash-navbar h4 {
+  font-size: 25px;
+  margin-left: -37px;
+  margin-top: 13px;
+}
+
+.dash-profile {
+  display: flex;
+  width: 32%;
+  max-width: 200px;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.dash-profile-image {
+  width: 30px;
+  height: 30px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.dash-profile-name {
+  font-size: 0.9rem;
+  line-height: 0.9rem;
+  margin-left: 5px;
+  font-weight: 600;
+}
+
+.dash-side-toggle {
+  position: fixed;
+  z-index: 2;
+  top: 11px;
+  left: 20px;
+  float: right;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+#dash-toggle {
+  display: none;
+}
+
+.fa-bars {
+  color: rgb(246, 103, 51);
+}
+
+.dash-sidebar {
+  position: fixed;
+  height: 100%;
+  width: 200px;
+  left: 0;
+  top: 0;
+  padding: 80px 0 20px 0;
+  color: rgb(230, 227, 227);
+  background-color: #2d2b98;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+}
+
+.dash-sidebar-menu {
+  display: flex;
+  align-items: center;
+  padding: 15px 25px;
+  width: 100%;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.dash-sidebar-menu.active span {
+  color: red;
+}
+
+.dash-sidebar-menu span {
+  font-size: 20px;
+  padding-right: 20px;
+  min-width: 45px;
+}
+
+.dash-sidebar-menu p {
+  font-weight: 600;
+}
+
+.dash-sidebar-menu a {
+  text-decoration: none;
+  pointer-events: all;
+}
+
+.dash-sidebar-menu a p {
+  color: deeppink;
+  font-size: 12px;
+  letter-spacing: 1px;
+  font-weight: lighter;
+}
+
+#dash-instagram-div {
+  padding: 0 0 0 22px;
+}
+
+#dash-instagram-div span {
+  font-size: 25px;
+  color: deeppink;
+  padding-right: 5px;
+  min-width: 20px;
+}
+
+.dash-sidebar-menu:hover {
+  color: #2d2b98;
+  background-color: #b4b4b9;
+}
+
+.dash-sidebar-image img {
+  width: 140px;
+  height: 140px;
+  object-fit: cover;
+  opacity: 0.5;
+  border-radius: 50%;
+  margin-top: 10px;
+  margin-left: 25px;
+}
+
+#dash-toggle:checked ~ .dash-sidebar {
+  width: 70px;
+}
+
+#dash-toggle:checked ~ .dash-sidebar .dash-sidebar-menu p {
+  display: none;
+}
+
+#dash-toggle:checked ~ .dash-sidebar .dash-sidebar-image {
+  display: none;
+}
+
+#dash-toggle:checked ~ main {
+  padding: 3.5rem 2rem 2rem 5.5rem;
+}
+
+/*-------------------------*/
+
+main {
+  min-height: 100%;
+  padding: 3.5rem 1rem 2rem 13rem;
+  color: #201f2b;
+}
+
+.dash-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 0.5fr 0.5fr;
+  grid-template-rows: auto;
+  gap: 0.5rem;
+  grid-template-areas:
+    "total1 total2 total3 total4 total4"
+    "detail detail detail customer customer"
+    "detail detail detail customer customer"
+    "foot foot foot foot foot";
+}
+
+.dash-card {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.total1 {
+  grid-area: total1;
+  background-color: #2d972e;
+  color: #fff;
+}
+
+.total2 {
+  grid-area: total2;
+  background-color: #ffa705;
+  color: #fff;
+}
+
+.total3 {
+  grid-area: total3;
+  background-color: #9132bd;
+  color: #fff;
+}
+
+.total4 {
+  grid-area: total4;
+  background-color: #15a1fe;
+  color: #fff;
+}
+
+.detail {
+  grid-area: detail;
+  overflow-x: auto;
+}
+
+.customer {
+  grid-area: customer;
+  overflow-x: auto;
+}
+
+.foot {
+  grid-area: foot;
+  background-color: black;
+  color: #b4b4b9;
+  text-align: center;
+  font-size: 12px;
+  height: 30px;
+}
+
+.dash-info {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-info-detail h2 {
+  font-size: 25px;
+}
+
+.dash-info-detail p {
+  font-size: 14px;
+}
+
+.dash-info-image {
+  font-size: 40px;
+  color: #2d2b98;
+}
+
+h2 > span {
+  font-size: 14px;
+}
+
+.dash-detail-header {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dash-detail-header button {
+  height: 30px;
+  width: 120px;
+  border: 1px solid rgb(48, 182, 137);
+  background-color: aquamarine;
+  color: #76757c;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease-in;
+  font-weight: 700;
+}
+
+.dash-detail-header button:hover {
+  background-color: transparent;
+  color: #2d2b98;
+}
+
+.dash-detail-header h2 {
+  font-size: 20px;
+  padding: 15px 0 2px 0;
+}
+
+.td-id-hidden,
+#th-id-hidden {
+  display: none;
+}
+
+.detail table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #15a1fe;
+}
+
+.detail table:nth-child(odd) {
+  background-color: #f8f8fb;
+}
+
+.detail table th {
+  background-color: #4db6ac;
+}
+
+.detail table th,
+.detail table td {
+  padding: 0.2rem;
+  text-align: center;
+  font-size: 14px;
+}
+
+.detail table td:nth-child(3),
+.detail table td:nth-child(43) {
+  text-align: left;
+}
+
+.detail table tr:hover {
+  background-color: #f2f2f2;
+  border-bottom: 2px solid aquamarine;
+  font-weight: 700;
+}
+
+.detail td i {
+  width: 30px;
+  height: 30px;
+  padding: 8px;
+  color: #fff;
+  border-radius: 50%;
+  cursor: pointer;
+  margin-right: 3px;
+}
+
+.td-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+}
+
+.dash-status {
+  padding: 0.3rem 0.5rem;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 0.7rem;
+}
+
+.onprogress {
+  background-color: #fff2d7;
+  color: #ffa705;
+}
+
+.confirmed {
+  background-color: #d7effc;
+  color: #15a1fe;
+}
+
+.fullfilled {
+  background-color: #dcedde;
+  color: #37aa38;
+}
+
+.dash-customer-wrapper {
+  display: grid;
+  grid-template-columns: 0.3fr 1fr 0.4fr;
+  grid-auto-flow: column;
+  margin: 10px 0;
+  min-width: 230px;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.dash-card.customer {
+  background-color: #ffa705;
+}
+
+.dash-card.customer h2 {
+  padding-top: 0;
+  text-align: center;
+  font-size: 15px;
+}
+.dash-card.customer h1 {
+  text-align: center;
+}
+
+.dash-customer-image {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.dash-customer-name,
+.dash-customer-date {
+  font-size: 0.9rem;
+}
+
+.dash-customer-date {
+  text-align: left;
+  color: #9092a9;
+}
+
+.fa-search {
+  background: #ffa705;
+  pointer-events: none;
+}
+
+.fa-edit {
+  background: #2d972e;
+  pointer-events: none;
+}
+
+.fa-trash-alt {
+  background: #9132bd;
+  pointer-events: none;
+}
+
+.fa-pencil-alt {
+  background: #2d972e;
+}
+
+/* DASHBOARD MADE RESPONSIVE YO! */
+
+@media screen and (max-width: 980px) {
+  .dash-container {
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "total1 total2"
+      "total3 total4"
+      "detail detail"
+      "customer customer";
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dash-profile-name {
+    display: none;
+  }
+
+  .dash-sidebar {
+    display: none;
+  }
+
+  main {
+    padding: 6rem 0.1rem 1rem 0.1rem;
+  }
+
+  #dash-toggle:checked ~ .dash-sidebar {
+    width: 200px;
+    display: block;
+    opacity: 0.7;
+  }
+
+  #dash-toggle:checked ~ .dash-sidebar .dash-sidebar-menu p {
+    display: block;
+  }
+
+  #dash-toggle:checked ~ main {
+    padding: 6rem 2rem 2rem 2rem;
+  }
+
+  .dash-container {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "total1"
+      "total2"
+      "total3"
+      "total4"
+      "detail"
+      "customer";
+  }
+
+  .detail table {
+    font-size: 0.9rem;
+  }
+}

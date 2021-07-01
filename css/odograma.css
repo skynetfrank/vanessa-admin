@@ -41,16 +41,14 @@ div#sidebar {
 }
 
 canvas#canvas {
-  left: 335px;
+  left: 350px;
   top: 60px;
 }
 
 .colorButtons {
   display: flex;
- justify-content: space-between;
- align-items: center;
-
-
+  justify-content: space-between;
+  align-items: center;
 }
 
 .btn-color {
@@ -83,8 +81,6 @@ canvas#canvas {
 }
 
 label {
- 
- 
   font-weight: bolder;
 }
 
@@ -97,7 +93,6 @@ label {
   border-radius: 5px;
   width: 80px;
   pointer-events: none;
-  
 }
 
 #myH3 {
@@ -119,13 +114,59 @@ label {
   color: dark;
 }
 
-.btn.comando {
+.td-btn {
   width: 45px;
   height: 40px;
   margin: 3px;
   color: #0000ff;
   font-weight: 700;
+  cursor: pointer;
+  position: relative;
 }
+
+/* tooltip for buttons */
+
+.td-btn::before,
+.td-btn::after {
+  --scale: 0;
+  --tooltip-color: #333;
+  --arrow-size: 10px;
+  position: absolute;
+  top: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--translate-y, 0))
+    scale(var(--scale));
+  transition: 150ms transform;
+  transform-origin: bottom center;
+}
+
+.td-btn::before {
+  --translate-y: calc(-100% - var(--arrow-size));
+  content: attr(data-tip);
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  min-width: 110px;
+  max-width: 100%;
+  border-radius: 0.3rem;
+  text-align: center;
+  z-index: 99;
+}
+
+.td-btn:hover::before,
+.td-btn:hover::after {
+  --scale: 1;
+}
+
+.td-btn::after {
+  --translate-y: calc(-1 * var(--arrow-size));
+  content: "";
+  border: var(--arrow-size) solid transparent;
+  border-top-color: var(--tooltip-color);
+  transform-origin: top center;
+}
+
+/* fin de tooltip for buttons */
 
 input {
   width: 50%;
@@ -147,14 +188,18 @@ input {
 }
 
 a {
+  border-radius: 5px;
+  font-size: 25px;
+  font-weight: 700;
   position: relative;
-  top: 25px;
-  padding: 10px;
+  top: 40px;
+  padding: 20px;
   border: 1px solid rgb(137, 137, 148);
   cursor: pointer;
   background-color: aqua;
   font-weight: bold;
   color: rgb(51, 51, 53);
+  text-decoration: none;
 }
 
 a:hover {
@@ -166,7 +211,26 @@ a:hover {
   text-align: center;
 }
 
+#progress {
+  position: relative;
+  top: 70px;
+  left: 40px;
+  font-size: 25px;
+  font-weight: 800;
+}
+
 @media screen and (max-width: 600px) {
+  #h2-nombre {
+    font-size: 12px;
+  }
+
+  a {
+    padding: 10px;
+    font-size: 15px;
+    top: 0px;
+    margin-bottom: 15px;
+  }
+
   div#sidebar {
     width: 105px;
   }
@@ -186,11 +250,17 @@ a:hover {
 
   #div-figuras {
     display: flex;
-   
   }
 
   canvas#canvas {
     left: 130px;
+  }
+
+  #progress {
+    top: 15px;
+    left: 0 px;
+   font-size: 12px;
+   font-weight: 600;
   }
 }
 
@@ -202,6 +272,6 @@ a:hover {
   background-color: springgreen;
 }
 
-#myH3{
+#myH3 {
   display: none;
 }

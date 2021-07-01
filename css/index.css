@@ -206,51 +206,9 @@ i.left {
 }
 
 #tabla-paciente {
-  padding: 30px;
+  padding: 10px;
+  margin: 3px 90px;
   width: 80%;
-  margin-left: 150px;
-}
-
-table.striped > tbody > tr:nth-child(odd) {
-  background-color: rgba(189, 186, 186, 0.5);
-}
-
-table.highlight > tbody > tr:hover {
-  background-color: #ee6e73;
-}
-
-table td {
-  padding: 5px;
-  border: 1px solid #a8adb3;
-}
-
-
-table td:nth-child(2),table td:nth-child(3) {
-  width: 90px;
-}
-table td:nth-child(5){
-  width: 60px;
-  text-align: center;
-}
-
-table td:nth-child(6){
-  width: 100px;
-  text-align: center;
-}
-
-table td:nth-child(4) {
-  width: 40px;
-  text-align: center;
-}
-
-table td:nth-child(7) {
-  width: 190px;
-  text-align: center;
-}
-
-.td-id-hidden,
-#th-id-hidden {
-  display: none;
 }
 
 th {
@@ -260,36 +218,124 @@ th {
   background-color: chocolate;
 }
 
+table.striped > tbody > tr:nth-child(odd) {
+  background-color: rgba(189, 186, 186, 0.5);
+}
+
+table.highlight > tbody > tr:hover {
+  background-color: #ee6e73;
+  font-weight: 700;
+}
+
+table td {
+  padding: 5px;
+  border: 1px solid #a8adb3;
+}
+
+table td:nth-child(4),
+table td:nth-child(5),
+table td:nth-child(6) {
+  text-align: center;
+}
+
+table td:nth-child(6){
+  width: 225px;
+}
+
+.td-id-hidden,
+#th-id-hidden {
+  display: none;
+}
+
 .td-btn:hover {
   opacity: 0.9;
 }
 
-#btn-ver-paciente,
-#btn-control-paciente,#btn-eliminar-paciente {
-  width: 65px;
-  padding: 5px;
+.td-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   outline: none;
   border: 1px solid teal;
-  border-radius: 5px;
-  margin-left: 7px;
   background-color: rgb(39, 206, 206);
   pointer-events: all;
   cursor: pointer;
+  margin: 3px;
+  position: relative;
 }
-#btn-eliminar-paciente{
+
+/* tooltip for buttons */
+
+.td-btn::before,
+.td-btn::after {
+  --scale: 0;
+  --tooltip-color: #333;
+  --arrow-size: 10px;
+  position: absolute;
+  top: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--translate-y, 0))
+    scale(var(--scale));
+  transition: 150ms transform;
+  transform-origin: bottom center;
+}
+
+.td-btn::before {
+  --translate-y: calc(-100% - var(--arrow-size));
+  content: attr(data-tip);
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  min-width: 100px;
+  max-width: 100%;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+.td-btn:hover::before,
+.td-btn:hover::after {
+  --scale: 1;
+}
+
+.td-btn::after {
+  --translate-y: calc(-1 * var(--arrow-size));
+  content: "";
+  border: var(--arrow-size) solid transparent;
+  border-top-color: var(--tooltip-color);
+  transform-origin: top center;
+}
+
+/* fin de tooltip for buttons */
+
+.fa-tasks,
+.fa-teeth-open,
+.fa-pencil-alt,
+.fa-user-times {
+  font-size: 20px;
+  pointer-events: none;
+}
+
+#btn-eliminar-paciente {
   background-color: rgb(199, 52, 52);
+  border: 1px solid red;
 }
 
 #btn-ver-paciente:hover,
-#btn-control-paciente:hover {
+#btn-control-paciente:hover,
+#btn-odograma:hover {
   color: white;
+  background-color: #4db6ac;
+}
+
+#btn-eliminar-paciente:hover {
+  color: rgb(236, 219, 219);
 }
 
 #img-crear-paciente {
   margin-top: 35px;
   cursor: pointer;
   background-color: aqua;
-  border-radius: 5px; 
+  border-radius: 5px;
 }
 
 #img-crear-paciente:hover {
@@ -300,19 +346,45 @@ th {
   pointer-events: none;
 }
 
-p.bottom10{
+p.bottom10 {
   font-size: 20px;
-  margin-bottom: 15px;
-  color:#143961 ;
+  margin-bottom: 35px;
+  color: #143961;
   font-weight: bolder;
   line-height: 10px;
 }
 
- #div-pacientes-titulo > h3 {
-    font-size: 2.5rem;
-   font-weight: 700 !important;
-   margin-bottom: 5px;
-  }
+#div-pacientes-titulo > div > h3 {
+  font-size: 2.5rem;
+  font-weight: 700 !important;
+  margin: 0px 25px 0px 0px !important;
+}
+
+#div-buscador {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#btn-borrar {
+  width: 20px;
+  height: 20px;
+  margin-left: 5px;
+  opacity: 0.4;
+  pointer-events: all;
+  cursor: pointer;
+  padding: auto;
+  background-color: rgb(202, 200, 200);
+  border-radius: 5px;
+  outline: none;
+  border: 1px solid grey;
+  display: none;
+}
+
+#btn-borrar:hover {
+  opacity: 1;
+  border: 1px solid red;
+}
 
 /*INICIO DEL MEDIA QUERY FEBB -------------------------------------------------------------- */
 
@@ -388,36 +460,45 @@ p.bottom10{
   }
 
   table td {
-    font-size: 10px;
+    font-size: 15px;
   }
 
   #tabla-paciente {
     width: 95%;
-    margin-left: 10px;
+    margin-left: 5px;
     max-width: 100%;
     padding: 0;
   }
 
- 
-
-  #btn-ver-paciente,#btn-eliminar-paciente{
-    margin-top: 5px;
-  }
-#div-pacientes-titulo > h3 {
-    font-size: 2rem;
-   font-weight: 700 !important;
+  #btn-ver-paciente,
+  #btn-control-paciente,
+  #btn-eliminar-paciente,
+  #btn-odograma {
+    width: 70px;
+    margin: 5px 0 5px 15px;
   }
 
+  #div-pacientes-titulo > div > h3 {
+    display: none;
+    font-size: 1.5rem;
+    font-weight: 700 !important;
+  }
 
+  #tabla-paciente thead tr th:nth-child(4),
+  #tabla-paciente tbody tr td:nth-child(4),
+  #tabla-paciente thead tr th:nth-child(5),
+  #tabla-paciente tbody tr td:nth-child(5) {
+    display: none;
+  }
 }
-/*FIN DEL MEDIA QUERY */
+/*FIN DEL MEDIA QUERY FEBB */
 
 /* INTRO SECTION TIME-LINE CSS
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
 .intro {
   background: #f45b69;
-  padding: 30px 0;
+  padding: 30px 0 5px 0;
 }
 
 .intro-header {
@@ -429,6 +510,14 @@ p.bottom10{
 
 h1 {
   font-size: 2.5rem;
+}
+
+.intro-header h1 {
+  margin-bottom: 10px;
+}
+
+#id-cita-eliminar {
+  display: none;
 }
 
 /* TIMELINE
@@ -446,6 +535,7 @@ h1 {
 .timeline ul {
   background: #456990;
   padding: 5px 0;
+  height: 100vh;
 }
 
 .timeline ul li {
@@ -661,3 +751,63 @@ time {
   border-color: rgb(12, 138, 138);
   font-weight: bolder;
 }
+
+/*INPUT SEARCH CUSTOM DE FEBB   */
+
+.search__div {
+  background-color: #54dfd1 !important;
+  height: 40px !important;
+  width: 40px !important;
+  border-radius: 20px !important;
+  transition: all ease 0.5s !important;
+  overflow: hidden !important;
+  border: 1px solid rgba(54, 139, 111, 0.603) !important;
+  margin-bottom: 5px;
+}
+
+.search__input {
+  border: none !important;
+  background: none !important;
+  outline: none !important;
+  color: black !important;
+  font-size: 20px !important;
+  height: 2rem !important;
+  width: 0px !important;
+  transition: all ease 0.5s !important;
+  pointer-events: all;
+  margin: 0 !important;
+}
+
+.search__div:hover > .search__input {
+  width: 175px !important;
+}
+
+.search__div:hover {
+  width: 225px !important;
+  background-color: #54dfd1 !important;
+}
+
+.fa-search {
+  color: chocolate !important;
+  font-size: 25px !important;
+  position: absolute !important;
+  margin-top: 7px !important;
+  margin-left: -12px !important;
+  cursor: pointer !important;
+}
+
+.search__input::placeholder {
+  color: rgb(114, 111, 111);
+}
+
+/*FIN DE SEARCH INPUT FEBB /*
+
+
+
+/* CUSTOM TOOL TIP COMPONENT */
+
+.tooltip {
+  position: relative; /* making the .tooltip span a container for the tooltip text */
+}
+
+/*FIN DE TOOL TIP COMPONENT  */

@@ -36,13 +36,15 @@ window.addEventListener('DOMContentLoaded', async () => {
     .get()
     .then((querySnapshot) => {
       querySnapshot.forEach((doc) => {
+        //console.log("controles de Asistencias querySnopshot: ", querySnapshot);
         controlActual = doc.id;
-        console.log("controlasistencias forEach doc => ", doc.data());
+        //console.log("CONTROLES DE ASISTENCIAS =>>: ", doc.data().createdAt.toDate());
 
         controlContainer.innerHTML += `      
 <div class="carousel-item amber black-text">
         <div class="card amber">
           <div class="card-content black-text">
+           ${doc.data().esCita1 ? 'primera cita' : ''}
             <span class="card-title">Historial: ${formatearFecha(doc.data().fecha)}</span>
             <p class="textoformato" >Tratamiento Aplicado</p>
             <textarea  rows="5" id="text-tratamiento" disabled>${doc.data().tratamientoAplicado}</textarea>
@@ -51,6 +53,7 @@ window.addEventListener('DOMContentLoaded', async () => {
               <span>Pago: ${doc.data().pago}</span>
               <span>Ref: ${doc.data().referencia}</span>
               <span>Monto: ${doc.data().monto}</span>
+              
          </div>
        </div>        
  </div>
@@ -113,6 +116,7 @@ historia.addEventListener('submit', async (e) => {
     pago: formadepago,
     referencia: referenciapago,
     monto: montopagado,
+    createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   };
   console.log("controlasistencias ID Documento => ", controlAsistencia);
   console.log("controlasistencias ID Documento => ", controlActual);
@@ -125,6 +129,7 @@ historia.addEventListener('submit', async (e) => {
   document.querySelector(".very-small-btn").style.display = "none";
   sliderContainer.style.display = "block";
   btnAddControl.style.display = "block";
+  window.location.reload();
 
 
 });

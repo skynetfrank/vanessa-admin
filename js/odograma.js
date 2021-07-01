@@ -1,9 +1,27 @@
 const idPacienteLocal = JSON.parse(localStorage.getItem('pacienteActual'));
 const nombrePaciente = JSON.parse(localStorage.getItem('nombrePaciente'));
 const apellidoPaciente = JSON.parse(localStorage.getItem('apellidoPaciente'));
+const uploadProgress = document.getElementById("progress");
+// Create a root reference
+//var ref = storage.ref('images').child(idPacienteLocal + '.jpg');
+
+function formatearFecha(nfecha) {
+  var info = nfecha.split('-').reverse().join('/');
+  return info;
+}
+
+//funcion para convertir fecha a formato AAAA-MM-DD
+function convertirFecha(cfecha) {
+  let year = cfecha.getFullYear();                        // YYYY
+  let month = ("0" + (cfecha.getMonth() + 1)).slice(-2);  // MM
+  let day = ("0" + cfecha.getDate()).slice(-2);           // DD
+  return (year + "-" + month + "-" + day);
+}
+let fecha = formatearFecha(convertirFecha(new Date()));
 
 
-console.log("ID-Paciente Actual en el odograma:",idPacienteLocal);
+
+
 //SETTING CONSTANTES
 const MARCAR_EXTRACCION = 1;
 const MARCAR_CARIES = 2;
@@ -36,54 +54,66 @@ const MARCAR_FRENILLO = 28;
 const MARCAR_EXTRUSION = 29;
 const MARCAR_INCLINACION = 30;
 const MARCAR_ROTACION = 31;
-
-
-
 const SIN_SELECCION = 0;
 
 // SETTING ALL VARIABLES
 var isMouseDown = false;
+
+var isStorage = false;//switche para controlar si existe el odograma en firebase storage
 var canvas = document.createElement('canvas');
 var body = document.getElementsByTagName("body")[0];
 var ctx = canvas.getContext('2d');
 var linesArray = [];
-currentSize = 3;
-var currentColor = "#ffffff";
+var currentSize = 3;
+var currentColor = "rgba(0, 0, 255, 0.7)";
 var currentAction = SIN_SELECCION;
 var currentBg = "white";
 var odogramaOriginal = document.getElementById("img-hidden");
 var cargarImagen = document.getElementById("cargarImg");
 var recortarImagen = document.getElementById("recortarImg");
 var h3 = document.getElementById("myH3");
+
 var odograma = new Image();
 //asignar ubicacion donde esta la imagen del odograma
-odograma.src = "images/odograma1.jpg";
+// odograma.src = "images/odograma1.jpg";
+
+//Verificar si existe un odograma en storage - sino crear uno nuevo
+window.addEventListener('load', () => {
+  var ref = storage.ref('images').child(idPacienteLocal + '.jpg');
+  ref.getDownloadURL().then(function (url) {
+    odograma.src = url;
+    odograma.crossOrigin = "Anonymous";
+    isStorage = true;
+  }).catch(function (error) {
+
+    if (error.code === 'storage/object-not-found') {
+      alert("Paciente sin Odograma Anterior. Se la asignara un Odograma nuevo.");
+      odograma.src = "images/odograma1.jpg";
+      odograma.crossOrigin = "Anonymous";
+      isStorage = false;
+    }
+  });
+})
 
 odograma.addEventListener('load', () => {
   createCanvas();
+  if (!isStorage) {
+    ctx.font = "15px Arial";
+    ctx.fillStyle = '#000000'
+    ctx.fillText('Paciente: ' + nombrePaciente + ' ' + apellidoPaciente + ' ' + ' ' + '  ID: ' + idPacienteLocal +
+      ' ' + ' Creado el: ' + fecha, 20, 485)
+  }
+  document.getElementById("h2-nombre").innerHTML += ' ' + nombrePaciente + ' ' + apellidoPaciente;
   document.getElementById("marcador").focus();
-
 });
 // INITIAL LAUNCH
-
-
-
-window.oncontextmenu = (e) => {
-
-  console.log("se disparo el menu contextual")
-}
-
-
-
-
-
 
 
 // CREATE CANVAS
 
 function createCanvas() {
   canvas.id = "canvas";
-  canvas.width = 650;
+  canvas.width = 600;
   canvas.height = 500;
   canvas.style.zIndex = 8;
   canvas.style.position = "absolute";
@@ -91,11 +121,108 @@ function createCanvas() {
   ctx.fillStyle = "#FFFFFF";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   body.appendChild(canvas);
-  ctx.drawImage(odograma, 20, 20, 600, 461);
-  if(nombrePaciente){
-  document.getElementById("h2-nombre").innerHTML += ' ' + nombrePaciente + ' ' + apellidoPaciente;
-  }
+  ctx.drawImage(odograma, 0, 0);
+
 }
+
+
+
+document.getElementById('download').addEventListener('click', () => {
+  guardarLocal(document.getElementById('saveToImage'), 'canvas', idPacienteLocal + '.jpg')
+})
+
+function guardarLocal(link, canvas, filename) {
+
+  //link.href = document.getElementById(canvas).toDataURL("image/jpeg", 1.0);
+  //link.download = filename;
+  console.log("Downloaded!!", link.href, canvas, filename);
+}
+
+
+
+//boton guardar odograma en firebase
+document.getElementById('saveToImage').addEventListener('click', function () {
+  guardarStorage(this, 'canvas', idPacienteLocal + '.jpg');
+});
+//FIN GUARDAR CANVAS
+
+
+// DOWNLOAD CANVAS
+function guardarStorage(link, canvas, filename) {
+  let ref = storage.ref('images').child(idPacienteLocal + '.jpg');
+  link.href = document.getElementById(canvas).toDataURL("image/jpeg", 1.0);
+  console.log("link.href: ", link.href.substring(23));
+  //link.download = filename;
+
+  //EXPERIMENTAL SAVE TO FIREBASE
+  uploadTask = ref.putString(link.href.substring(23), 'base64', { contentType: 'image/jpg' });
+  uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+    function (snapshot) {
+      console.log("snapshot: ", snapshot);
+      // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+      switch (snapshot.state) {
+        case firebase.storage.TaskState.PAUSED: // or 'paused'
+          console.log('Upload is paused');
+          break;
+        case firebase.storage.TaskState.RUNNING: // or 'running'
+          uploadProgress.innerHTML = "Guardando... Espere!"
+          console.log('Upload is running');
+          break;
+      }
+    }, function (error) {
+      console.log(error);
+      alert("Ocurrio un error al subir la imagen al Servidor!.");
+    }, function () {
+      // Upload completed successfully, now we can get the download URL
+      uploadProgress.innerHTML = "Odograma Guardado Correctamente!"
+      alert("Se ha grabado el odograma correctamente");
+      uploadProgress.innerHTML = ""
+      var downloadURL = uploadTask.snapshot.downloadURL;
+      console.log("downloadURL: ", uploadTask.snapshot);
+    });
+
+
+  function descargarStorage() {
+
+    var ref = storage.ref('images').child('pruebaOdontograma.jpg');
+    ref.getDownloadURL().then(function (url) {
+      // `url` is the download URL for 'images/stars.jpg'
+      console.log("url obtenido: ", url);
+      // This can be downloaded directly:
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function (event) {
+        var blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send();
+
+      // Or inserted into an <img> element:
+      var img = document.getElementById('myimg');
+      img.src = url;
+    }).catch(function (error) {
+      // Handle any errors
+    });
+
+  }
+
+
+
+
+
+
+  //FIN EXPERIMENTAL SAVE TO FIREBASE
+
+}
+//FIN DOWNLOAD CANVAS
+
+
+
+
+
+
 
 
 // BUTTON COLORES EVENT HANDLERS
@@ -125,15 +252,7 @@ document.getElementById("btncolor-verde").addEventListener('click', () => {
 });
 
 
-//descargar archivo (guardar)
-document.getElementById('saveToImage').addEventListener('click', function () {
-  console.log(idPacienteLocal);
-  if (!idPacienteLocal) {
-    alert("El ID del paciente no es valido!!..cargue primero el paciente");
-    return
-  }
-  downloadCanvas(this, 'canvas', idPacienteLocal + '.jpg');
-}, false);
+
 
 //ACCIONES DE LA SIDE-BAR
 document.getElementById("extraccion").addEventListener("click", () => {
@@ -348,13 +467,7 @@ canvas.addEventListener('mousemove', function (e) {
 canvas.addEventListener('mouseup', mouseup);
 
 
-// DOWNLOAD CANVAS
 
-function downloadCanvas(link, canvas, filename) {
-  link.href = document.getElementById(canvas).toDataURL();
-  // link.download = filename;
-  link.download = filename;
-}
 
 // ERASER HANDLING
 function eraser() {
@@ -376,7 +489,7 @@ function getMousePos(canvas, evt) {
 //boundaries check
 function esAplicable(pos) {
   //el click  esta dentro de la zona dibujable
-  if (!((pos.x > 20) && (pos.y > 245 && pos.y < 270))) {
+  if (!((pos.x > 20) && (pos.y > 225 && pos.y < 250))) {
     return true
   } else {
     return false
@@ -388,14 +501,14 @@ function esOutside(posx, posy) {
   if ((posx >= 0 && posx <= 20)) {
     return true;
   }
-  if ((posx >= 620 && posx <= 650)) {
+  if ((posx >= 585 && posx <= 600)) {
     return true;
   }
 
   if ((posy >= 0 && posy <= 20)) {
     return true;
   }
-  if ((posy >= 483 && posy <= 500)) {
+  if ((posy >= 435 && posy <= 500)) {
     return true;
   }
 
@@ -469,7 +582,9 @@ function mouseup(evt) {
   var contorno = canvas.getBoundingClientRect();
 
   if (currentAction === MARCAR_CARIES) {
+
     if (esAplicable(position)) {
+
       //ctx.globalCompositeOperation = 'source-atop';
       ctx.beginPath();
       ctx.arc(evt.clientX - contorno.left, evt.clientY - contorno.top, 5, 0, 2 * Math.PI);
@@ -579,17 +694,6 @@ function mouseup(evt) {
     rotacion(position.x, position.y)
   }
 
-
-
-
-
-
-
-
-
-
-
-
   isMouseDown = false
   store()
 }
@@ -609,14 +713,14 @@ function extraccion(posx, posy) {
   }
   ctx.lineWidth = 3;
   ctx.beginPath();
-  ctx.moveTo(posx - 15, calibrarY(posy) - 70);
-  ctx.lineTo(posx + 15, calibrarY(posy) + 70); // Red line
+  ctx.moveTo(posx - 15, calibrarY(posy) - 80);
+  ctx.lineTo(posx + 15, calibrarY(posy) + 80); // Red line
   ctx.closePath();
   ctx.stroke();
 
   ctx.beginPath();
-  ctx.moveTo(posx + 15, calibrarY(posy) - 70);
-  ctx.lineTo(posx - 15, calibrarY(posy) + 70); // Red line
+  ctx.moveTo(posx + 15, calibrarY(posy) - 80);
+  ctx.lineTo(posx - 15, calibrarY(posy) + 80); // Red line
   ctx.closePath();
   ctx.stroke();
 }
@@ -1045,12 +1149,12 @@ function extractIcon() {
 //CALIBRAR POSICION AL MEDIO DEL CUADRANTE (HORIZONTALMENTE)
 
 function calibrarY(y) {
-  if (y >= 257 && y <= 500) {
-    let newy = 359;
+  if (y >= 237 && y <= 460) {
+    let newy = 340;
     return newy
   }
-  if (y >= 0 && y <= 256) {
-    let newy = 150;
+  if (y >= 0 && y <= 236) {
+    let newy = 130;
     return newy
   }
   return y;
@@ -1059,7 +1163,7 @@ function calibrarY(y) {
 
 
 function btnOff() {
-  let comandos = document.getElementsByClassName("btn comando");
+  let comandos = document.getElementsByClassName("td-btn");
   Array.from(comandos).forEach((el) => {
     if (el.classList.contains("activo")) {
       el.classList.toggle("activo");

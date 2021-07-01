@@ -18,11 +18,25 @@ p {
   color: #666;
 }
 
-.question p{
+.question p {
   margin-bottom: 7px;
+  font-weight: bold;
+  color: #265a6e;
 }
 
-input,textarea {
+.item:not(.item.tipoInput, .item.dir) p {
+  font-weight: bold;
+  color: #265a6e;
+}
+
+#fecha-cita,
+#procedimiento {
+  font-weight: bold;
+  color: #265a6e;
+}
+
+input,
+textarea {
   color: orangered;
   font-weight: 500;
 }
@@ -61,7 +75,6 @@ h5 {
   display: flex;
   justify-content: center;
   align-items: center;
-  text-align: center;
 }
 
 .banner.nuevo {
@@ -113,12 +126,11 @@ form {
   width: 450px;
 }
 
-
-
 #div-genero,
 #div-edocivil {
   margin-left: 55px;
 }
+
 
 #div-odontograma {
   display: flex;
@@ -127,6 +139,15 @@ form {
   justify-content: center;
   border-radius: 5px;
 }
+#div-odontograma-nuevo {
+  display: none;
+  border: 1px solid rgb(153, 152, 152);
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+}
+
+
 
 #div-odontograma:hover {
   border-color: rgb(7, 187, 190);
@@ -239,18 +260,15 @@ textarea {
   justify-content: space-evenly;
 }
 
-
-
-
-p:hover{
-  color:rgb(6, 157, 160);
+p:hover {
+  color: rgb(6, 157, 160);
   font-weight: 600;
 }
 
 input:hover,
 select:hover,
 textarea:hover {
-  border: 1px solid rgb(7, 187, 190); 
+  border: 1px solid rgb(7, 187, 190);
 }
 
 .item {
@@ -278,7 +296,6 @@ label.check {
   margin-left: 22px;
 }
 
-
 .checkbox-item label {
   margin: 5px 20px 10px 0;
 }
@@ -304,16 +321,10 @@ label.check:before {
   border: 1px solid #095484;
 }
 
-label.check:hover{
-  color:rgb(6, 157, 160);
+label.check:hover {
+  color: rgb(6, 157, 160);
   font-weight: 600;
 }
-
-
-
-
-
-
 
 input[type="checkbox"]:checked + .check:before {
   background: orangered;
@@ -368,13 +379,27 @@ button {
   cursor: pointer;
 }
 
-#btn-registrar-paciente{
-width: 100%;
-background: #26a69a;
+button.volver {
+  width: 50px;
+  font-size: 13px;
+  padding: 5px;
+  position: fixed;
+  top: 25px;
+  left: 140px;
 }
 
-#btn-registrar-paciente:hover{
-background: #28bbac;
+button.volver > a {
+  text-decoration: none;
+  color: white;
+}
+
+#btn-registrar-paciente {
+  width: 100%;
+  background: #26a69a;
+}
+
+#btn-registrar-paciente:hover {
+  background: #28bbac;
 }
 
 /*Formulario Control Asistencia     */
@@ -385,7 +410,6 @@ background: #28bbac;
 .btn-block.control,
 #div-control-asistencia.control {
   display: none;
-  
 }
 
 .btn-block.control {
@@ -422,6 +446,14 @@ background: #28bbac;
 
 #tiny-btn:hover {
   background-color: teal;
+}
+
+#span-pestana {
+  color: #00c853;
+  font-weight: bold;
+  position: fixed;
+  top: 10px;
+  left: 145px;
 }
 
 /*FIN DE Formulario Control Asistencia     */
@@ -522,4 +554,19 @@ background: #28bbac;
   #div-odontograma a > h5 {
     font-size: 20px;
   }
+
+  #span-pestana {
+    position: fixed;
+    font-size: 15px;
+    top: 0;
+    left: 0;
+  }
+  button.volver {
+top:25px;
+left:0px;
+z-index: 999;
+
+  }
+
+
 }
