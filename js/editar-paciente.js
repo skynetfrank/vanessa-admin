@@ -122,17 +122,28 @@ historia.addEventListener('submit', async (e) => {
   const tlflocal = historia['tlflocal'].value;
   const email = historia['email'].value;
   const contacto = historia['contacto'].value;
-  const genero = document.querySelector('input[name="checkgenero"]:checked').value;
-  const edocivil = document.querySelector('input[name="checkedocivil"]:checked').value;
+  const genero = document.querySelector('input[name="checkgenero"]:checked')?.value ?
+    document.querySelector('input[name="checkgenero"]:checked').value : "";
+
+  const edocivil = document.querySelector('input[name="checkedocivil"]:checked')?.value ?
+    document.querySelector('input[name="checkedocivil"]:checked').value : "";
   const direccion1 = historia['direccion1'].value;
   const estatura = historia['estatura'].value;
   const peso = historia['peso'].value;
   const edad = historia['edad'].value;
-  const tratadopormedico = document.querySelector('input[name="checktratadopormedico"]:checked').value;
+  const tratadopormedico = document.querySelector('input[name="checktratadopormedico"]:checked')?.value ?
+    document.querySelector('input[name="checktratadopormedico"]:checked').value : "";
+
+
   const tratadoporenfermedad = historia['tratadoporenfermedad'].value;
 
-  const checktomamedicamento = document.querySelector('input[name="checktomamedicamento"]:checked').value;
-  const checkcomplicaciones = document.querySelector('input[name="checkcomplicaciones"]:checked').value;
+  const checktomamedicamento = document.querySelector('input[name="checktomamedicamento"]:checked')?.value ?
+    document.querySelector('input[name="checktomamedicamento"]:checked').value : "";
+
+
+  const checkcomplicaciones = document.querySelector('input[name="checkcomplicaciones"]:checked')?.value ?
+    document.querySelector('input[name="checkcomplicaciones"]:checked').value : "";
+
 
   const cualesmedicamentos = historia['cualesmedicamentos'].value;
   const dosismeds = historia['dosismeds'].value;
@@ -215,7 +226,7 @@ historia.addEventListener('submit', async (e) => {
         checkcardiovasculares,
         checkhemorragicas,
         checkvenereas,
-       
+
       ],
     otraenfermedad,
     texthabitos,

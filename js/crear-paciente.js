@@ -75,8 +75,11 @@ historia.addEventListener('submit', async (e) => {
 
   const textcontrolasistencia = historia['textcontrolasistencia'].value;
   const formadepago = historia['formadepago'].value;
+  const banco = historia['select-banco'].value;
+  const tipopago = historia['tipo-pago'].value;
   const referenciapago = historia['referenciapago'].value;
   const montopagado = historia['montopagado'].value;
+  const montopagadobs = historia['montopagadobs'].value;
   //Crear Objeto para enviar a firebase con todos los campos 
 
 
@@ -142,7 +145,7 @@ historia.addEventListener('submit', async (e) => {
   localStorage.setItem('pacienteActual', JSON.stringify(id));
   //Esta es una Root Coleccion para hacer Join con Pacientes
 
-  document.getElementById("div-odontograma-nuevo").style.display="flex";
+  //document.getElementById("div-odontograma-nuevo").style.display = "flex";
 
   const controlAsistencia = {
     idPaciente: id,
@@ -150,6 +153,9 @@ historia.addEventListener('submit', async (e) => {
     esCita1: true,
     tratamientoAplicado: textcontrolasistencia,
     pago: formadepago,
+    tipopago: tipopago,
+    banco: banco,
+    montoBs: montopagadobs,
     referencia: referenciapago,
     monto: montopagado,
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),

@@ -2,8 +2,15 @@ const idPacienteLocal = JSON.parse(localStorage.getItem('pacienteActual'));
 const nombrePaciente = JSON.parse(localStorage.getItem('nombrePaciente'));
 const apellidoPaciente = JSON.parse(localStorage.getItem('apellidoPaciente'));
 const uploadProgress = document.getElementById("progress");
+const mySpinner = document.querySelector(".myspinner-container");
+const btnCerrar = document.getElementById("btn-cerrar");
+mySpinner.style.display = "none";
 // Create a root reference
 //var ref = storage.ref('images').child(idPacienteLocal + '.jpg');
+
+btnCerrar.addEventListener("click", () => {
+  window.close();
+});
 
 function formatearFecha(nfecha) {
   var info = nfecha.split('-').reverse().join('/');
@@ -167,7 +174,8 @@ function guardarStorage(link, canvas, filename) {
           console.log('Upload is paused');
           break;
         case firebase.storage.TaskState.RUNNING: // or 'running'
-          uploadProgress.innerHTML = "Guardando... Espere!"
+          mySpinner.style.display = "flex";
+          //uploadProgress.innerHTML = "Guardando... Espere!"
           console.log('Upload is running');
           break;
       }
@@ -175,12 +183,18 @@ function guardarStorage(link, canvas, filename) {
       console.log(error);
       alert("Ocurrio un error al subir la imagen al Servidor!.");
     }, function () {
+      mySpinner.style.display = "none";
       // Upload completed successfully, now we can get the download URL
-      uploadProgress.innerHTML = "Odograma Guardado Correctamente!"
-      alert("Se ha grabado el odograma correctamente");
-      uploadProgress.innerHTML = ""
+      //uploadProgress.innerHTML = "Odograma Guardado Correctamente!"
+      // alert("Se ha grabado el odograma correctamente");
+      uploadProgress.innerHTML = "Odograma Guardado!"
+      setTimeout(() => {
+        uploadProgress.innerHTML = ""
+      }, 7000)
+
       var downloadURL = uploadTask.snapshot.downloadURL;
       console.log("downloadURL: ", uploadTask.snapshot);
+
     });
 
 

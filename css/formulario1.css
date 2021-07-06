@@ -29,6 +29,14 @@ p {
   color: #265a6e;
 }
 
+
+
+.fecha-control-editar{
+  width: 25% !important;
+  height: 2rem !important;
+ 
+}
+
 #fecha-cita,
 #procedimiento {
   font-weight: bold;
@@ -40,6 +48,19 @@ textarea {
   color: orangered;
   font-weight: 500;
 }
+
+.card-content textarea{
+  font-weight: 500;
+  font-size: 17px;
+}
+
+#p-tratamiento{
+color:black;
+pointer-events: none;
+font-weight: 700;
+
+}
+
 
 h1 {
   position: absolute;
@@ -59,6 +80,15 @@ h5 {
   font-size: 2rem;
   font-weight: 700;
 }
+
+h6 {
+  margin: 10px 0;
+  color: #265a6e;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
 
 .testbox {
   display: flex;
@@ -81,19 +111,16 @@ h5 {
   background-color: #00b8d4;
 }
 
-.banner::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
 form {
-  width: 100%;
+  width: 65%;
   padding: 20px;
   border-radius: 6px;
   background: #fff;
   box-shadow: 0 0 5px 0 #095484;
+}
+
+form.form-control-editar{
+  padding: 10px;
 }
 
 .item.tipoInput {
@@ -131,7 +158,6 @@ form {
   margin-left: 55px;
 }
 
-
 #div-odontograma {
   display: flex;
   border: 1px solid rgb(153, 152, 152);
@@ -147,8 +173,6 @@ form {
   border-radius: 5px;
 }
 
-
-
 #div-odontograma:hover {
   border-color: rgb(7, 187, 190);
 }
@@ -163,7 +187,7 @@ form {
 }
 
 #div-control-asistencia {
-  margin-bottom: 25px;
+  margin-bottom: 20px;
 }
 
 #div-control-asistencia > h5 {
@@ -188,6 +212,8 @@ form {
 
 .card-title {
   font-weight: 700 !important;
+  color: blue;
+  font-size: 20px !important;
 }
 
 #text-tratamiento {
@@ -195,28 +221,102 @@ form {
 }
 
 .carousel {
-  max-height: 250px;
+  max-height: 300px;
+  border-radius: 10px;
 }
 
+
+
 .card {
-  margin-top: 80px;
+  margin-top: 60px;
+cursor: pointer;
+border-top: none;
+outline: none;
+
 }
 
 .card .card-content {
   padding: 0px 20px 0px 20px;
+  cursor: pointer;
 }
 
 p.textoformato,
 #text-tratamiento,
 #pago-info {
   color: black;
-  font-weight: 700;
+ 
 }
 
 #pago-info {
   display: flex;
   justify-content: space-around;
+  background-color: #3584a3;
+  
 }
+
+#pago-titulo {
+  display: flex;
+  justify-content: space-around;
+  background-color: #3584a3;
+  padding-top: 3px;
+
+}
+
+#pago-info > span{
+  min-width: 100px;
+  border-right: 1px solid #5d90a5;
+  padding-right: 3px;
+  color: white;
+}
+
+.pago-titulo{
+ min-width: 100px;
+  border-right: 1px solid #5d90a5;
+  padding-right: 3px;
+  color: black;
+  font-weight: bold;
+}
+
+#ante-titulo{
+  text-align: left;
+  font-size: 12px;
+  color: blue;
+  font-weight: bold;
+  margin-left: 3px;
+}
+
+
+#select-banco,#formadepago,#tipo-pago{
+  display: inline-block;
+  width: 31%;
+  padding: 5px;
+  margin-right: 10px;
+
+}
+
+#div-inputs-pago{
+  display: flex;
+position: relative;
+
+}
+
+
+
+ #div-inputs-pago > input{
+   width: 16%;   
+   padding: 5px;
+   margin: 5px;
+ }
+
+ #div-inputs-pago > p{  
+   min-width: 75px;
+   margin-top: 12px;  
+ }
+
+  
+
+
+
 
 input,
 select,
@@ -412,22 +512,40 @@ button.volver > a {
   display: none;
 }
 
+.indicator-item{
+ margin-bottom: 15px !important;
+ background-color: blue !important;
+ width: 12px !important;
+ height: 12px !important;
+}
+
 .btn-block.control {
   margin-top: 0;
 }
 
-#btn-add-control {
-  display: flex;
-  justify-content: center;
+#btn-add-control,
+#btn-delete-control,
+#btn-edit-control {
+  position: relative;
 }
 
-#btn-add-control > img {
-  margin-top: 25px;
+#btn-delete-control,#btn-add-control{
+ padding-top: 5px;
+}
+
+#btn-edit-control > img{
+  border-radius: 5px;
+}
+
+
+#crud-control-asistencia > div > img { 
   pointer-events: all;
   cursor: pointer;
 }
 
 #tiny-btn {
+  position: relative;
+  top: -85px;
   width: 30px;
   height: 30px;
   border-radius: 50%;
@@ -435,11 +553,6 @@ button.volver > a {
   font-weight: 900;
   padding: 5px;
   background-color: red;
-  position: relative;
-  float: right;
-  left: 350px;
-  top: -55px;
-
   pointer-events: all !important;
   cursor: pointer !important;
 }
@@ -454,6 +567,13 @@ button.volver > a {
   position: fixed;
   top: 10px;
   left: 145px;
+}
+
+#crud-control-asistencia {
+  margin-top: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 /*FIN DE Formulario Control Asistencia     */
@@ -475,11 +595,7 @@ button.volver > a {
   }
 }
 
-@media (min-width: 768px) {
-  form {
-    width: 60%;
-  }
-}
+
 
 /*INICIO DEL MEDIA QUERIES PROPIETARIO FEBB */
 @media (max-width: 600px) {
@@ -538,9 +654,11 @@ button.volver > a {
     font-size: 15px;
   }
 
+  
+
   #tiny-btn {
-    left: 110px;
-    top: -55px;
+    left: 210px;
+    top: -85px;
   }
 
   .banner.nuevo {
@@ -562,11 +680,69 @@ button.volver > a {
     left: 0;
   }
   button.volver {
-top:25px;
-left:0px;
-z-index: 999;
-
+    top: 25px;
+    left: 0px;
+    z-index: 999;
+  }
+  #p-tratamiento{
+    font-size: 10px;
   }
 
+  .card-title{
+    font-size: 14px !important;
+  }
+
+  #pago-info >span{
+    font-size: 12px;
+  }
 
 }
+
+/*FIN MEDIA QUERIES FEBB */
+
+
+
+
+
+/* tooltip for buttons */
+
+.my-tooltip::before,
+.my-tooltip::after {
+  --scale: 0;
+  --tooltip-color: #333;
+  --arrow-size: 10px;
+  position: absolute;
+  top: -0.25rem;
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--translate-y, 0))
+    scale(var(--scale));
+  transition: 150ms transform;
+  transform-origin: bottom center;
+}
+
+.my-tooltip::before {
+  --translate-y: calc(-100% - var(--arrow-size));
+  content: attr(data-tip);
+  background: #333;
+  color: white;
+  padding: 0.5rem;
+  min-width: 100px;
+  max-width: 100%;
+  border-radius: 0.3rem;
+  text-align: center;
+}
+
+.my-tooltip:hover::before,
+.my-tooltip:hover::after {
+  --scale: 1;
+}
+
+.my-tooltip::after {
+  --translate-y: calc(-1 * var(--arrow-size));
+  content: "";
+  border: var(--arrow-size) solid transparent;
+  border-top-color: var(--tooltip-color);
+  transform-origin: top center;
+}
+
+/* fin de tooltip for buttons */

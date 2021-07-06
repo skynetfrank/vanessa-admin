@@ -11,54 +11,61 @@
   <title>Paciente-Historia</title>
 </head>
 
-
-
 <body>
   <div class="testbox">
-    <form id="control-form">
+    <form id="control-form" class="form-control-editar">
       <div class="banner nuevo">
         <h1 class="control">Control de Asistencias</h1>
       </div>
       <div class="chip">
-        <img src="images/paciete-icon.png" alt="img">
+        <img src="images/mask-icon.png" alt="img">
         <span id="span-chip-paciente"></span>
-        <button type="button" class="very-small-btn" id="tiny-btn">X</button>
+        <button type="button" class="very-small-btn my-tooltip" id="tiny-btn" data-tip="Volver">X</button>
       </div>
       <!---SLIDER -->
       <div class="slider-container">
         <div class="carousel carousel-slider center" id="myCarusel">
-
         </div>
       </div>
       <!---FIN DEL SLIDER -->
-      <div id="btn-add-control">
-        <img src="/images/add-control-icon2.png" id="add-control-img" alt="img">
+      <div id="crud-control-asistencia">
+        <div id="btn-add-control" class="my-tooltip" data-tip="Agregar Control de Asistencia">
+          <img src="/images/add-control-icon2.png" id="add-control-img" alt="img">
+        </div>
+        <div id="btn-edit-control" class="my-tooltip" data-tip="Modificar Control de Asistencia">
+          <img src="/images/edit-control-icon.png" id="edit-control-img" alt="img">
+        </div>
+        <div id="btn-delete-control" class="my-tooltip" data-tip="Eliminar Control de Asistencia">
+          <img src="/images/delete-control-icon.png" id="delete-control-img" alt="img">
+        </div>
       </div>
-
 
       <!---AGREGAR UN NUEVO REGISTRO DE CONTROL DE ASISTENCIA PARA ESTE PACIENTE-->
       <div id="div-control-asistencia" class="control">
         <div class="item">
           <div class="input-field">
-            <input type="date" id="fechacontrolasistencia" />
-            <label for="referenciapago">Fecha Asistencia</label>
+            <input type="date" id="fechacontrolasistencia" class="fecha-control-editar" required />
+            <label for="fechacontrolasistencia">Fecha Asistencia</label>
           </div>
         </div>
-        <p>Procedimientos Realizados</p>
+        <h6>Procedimientos Realizados y/o Observaciones</h6>
         <div class="item textarea">
-          <textarea rows="7" placeholder="detalle los procedimientos aplicados en esta cita" id="textcontrolasistencia"
+          <textarea rows="5" placeholder="detalle los procedimientos aplicados en esta cita" id="textcontrolasistencia"
             name="textcontrolasistencia"></textarea>
         </div>
-
+        <h6>Informacion de Pago</h6>
         <div class="item" id="div-ref-monto">
-          <select id="formadepago">
-            <option value="" disabled selected>forma de Pago</option>
-            <option value="Efectivo">Efectivo-$</option>
-            <option value="Transferencia">Transferencia</option>
-            <option value="Pago-Movil">Pago-Movil</option>
-            <option value="Zelle">Zelle</option>
-            <option value="Otro">Otros</option>
-          </select>
+          <div class="input-field">
+            <select id="formadepago">
+              <option value="" disabled selected>forma de Pago</option>
+              <option value="Efectivo">Efectivo-$</option>
+              <option value="Transferencia">Transferencia</option>
+              <option value="Pago-Movil">Pago-Movil</option>
+              <option value="Zelle">Zelle</option>
+              <option value="Otro">Otros</option>
+            </select>
+            <label>Forma de Pago</label>
+          </div>
           <div class="input-field">
             <input type="text" id="referenciapago" name="referenciapago" />
             <label for="referenciapago">Referencia</label>
@@ -67,24 +74,13 @@
             <input type="text" id="montopagado" name="montopagado" />
             <label for="montopagado">Monto</label>
           </div>
+
         </div>
-      </div>
-      <!---FIN DE AGREGAR UN NUEVO REGISTRO DE CONTROL DE ASISTENCIA PARA ESTE PACIENTE-->
+        <!---FIN DE AGREGAR UN NUEVO REGISTRO DE CONTROL DE ASISTENCIA PARA ESTE PACIENTE-->
 
-      <div class="btn-block control">
-        <button type="submit" id="btn-registrar-paciente"" href=" /">Guardar Asistencia</button>
-      </div>
-
-
-      <!-- ODONTOGRAMA-->
-      <div class="odontograma control" id="div-odontograma">
-        <a href="odograma.html">
-          <h5>ODONTOGRAMA</h5>
-        </a>
-        <a href="odograma.html"><img src="images/odontograma-icon.png" alt="icon"></a>
-      </div>
-      <!-- FIN DE ODONTOGRAMA-->
-
+        <div class="btn-block control">
+          <button type="submit" id="btn-registrar-paciente"" href=" /">Guardar Asistencia</button>
+        </div>
 
 
     </form>
@@ -96,6 +92,7 @@
   <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
   <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
   <script src="js/firebase-config.js"></script>
   <script src="js/control-paciente.js"></script>
 </body>

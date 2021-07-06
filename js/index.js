@@ -38,6 +38,7 @@ function populateTabla() {
 
   const allPacientes = async () => {
     const getPacientes = await db.collection('pacientes')
+      .orderBy("nombre", 'asc')
       .onSnapshot(querysnapshot => {
         let table = document.getElementById('pacientes-tbody')
         table.innerHTML = ''
@@ -46,6 +47,7 @@ function populateTabla() {
         querysnapshot.forEach((doc) => {
 
           let data = doc.data();
+          console.log(data);
           let row = `<tr> 
                         <td class="td-id-hidden">${doc.id}</td>                          
                         <td>${data.nombre}</td>

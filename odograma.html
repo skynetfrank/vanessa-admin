@@ -12,7 +12,7 @@
 
 <body>
   <h2 id="h2-nombre">Examen Clinico Intraoral - Odontograma</h2>
-
+  <button id="btn-cerrar">X</button>
   <div id="sidebar">
 
     <div class="colorButtons">
@@ -25,7 +25,7 @@
         <button id="btncolor-verde" class="btn-color"></button>
       </div>
       <div class="div-color-actual">
-        <label for="color-actual">seleccionado</label>
+        <label for="color-actual" id="label-seleccionado">seleccionado</label>
         <button id="color-actual" class="btn-color"></button>
       </div>
 
@@ -75,12 +75,35 @@
     <hr>
     <div class="guardar">
       <a id="saveToImage">Guardar</a>
-     
+
     </div>
     <span id="progress"></span>
     <span id="myH3"></span>
 
   </div>
+  <!--MY CUSTOM LOADING SPINNER -->
+  <div class="myspinner-container">
+    <div class="myspinner-text" data-spintext="Guardando! Espere."></div>
+    <div class="myspinner-sector myspinner-sector-red"></div>
+    <div class="myspinner-sector myspinner-sector-blue"></div>
+    <div class="myspinner-sector myspinner-sector-green"></div>
+  </div>
+  <!--END OF MY CUSTOM LOADINF SPINNER -->
+  <!--MY CUSTOM MODAL -->
+  <div class="myModal-div" id="mymodal-div">
+    <div class="mymodal-container">
+      <h2 class="mymodal-title">TITULO DEL MODAL</h2>
+      <p id="mymodal-text">Aqui va el contenido del mensaje del modal
+        el cual debe ser largo hasta que ocupe por lo menos tres lineas
+        para poder aplicar estilos apropiadamente.
+      </p>
+      <div class="mymodal-btncontainer">
+        <button class="mymodal-btn" id="mymodal-btncerrar">Cerrar</button>
+        <button class="mymodal-btn" id="mymodal-btnaceptar">Aceptar</button>
+      </div>
+    </div>
+  </div>
+  <!--END OF MY CUSTOM MODAL -->
 
 
 
