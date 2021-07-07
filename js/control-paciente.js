@@ -1,6 +1,6 @@
 const historia = document.getElementById("control-form");
-const tituloModo=document.querySelector("h1.control");
-console.log("h1.control: ",tituloModo);
+const tituloModo = document.querySelector("h1.control");
+console.log("h1.control: ", tituloModo);
 const idPacienteLocal = JSON.parse(localStorage.getItem('pacienteActual'));
 const controlContainer = document.getElementById('myCarusel');
 const btnAddControl = document.getElementById("add-control-img");
@@ -16,9 +16,12 @@ let modo = '';
 
 let fechaActual = '';
 let tratamientoActual = '';
+let tipopagoActual = '';
+let bancoActual = '';
 let formaPagoActual = '';
 let referenciaActual = '';
 let montoPagadoActual = '';
+let montoPagadobsActual = '';
 
 
 
@@ -57,8 +60,8 @@ window.addEventListener('resize', () => {
 window.addEventListener('DOMContentLoaded', async () => {
   document.querySelector(".very-small-btn").style.display = "none";
   //activando carousel a futuro
-  var sels = document.querySelectorAll('select');
-  var selects = M.FormSelect.init(sels, {});
+  /*   var sels = document.querySelectorAll('select');
+    var selects = M.FormSelect.init(sels, {}); */
 
   const snopshot = await db.collection('pacientes').doc(idPacienteLocal).get();
   const data = snopshot.data();
@@ -94,11 +97,11 @@ window.addEventListener('DOMContentLoaded', async () => {
                         </div>
                          <div id="pago-info">
                              <span>${doc.data().pago}</span>
-                             <span>${doc.data().pago}</span>
-                             <span>${doc.data().pago}</span>
+                             <span>${doc.data().tipopago}</span>
+                             <span>${doc.data().banco}</span>
                              <span>${doc.data().referencia}</span>
-                             <span>${doc.data().monto}</span>   
-                             <span>${doc.data().pago}</span>
+                             <span>${doc.data().montoBs}</span>   
+                             <span>${doc.data().monto}</span>
                         </div>
                    </div>        
               </div>
@@ -116,19 +119,25 @@ window.addEventListener('DOMContentLoaded', async () => {
             if (element.className === 'carousel-item amber black-text active') {
               controlSeleccionadoSlider = element.children[0].dataset.idcontrol;
               fechaActual = yyyymmdd((element.children[0].children[0].children[0].innerHTML).substring(16));
-
               tratamientoActual = (element.children[0].children[0].children[2].innerHTML);
-              formaPagoActual = (element.children[0].children[1].children[0].innerHTML).substring(15);
-              referenciaActual = (element.children[0].children[1].children[1].innerHTML).substring(12);
-              montoPagadoActual = (element.children[0].children[1].children[2].innerHTML).substring(7);
 
-              console.log("ID Control Asistencia Actual", controlSeleccionadoSlider);
+              formaPagoActual = (element.children[0].children[2].children[0].innerHTML);
+              tipopagoActual = (element.children[0].children[2].children[1].innerHTML);
+              bancoActual = (element.children[0].children[2].children[2].innerHTML);              
+              referenciaActual = (element.children[0].children[2].children[3].innerHTML);
+              montoPagadobsActual = (element.children[0].children[2].children[4].innerHTML);
+              montoPagadoActual = (element.children[0].children[2].children[5].innerHTML);
+
+              console.log("**  ID Control Asistencia Actual", controlSeleccionadoSlider);
               console.log("Fecha", fechaActual);
               console.log("Tratamiento", tratamientoActual);
-              console.log("Forma Pago... ", formaPagoActual);
+              console.log("Forma Pago", formaPagoActual);
+              console.log("Tipo de Pago",tipopagoActual);
+              console.log("Banco",bancoActual);
               console.log("Referencia", referenciaActual);
-              console.log("Monto", montoPagadoActual);
-              console.log("Elemento", element.children[0].children[0].children[2].innerHTML);
+              console.log("Monto Bs.", montoPagadobsActual);
+              console.log("Monto US$", montoPagadoActual);
+              console.log("Elemento **", element.children[0].children[0].children[2].innerHTML);
             }
           }
         }
@@ -162,8 +171,8 @@ window.addEventListener('DOMContentLoaded', async () => {
 
 btnAddControl.addEventListener('click', (e) => {
   e.preventDefault();
-  document.querySelector("banner.nuevo").style.background="green";
-  tituloModo.innerHTML="Agregar Control de Asistencia";
+  document.querySelector(".banner.nuevo").style.background = "green";
+  tituloModo.innerHTML = "Agregar Control de Asistencia";
   btnVolver.style.display = "block";
   sliderContainer.style.display = "none";
   document.getElementById('crud-control-asistencia').style.display = "none";
@@ -172,21 +181,33 @@ btnAddControl.addEventListener('click', (e) => {
   historia['fechacontrolasistencia'].value = '';
   historia['textcontrolasistencia'].value = '';
   historia['formadepago'].value = '';
+  historia['tipo-pago'].value = '';
+  historia['select-banco'].value = '';
   historia['referenciapago'].value = '';
   historia['montopagado'].value = '';
-  const mySelect = document.getElementById('formadepago');
-  var instance = M.FormSelect.getInstance(mySelect);
-  instance.input.value = '';
+  historia['montopagadobs'].value = '';
+
+
+  /* 
+    ojo con esto
+    const mySelect = document.getElementById('formadepago');
+    var instance = M.FormSelect.getInstance(mySelect);
+    instance.input.value = '';
+     */
+
+
   modo = "new";
 });
 
 
 btnEditControl.addEventListener('click', (e) => {
   e.preventDefault();
-  const mySelect = document.getElementById('formadepago');
+  /* const mySelect = document.getElementById('formadepago');
   var instance = M.FormSelect.getInstance(mySelect);
 
-  console.log("select instance: ", instance.input.value);
+  console.log("select instance: ", instance.input.value); */
+  document.querySelector(".banner.nuevo").style.background = "teal";
+  tituloModo.innerHTML = "Editar Control de Asistencia";
   btnVolver.style.display = "block";
   sliderContainer.style.display = "none";
   document.getElementById('crud-control-asistencia').style.display = "none";
@@ -196,17 +217,23 @@ btnEditControl.addEventListener('click', (e) => {
   console.log("Clicked on Edit modo: ", modo)
   historia['fechacontrolasistencia'].value = fechaActual;
   historia['textcontrolasistencia'].value = tratamientoActual;
-  instance.input.value = formaPagoActual;
-  console.log("edit clicked: instance forma pago:",instance.input.value);
-  console.log("edit clicked: formapagpactual:",formaPagoActual);
+  //instance.input.value = formaPagoActual;
+
+
+
   //historia['formadepago'].value = formaPagoActual;
   //element.setAttribute('style', 'display:inline !important');
-  document.querySelector("label[for=referenciapago]").classList.add('active');
-  document.querySelector("label[for=montopagado]").classList.add('active');
 
+  //document.querySelector("label[for=referenciapago]").classList.add('active');
+  //document.querySelector("label[for=montopagado]").classList.add('active');
+
+
+  historia['formadepago'].value=formaPagoActual;
   historia['referenciapago'].value = referenciaActual;
   historia['montopagado'].value = montoPagadoActual;
-
+  historia['montopagadobs'].value=montoPagadobsActual;
+  historia['tipo-pago'].value=tipopagoActual;
+  historia['select-banco'].value=bancoActual;
 });
 
 
@@ -217,7 +244,8 @@ btnVolver.addEventListener('click', (e) => {
   document.querySelector(".very-small-btn").style.display = "none";
   sliderContainer.style.display = "block";
   document.getElementById('crud-control-asistencia').style.display = "flex";
-
+  document.querySelector(".banner.nuevo").style.background = "#00b8d4";
+  tituloModo.innerHTML = "Control de Asistencias";
 
 
 });
@@ -230,39 +258,38 @@ btnVolver.addEventListener('click', (e) => {
 
 historia.addEventListener('submit', async (e) => {
   e.preventDefault();
-
-
   const fechacontrolasistencia = historia['fechacontrolasistencia'].value;
   const textcontrolasistencia = historia['textcontrolasistencia'].value;
   const formadepago = historia['formadepago'].value;
-  console.log("submitted formadepago: ",formadepago);
+  const tipopago = historia['tipo-pago'].value;
+  const banco = historia['select-banco'].value;
   const referenciapago = historia['referenciapago'].value;
   const montopagado = historia['montopagado'].value;
+  const montopagadobs = historia['montopagadobs'].value;
   //Esta es una Root Coleccion para hacer Join con Pacientes
+
   const controlAsistencia = {
     idPaciente: idPacienteLocal,
     fecha: fechacontrolasistencia,
     tratamientoAplicado: textcontrolasistencia,
-    pago: formadepago ? formadepago:formaPagoActual,
+    pago: formadepago ? formadepago : formaPagoActual,
+    tipopago: tipopago,
+    banco: banco,
+    montoBs: montopagadobs,
     referencia: referenciapago,
     monto: montopagado,
     createdAt: firebase.firestore.FieldValue.serverTimestamp(),
   };
-
-
-
-
 
   console.log("controlasistencias ID Documento => ", controlAsistencia);
   console.log("controlasistencias ID Documento => ", controlActual);
 
   if (modo === "update") {
     delete controlAsistencia.createdAt
-    console.log("objeto: ",controlAsistencia);
+    console.log("objeto: ", controlAsistencia);
     await db.collection('controlasistencias').doc(controlSeleccionadoSlider).update(controlAsistencia)
-      .then(result => alert("control agregado ok"))
+      .then(result => alert("La Informacion ha sido Actualizada Correctamente."))
       .catch(error => alert(error));
-
   }
 
   if (modo === "new") {
@@ -270,17 +297,6 @@ historia.addEventListener('submit', async (e) => {
       .then(result => alert("control agregado ok"))
       .catch(error => alert(error));
   }
-
-
-
-
-
-  /* await db.collection('controlasistencias').add(controlAsistencia)
-    .then(result => alert("control agregado ok"))
-    .catch(error => alert(error)); */
-
-
-
 
   historia.reset();
 
@@ -292,15 +308,18 @@ historia.addEventListener('submit', async (e) => {
   fechaActual = '';
   tratamientoActual = '';
   formaPagoActual = '';
+  tipopagoActual = '';
+  bancoActual = ''
   referenciaActual = '';
   montoPagadoActual = '';
+  montoPagadobsActual = ''
   controlSeleccionadoSlider = '';
   modo = '';
-
-
-
+  document.querySelector(".banner.nuevo").style.background = "#00b8d4";
   window.location.reload();
+  tituloModo.innerHTML = "Control de Asistencias";
 
+  //color del control de existencias #00b8d4
 
 });
 

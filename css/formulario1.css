@@ -82,7 +82,7 @@ h5 {
 }
 
 h6 {
-  margin: 10px 0;
+  margin: 10px 0px 15px 0px;
   color: #265a6e;
   font-size: 1.5rem;
   font-weight: 700;
@@ -208,6 +208,7 @@ form.form-control-editar{
 
 .chip {
   margin: 10px 0px 10px 0px;
+  font-size: 15px;
 }
 
 .card-title {
@@ -291,12 +292,14 @@ p.textoformato,
   width: 31%;
   padding: 5px;
   margin-right: 10px;
+  height: 2rem;
 
 }
 
 #div-inputs-pago{
   display: flex;
 position: relative;
+justify-content: space-between;
 
 }
 
@@ -305,12 +308,15 @@ position: relative;
  #div-inputs-pago > input{
    width: 16%;   
    padding: 5px;
-   margin: 5px;
+   margin: 5px 5px 35px 5px;
+   height: 10px;
+   text-align: center;
  }
 
  #div-inputs-pago > p{  
    min-width: 75px;
-   margin-top: 12px;  
+   margin-top: 8px;
+  
  }
 
   
@@ -486,6 +492,7 @@ button.volver {
   position: fixed;
   top: 25px;
   left: 140px;
+  z-index: 999;
 }
 
 button.volver > a {
@@ -606,6 +613,10 @@ button.volver > a {
     width: 90%;
   }
 
+  #control-form{
+    width: 100%;
+  }
+
   h1 {
     font-size: 20px;
   }
@@ -657,7 +668,7 @@ button.volver > a {
   
 
   #tiny-btn {
-    left: 210px;
+    left: 270px;
     top: -85px;
   }
 
@@ -682,7 +693,7 @@ button.volver > a {
   button.volver {
     top: 25px;
     left: 0px;
-    z-index: 999;
+    z-index: 9999;
   }
   #p-tratamiento{
     font-size: 10px;
@@ -695,6 +706,31 @@ button.volver > a {
   #pago-info >span{
     font-size: 12px;
   }
+
+  h6{
+    font-size: 1rem;
+    text-align: left;
+  }
+
+  .fecha-control-editar{
+     width: 50% !important;
+  }
+
+  #select-banco, #formadepago, #tipo-pago{
+    width: 100%;
+    height: 3rem;
+    margin-top: 1rem;
+  }
+
+  #div-inputs-pago{
+    display: block;    
+  }
+
+  #div-inputs-pago > input {
+    width: 50%;
+  }
+
+
 
 }
 

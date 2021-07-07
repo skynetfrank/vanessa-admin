@@ -55,26 +55,43 @@
         </div>
         <h6>Informacion de Pago</h6>
         <div class="item" id="div-ref-monto">
-          <div class="input-field">
+        
+          <div id="div-selects">
             <select id="formadepago">
-              <option value="" disabled selected>forma de Pago</option>
-              <option value="Efectivo">Efectivo-$</option>
+              <option value="" disabled selected>Forma de Pago</option>
+              <option value="Efectivo">Efectivo$</option>
               <option value="Transferencia">Transferencia</option>
               <option value="Pago-Movil">Pago-Movil</option>
               <option value="Zelle">Zelle</option>
-              <option value="Otro">Otros</option>
+              <option value="Otro">Otro</option>
             </select>
-            <label>Forma de Pago</label>
+        
+            <select id="select-banco">
+              <option value="" disabled selected>Banco</option>
+              <option value="Banesco">Banesco Banco Universal</option>
+              <option value="Venezuela">Banco de Venezuela</option>
+              <option value="Mercantil">Banco Mercantil</option>
+              <option value="BNC">BNC Nacional de Credito</option>
+              <option value="Tesoro">Banco del Tesoro</option>
+              <option value="BVC">Banco Vzlno. d/Credito</option>
+              <option value="BOD">BANCO BOD</option>
+              <option value="Otro">Otro</option>
+            </select>
+            <select id="tipo-pago">
+              <option value="" disabled selected>Tipo de Pago</option>
+              <option value="pago-Consulta">Pago Total de Consulta</option>
+              <option value="Abono a Cuenta">Pago Abono a Cuenta</option>
+              <option value="Saldo Pendiente">Pago Saldo Pendiente</option>
+            </select>
           </div>
-          <div class="input-field">
-            <input type="text" id="referenciapago" name="referenciapago" />
-            <label for="referenciapago">Referencia</label>
+          <div id="div-inputs-pago">
+            <p>Referencia:</p>
+            <input type="text" id="referenciapago" name="referenciapago" value="" />
+            <p>Monto Bs. :</p>
+            <input type="number" step="0.1" id="montopagadobs" name="montopagadobs" value="" />
+            <p>Monto US$:</p>
+            <input type="number" step="0.1" id="montopagado" name="montopagado" value="" />
           </div>
-          <div class="input-field">
-            <input type="text" id="montopagado" name="montopagado" />
-            <label for="montopagado">Monto</label>
-          </div>
-
         </div>
         <!---FIN DE AGREGAR UN NUEVO REGISTRO DE CONTROL DE ASISTENCIA PARA ESTE PACIENTE-->
 
