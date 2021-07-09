@@ -15,14 +15,20 @@ const dashboard = document.getElementById("link-dashboard");
 let textoBusqueda = "";
 var pacientex = [];
 
+
+
+
+
+
+
+
 function formatearFecha(nfecha) {
-  var info = nfecha.split('-').reverse().join('/');
+  var info = nfecha.split('-').reverse().join('-');
   return info;
 }
 
 //funcion para convertir fecha a formato AAAA-MM-DD
 function convertirFecha(cfecha) {
-  console.log("cfecha:", cfecha);
   let year = cfecha.getFullYear();                        // YYYY
   let month = ("0" + (cfecha.getMonth() + 1)).slice(-2);  // MM
   let day = ("0" + cfecha.getDate()).slice(-2);           // DD
@@ -111,17 +117,9 @@ function populateTabla() {
         }) //Fin del forEach del querysnapshot (loop de la consulta de todos los pacientes)
 
 
-
-
-        /*  if (table.innerHTML === '') {
-           document.getElementById("mostrar-citas").style.display = "none";
-         } */
-
       });
   }
   allPacientes();
-
-
 };
 
 
@@ -155,7 +153,6 @@ dashboard.addEventListener('click', () => {
   function callbackFunc() {
     var items = document.querySelectorAll(".timeline li");
     for (var i = 0; i < items.length; i++) {
-      console.log("i: ", i);
       if (isElementInViewport(items[i])) {
         items[i].classList.add("in-view");
       } else {
@@ -298,6 +295,7 @@ async function deleteAsistencia(id) {
 
 //INICIO DEL LISTENER PARA LA AGENDA
 agenda.addEventListener('click', () => {
+  horario();
   agenda.style.pointerEvents = 'none';
   document.getElementById("inicio").style.display = "none"
   document.getElementById("section-crear-paciente").style.display = "none"
@@ -328,12 +326,16 @@ agenda.addEventListener('click', () => {
         querysnapshot.forEach((doc) => {
           let data = doc.data();
           const found = pacientex.find(p => p.id === data.paciente);
+          console.log("found",found.id)
+          const doctora=found.id;
 
           let fila = `<li>
           <div>
-              <button style="display: block" class="btn-eliminar-cita">X</button>
+              <button style="display: block" class="btn-eliminar-cita td-btn" data-tip="Eliminar Esta Cita">
+              <i class="far fa-trash-alt"></i>
+              </button>
               <time>Dia: ${formatearFecha(data.fecha)}
-                    Hora: ${data.hora}</time><time>Paciente: ${found.nombre} ${found.apellido}
+                    Hora: ${data.hora}</time><time>Paciente: ${found.id===doctora ? "CITA BLOQUEADA POR LA Dra. VANESSA MIJARES":found.nombre+' '+found.apellido}
               </time>
               Mensaje: ${data.msg}  
               <span id="id-cita-eliminar">${doc.id}</span>         
@@ -347,15 +349,12 @@ agenda.addEventListener('click', () => {
           //loop de botones de la tabla
           allCitas.forEach((boton) => {
             boton.addEventListener('click', async (e) => {
-              //pacienteSeleccionado = e.target.dataset.id;
               let idCita = e.target.parentNode.parentNode.querySelector('span').innerHTML;
-              console.log("ID-CITA: ", idCita)
               await db.collection("citas").doc(idCita)
                 .delete()
-                .then(resp => alert("Cita Eliminada!"))
+                .then(resp => console.log("Cita Eliminada!"))
                 .catch(error => console.log("error al eliminar cita! verifique..."));
-
-
+              agenda.click();
             });
           });//fin del  forEach para loop de todos los botones de la table
 
@@ -366,15 +365,91 @@ agenda.addEventListener('click', () => {
 });//FINDE LISTENER PARA AGENDA
 
 
-//Eliminar 1 cita 
-document.getElementById("ul-timeline").addEventListener('click', (e) => {
-  e.preventDefault();
+//funcion para obtener el resto de horas que quedan sin apartar en el dia 
+async function horario() {
+  const fecha = convertirFecha(new Date());
+  console.log("FECHA DE HOY: ", fecha);
+  const listaHoras = document.getElementById("listaHoras");
+  //array de horas por defecto de 7 a 7 (24 horas)
+  var horas = ['08:00', '09:00', '10:00', '11:00', '13:00', '14:00', '15:00', '16:00',];
 
-  // console.log("li target", e.target.parentNode.parentNode.querySelector('li div span'))
-  /*  const id_cita = e.target.parentNode.parentNode.querySelector('td:nth-child(1)').innerHTML;
-   db.collection("citas").doc(id_cita)
-     .delete()
-     .then()
-     .catch(error => console.log("error al eliminar cita! verifique...")); */
+  await db.collection("citas")
+    .where('fecha', '==', fecha)
+    .onSnapshot((querySnapshot) => {
+      console.log("onSnapshot disparado", querySnapshot);
+      listaHoras.innerHTML = `
+      <div class="titulo-horas">
+      <li>Horas de Citas</li>
+      <li>Disponibles Hoy</li>
+      <li>${formatearFecha(fecha)}</li>
+      </div>     
+      `;
+      querySnapshot.forEach((doc) => {
+        let position = horas.indexOf(doc.data().hora);
+        console.log("position",position);
+        if(position >=0){
+          console.log("inside del IF");
+          horas.splice(position, 1)
+        }
+      });
+      console.log("Horas que quedan:", horas);
+      horas.forEach((item) => {
+        console.log("forEach horas chequear times exected");
+        if (item.length > 0) {
+          listaHoras.innerHTML += `
+        <li>${item}
+            <button class="td-btn horas" data-tip="Bloquear Hora">
+                 <i class="fas fa-user-alt-slash"></i>
+            </button>                  
+        </li>`
+        }
+      });
 
-});
+      //seleccionar todos los botones eliminar cita
+      const allHoras = document.querySelectorAll(".td-btn.horas");
+      console.log("botonera: ", allHoras);
+      //loop de botones de la tabla
+      allHoras.forEach((boton) => {
+        boton.addEventListener('click', (e) => {
+
+          let horaX = (e.target.parentNode.innerHTML).substring(0, 5);
+          console.log("e.target.parentNode.innerHTML", e.target);
+          console.log("Boton Listener bloquear hora clicked en la Hora:", horaX);
+          bloquearHora(fecha, horaX)
+        });
+      });//fin del  forEach para loop de todos los botones de la table
+    });
+} //END OF HORARIO()
+
+
+
+
+
+
+
+
+
+async function bloquearHora(fechaBloquear, horaBloquear) {
+  console.log("Funcion Bloquear Hora Disparada");
+  const mensaje = "Para desbloquear esta hora pulse el boton con la papelera!"
+  await db
+    .collection("citas")
+    .doc()
+    .set({
+      fecha: fechaBloquear,
+      hora: horaBloquear,
+      telefono: 'Dra. Vanessa',
+      msg: mensaje,
+      paciente: auth.currentUser.uid,
+      status: 'Confirmado',
+      createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+}
+
+
+
+
+
+
+
+

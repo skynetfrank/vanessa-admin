@@ -503,7 +503,7 @@ p.bottom10 {
 
 .intro {
   background: #f45b69;
-  padding: 30px 0 5px 0;
+   margin-top: 60px;
 }
 
 .intro-header {
@@ -518,11 +518,44 @@ h1 {
 }
 
 .intro-header h1 {
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  margin: 0;
+  vertical-align: middle;
 }
 
 #id-cita-eliminar {
   display: none;
+}
+
+.horario{
+   width: 100%;
+  height: 50px;
+  background-color: teal;
+}
+ol{
+  list-style: none;
+  display: flex;
+   height: 100%;
+  justify-content: space-evenly;
+  align-items: center;
+  max-width: 1024px;
+}
+
+.titulo-horas{
+  font-size: 11px;
+  
+}
+
+.fa-user-alt-slash{
+pointer-events: none;
+}
+
+.fa-trash-alt{
+  pointer-events: none;
+  font-size: 20px;
 }
 
 /* TIMELINE
@@ -535,12 +568,14 @@ h1 {
   color: #fff;
   overflow-x: hidden;
   padding-bottom: 50px;
+ 
 }
 
 .timeline ul {
   background: #456990;
   padding: 5px 0;
-  height: 100vh;
+  height: auto;
+ min-height: 100vh;
 }
 
 .timeline ul li {
@@ -665,6 +700,22 @@ time {
     border-width: 8px 16px 8px 0;
     border-color: transparent #f45b69 transparent transparent;
   }
+  .titulo-horas{
+    display: none;
+  }
+
+  .horario{
+    height: 100px;
+  }
+
+#listaHoras > li{
+  font-size: 14px; 
+  text-align: center;
+}
+
+
+
+
 }
 
 /* EXTRA/CLIP PATH STYLES
@@ -745,10 +796,8 @@ time {
 }
 
 .btn-eliminar-cita {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: aqua;
+  
+ 
   color: black;
   border: none;
   float: right;

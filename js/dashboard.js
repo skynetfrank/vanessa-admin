@@ -42,7 +42,8 @@ window.addEventListener('load', async () => {
         ingresos += Number(thenum);
         console.log("Actividad acumulada: ", ingresos);
       })
-      cardIngresos.innerHTML = ingresos.toLocaleString('en-US', { minimumFractionDigits: 2 });
+      //cardIngresos.innerHTML = ingresos.toLocaleString('en-US', { minimumFractionDigits: 2 });
+      cardIngresos.innerHTML = 'US$ 0.00';
     });
 
   //CITAS PENDIENTES DASHBOARD
@@ -168,7 +169,7 @@ function populateTabla() {
           let data = doc.data();
           let row = `<tr> 
                         <td class="td-id-hidden">${doc.id}</td> 
-                        <td>${data.genero === 'mujer' ? `<img src='images/female-face-icon.png'/> ` : `<img src='images/male-face-icon.png' />`}</td>
+                        <td><img src='images/mask-icon24.png'/></td>
                         <td>${data.nombre}</td>
                         <td>${data.apellido}</td>
                         <td>${data.edad}</td>                       
@@ -180,11 +181,6 @@ function populateTabla() {
                                <i class="fas fa-search"></i>
                            </button>
                       
-
-                        
-                           <button  class="td-btn" id="btn-ver-paciente" data-id=${doc.id}  data-nom=${data.nombre} data-ape=${data.apellido}>
-                             <i class="fas fa-pencil-alt"></i>
-                           </button>
                         
                        
                           
