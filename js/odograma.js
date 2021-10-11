@@ -1,14 +1,14 @@
 const idPacienteLocal = JSON.parse(localStorage.getItem('pacienteActual'));
 const nombrePaciente = JSON.parse(localStorage.getItem('nombrePaciente'));
 const apellidoPaciente = JSON.parse(localStorage.getItem('apellidoPaciente'));
-const uploadProgress = document.getElementById("progress");
-const mySpinner = document.querySelector(".myspinner-container");
-const btnCerrar = document.getElementById("btn-cerrar");
-mySpinner.style.display = "none";
+const uploadProgress = document.getElementById('progress');
+const mySpinner = document.querySelector('.myspinner-container');
+const btnCerrar = document.getElementById('btn-cerrar');
+mySpinner.style.display = 'none';
 // Create a root reference
 //var ref = storage.ref('images').child(idPacienteLocal + '.jpg');
 
-btnCerrar.addEventListener("click", () => {
+btnCerrar.addEventListener('click', () => {
   window.close();
 });
 
@@ -19,15 +19,12 @@ function formatearFecha(nfecha) {
 
 //funcion para convertir fecha a formato AAAA-MM-DD
 function convertirFecha(cfecha) {
-  let year = cfecha.getFullYear();                        // YYYY
-  let month = ("0" + (cfecha.getMonth() + 1)).slice(-2);  // MM
-  let day = ("0" + cfecha.getDate()).slice(-2);           // DD
-  return (year + "-" + month + "-" + day);
+  let year = cfecha.getFullYear(); // YYYY
+  let month = ('0' + (cfecha.getMonth() + 1)).slice(-2); // MM
+  let day = ('0' + cfecha.getDate()).slice(-2); // DD
+  return year + '-' + month + '-' + day;
 }
 let fecha = formatearFecha(convertirFecha(new Date()));
-
-
-
 
 //SETTING CONSTANTES
 const MARCAR_EXTRACCION = 1;
@@ -66,19 +63,19 @@ const SIN_SELECCION = 0;
 // SETTING ALL VARIABLES
 var isMouseDown = false;
 
-var isStorage = false;//switche para controlar si existe el odograma en firebase storage
+var isStorage = false; //switche para controlar si existe el odograma en firebase storage
 var canvas = document.createElement('canvas');
-var body = document.getElementsByTagName("body")[0];
+var body = document.getElementsByTagName('body')[0];
 var ctx = canvas.getContext('2d');
 var linesArray = [];
 var currentSize = 3;
-var currentColor = "rgba(0, 0, 255, 0.7)";
+var currentColor = 'rgba(0, 0, 255, 0.7)';
 var currentAction = SIN_SELECCION;
-var currentBg = "white";
-var odogramaOriginal = document.getElementById("img-hidden");
-var cargarImagen = document.getElementById("cargarImg");
-var recortarImagen = document.getElementById("recortarImg");
-var h3 = document.getElementById("myH3");
+var currentBg = 'white';
+var odogramaOriginal = document.getElementById('img-hidden');
+var cargarImagen = document.getElementById('cargarImg');
+var recortarImagen = document.getElementById('recortarImg');
+var h3 = document.getElementById('myH3');
 
 var odograma = new Image();
 //asignar ubicacion donde esta la imagen del odograma
@@ -87,65 +84,80 @@ var odograma = new Image();
 //Verificar si existe un odograma en storage - sino crear uno nuevo
 window.addEventListener('load', () => {
   var ref = storage.ref('images').child(idPacienteLocal + '.jpg');
-  ref.getDownloadURL().then(function (url) {
-    odograma.src = url;
-    odograma.crossOrigin = "Anonymous";
-    isStorage = true;
-  }).catch(function (error) {
-
-    if (error.code === 'storage/object-not-found') {
-      alert("Paciente sin Odograma Anterior. Se la asignara un Odograma nuevo.");
-      odograma.src = "images/odograma1.jpg";
-      odograma.crossOrigin = "Anonymous";
-      isStorage = false;
-    }
-  });
-})
+  ref
+    .getDownloadURL()
+    .then(function (url) {
+      odograma.src = url;
+      odograma.crossOrigin = 'Anonymous';
+      isStorage = true;
+    })
+    .catch(function (error) {
+      if (error.code === 'storage/object-not-found') {
+        alert(
+          'Paciente sin Odograma Anterior. Se la asignara un Odograma nuevo.'
+        );
+        odograma.src = 'images/odograma1.jpg';
+        odograma.crossOrigin = 'Anonymous';
+        isStorage = false;
+      }
+    });
+});
 
 odograma.addEventListener('load', () => {
   createCanvas();
   if (!isStorage) {
-    ctx.font = "15px Arial";
-    ctx.fillStyle = '#000000'
-    ctx.fillText('Paciente: ' + nombrePaciente + ' ' + apellidoPaciente + ' ' + ' ' + '  ID: ' + idPacienteLocal +
-      ' ' + ' Creado el: ' + fecha, 20, 485)
+    ctx.font = '15px Arial';
+    ctx.fillStyle = '#000000';
+    ctx.fillText(
+      'Paciente: ' +
+        nombrePaciente +
+        ' ' +
+        apellidoPaciente +
+        ' ' +
+        ' ' +
+        '  ID: ' +
+        idPacienteLocal +
+        ' ' +
+        ' Creado el: ' +
+        fecha,
+      20,
+      485
+    );
   }
-  document.getElementById("h2-nombre").innerHTML += ' ' + nombrePaciente + ' ' + apellidoPaciente;
-  document.getElementById("marcador").focus();
+  document.getElementById('h2-nombre').innerHTML +=
+    ' ' + nombrePaciente + ' ' + apellidoPaciente;
+  document.getElementById('marcador').focus();
 });
 // INITIAL LAUNCH
-
 
 // CREATE CANVAS
 
 function createCanvas() {
-  canvas.id = "canvas";
+  canvas.id = 'canvas';
   canvas.width = 600;
   canvas.height = 500;
   canvas.style.zIndex = 8;
-  canvas.style.position = "absolute";
-  canvas.style.border = "1px solid rgb(121, 113, 113)";
-  ctx.fillStyle = "#FFFFFF";
+  canvas.style.position = 'absolute';
+  canvas.style.border = '1px solid rgb(121, 113, 113)';
+  ctx.fillStyle = '#FFFFFF';
   ctx.fillRect(0, 0, canvas.width, canvas.height);
   body.appendChild(canvas);
   ctx.drawImage(odograma, 0, 0);
-
 }
-
-
 
 document.getElementById('download').addEventListener('click', () => {
-  guardarLocal(document.getElementById('saveToImage'), 'canvas', idPacienteLocal + '.jpg')
-})
+  guardarLocal(
+    document.getElementById('saveToImage'),
+    'canvas',
+    idPacienteLocal + '.jpg'
+  );
+});
 
 function guardarLocal(link, canvas, filename) {
-
   //link.href = document.getElementById(canvas).toDataURL("image/jpeg", 1.0);
   //link.download = filename;
-  console.log("Downloaded!!", link.href, canvas, filename);
+  console.log('Downloaded!!', link.href, canvas, filename);
 }
-
-
 
 //boton guardar odograma en firebase
 document.getElementById('saveToImage').addEventListener('click', function () {
@@ -153,340 +165,303 @@ document.getElementById('saveToImage').addEventListener('click', function () {
 });
 //FIN GUARDAR CANVAS
 
-
 // DOWNLOAD CANVAS
 function guardarStorage(link, canvas, filename) {
   let ref = storage.ref('images').child(idPacienteLocal + '.jpg');
-  link.href = document.getElementById(canvas).toDataURL("image/jpeg", 1.0);
-  console.log("link.href: ", link.href.substring(23));
+  link.href = document.getElementById(canvas).toDataURL('image/jpeg', 1.0);
   //link.download = filename;
 
   //EXPERIMENTAL SAVE TO FIREBASE
-  uploadTask = ref.putString(link.href.substring(23), 'base64', { contentType: 'image/jpg' });
-  uploadTask.on(firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
+  uploadTask = ref.putString(link.href.substring(23), 'base64', {
+    contentType: 'image/jpg',
+  });
+  uploadTask.on(
+    firebase.storage.TaskEvent.STATE_CHANGED, // or 'state_changed'
     function (snapshot) {
-      console.log("snapshot: ", snapshot);
       // Get task progress, including the number of bytes uploaded and the total number of bytes to be uploaded
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
+      console.log('Uploading: ' + progress + '% done');
       switch (snapshot.state) {
         case firebase.storage.TaskState.PAUSED: // or 'paused'
           console.log('Upload is paused');
           break;
         case firebase.storage.TaskState.RUNNING: // or 'running'
-          mySpinner.style.display = "flex";
+          mySpinner.style.display = 'flex';
           //uploadProgress.innerHTML = "Guardando... Espere!"
           console.log('Upload is running');
           break;
       }
-    }, function (error) {
-      console.log(error);
-      alert("Ocurrio un error al subir la imagen al Servidor!.");
-    }, function () {
-      mySpinner.style.display = "none";
+    },
+    function (error) {
+      alert('Ocurrio un error al subir la imagen al Servidor!.');
+    },
+    function () {
+      mySpinner.style.display = 'none';
       // Upload completed successfully, now we can get the download URL
       //uploadProgress.innerHTML = "Odograma Guardado Correctamente!"
       // alert("Se ha grabado el odograma correctamente");
-      uploadProgress.innerHTML = "Odograma Guardado!"
+      uploadProgress.innerHTML = 'Odograma Guardado!';
       setTimeout(() => {
-        uploadProgress.innerHTML = ""
-      }, 7000)
+        uploadProgress.innerHTML = '';
+      }, 7000);
 
       var downloadURL = uploadTask.snapshot.downloadURL;
-      console.log("downloadURL: ", uploadTask.snapshot);
-
-    });
-
+      console.log('downloadURL: ', uploadTask.snapshot);
+    }
+  );
 
   function descargarStorage() {
-
     var ref = storage.ref('images').child('pruebaOdontograma.jpg');
-    ref.getDownloadURL().then(function (url) {
-      // `url` is the download URL for 'images/stars.jpg'
-      console.log("url obtenido: ", url);
-      // This can be downloaded directly:
-      var xhr = new XMLHttpRequest();
-      xhr.responseType = 'blob';
-      xhr.onload = function (event) {
-        var blob = xhr.response;
-      };
-      xhr.open('GET', url);
-      xhr.send();
+    ref
+      .getDownloadURL()
+      .then(function (url) {
+        // `url` is the download URL for 'images/stars.jpg'
+        console.log('url obtenido: ', url);
+        // This can be downloaded directly:
+        var xhr = new XMLHttpRequest();
+        xhr.responseType = 'blob';
+        xhr.onload = function (event) {
+          var blob = xhr.response;
+        };
+        xhr.open('GET', url);
+        xhr.send();
 
-      // Or inserted into an <img> element:
-      var img = document.getElementById('myimg');
-      img.src = url;
-    }).catch(function (error) {
-      // Handle any errors
-    });
-
+        // Or inserted into an <img> element:
+        var img = document.getElementById('myimg');
+        img.src = url;
+      })
+      .catch(function (error) {
+        // Handle any errors
+      });
   }
 
-
-
-
-
-
   //FIN EXPERIMENTAL SAVE TO FIREBASE
-
 }
 //FIN DOWNLOAD CANVAS
 
-
-
-
-
-
-
-
 // BUTTON COLORES EVENT HANDLERS
-document.getElementById("btncolor-blanco").addEventListener('click', () => {
-  currentColor = "#FFFFFF";
-  document.getElementById("color-actual").style.backgroundColor = currentColor;
+document.getElementById('btncolor-blanco').addEventListener('click', () => {
+  currentColor = '#FFFFFF';
+  document.getElementById('color-actual').style.backgroundColor = currentColor;
 });
-document.getElementById("btncolor-negro").addEventListener('click', () => {
-  currentColor = "rgba(0, 0, 0, 0.5)";
-  document.getElementById("color-actual").style.backgroundColor = currentColor;
+document.getElementById('btncolor-negro').addEventListener('click', () => {
+  currentColor = 'rgba(0, 0, 0, 0.5)';
+  document.getElementById('color-actual').style.backgroundColor = currentColor;
 });
-document.getElementById("btncolor-azul").addEventListener('click', () => {
-  currentColor = "rgba(0, 0, 255, 0.7)";
-  document.getElementById("color-actual").style.backgroundColor = currentColor;
+document.getElementById('btncolor-azul').addEventListener('click', () => {
+  currentColor = 'rgba(0, 0, 255, 0.7)';
+  document.getElementById('color-actual').style.backgroundColor = currentColor;
 });
-document.getElementById("btncolor-naranja").addEventListener('click', () => {
-  currentColor = "#e68106";
-  document.getElementById("color-actual").style.backgroundColor = currentColor;
+document.getElementById('btncolor-naranja').addEventListener('click', () => {
+  currentColor = '#e68106';
+  document.getElementById('color-actual').style.backgroundColor = currentColor;
 });
-document.getElementById("btncolor-rojo").addEventListener('click', () => {
-  currentColor = "#FF0000";
-  document.getElementById("color-actual").style.backgroundColor = currentColor;
+document.getElementById('btncolor-rojo').addEventListener('click', () => {
+  currentColor = '#FF0000';
+  document.getElementById('color-actual').style.backgroundColor = currentColor;
 });
-document.getElementById("btncolor-verde").addEventListener('click', () => {
-  currentColor = "#008800";
-  document.getElementById("color-actual").style.backgroundColor = currentColor;
+document.getElementById('btncolor-verde').addEventListener('click', () => {
+  currentColor = '#008800';
+  document.getElementById('color-actual').style.backgroundColor = currentColor;
 });
-
-
-
 
 //ACCIONES DE LA SIDE-BAR
-document.getElementById("extraccion").addEventListener("click", () => {
+document.getElementById('extraccion').addEventListener('click', () => {
   currentAction = MARCAR_EXTRACCION;
   btnOff();
-  document.getElementById("extraccion").classList.toggle("activo");
-
+  document.getElementById('extraccion').classList.toggle('activo');
 });
-document.getElementById("caries").addEventListener("click", () => {
+document.getElementById('caries').addEventListener('click', () => {
   currentAction = MARCAR_CARIES;
   btnOff();
-  document.getElementById("caries").classList.toggle("activo");
-
+  document.getElementById('caries').classList.toggle('activo');
 });
-document.getElementById("marcador").addEventListener("click", () => {
+document.getElementById('marcador').addEventListener('click', () => {
   currentAction = MARCAR_AREA;
   btnOff();
-  document.getElementById("marcador").classList.toggle("activo");
+  document.getElementById('marcador').classList.toggle('activo');
 });
 
-document.getElementById("ausente").addEventListener("click", () => {
+document.getElementById('ausente').addEventListener('click', () => {
   currentAction = DIENTE_AUSENTE;
   btnOff();
-  document.getElementById("ausente").classList.toggle("activo");
+  document.getElementById('ausente').classList.toggle('activo');
 });
 
-document.getElementById("lineaH").addEventListener("click", () => {
+document.getElementById('lineaH').addEventListener('click', () => {
   currentAction = LINEA_HORIZONTAL;
   btnOff();
-  document.getElementById("lineaH").classList.toggle("activo");
+  document.getElementById('lineaH').classList.toggle('activo');
 });
 
-document.getElementById("lineaV").addEventListener("click", () => {
+document.getElementById('lineaV').addEventListener('click', () => {
   currentAction = LINEA_VERTICAL;
   btnOff();
-  document.getElementById("lineaV").classList.toggle("activo");
+  document.getElementById('lineaV').classList.toggle('activo');
 });
 
-
-
-
-
-document.getElementById("implante").addEventListener("click", () => {
+document.getElementById('implante').addEventListener('click', () => {
   currentAction = MARCAR_IMPLANTE;
   btnOff();
-  document.getElementById("implante").classList.toggle("activo");
+  document.getElementById('implante').classList.toggle('activo');
 });
 
-document.getElementById("eraser").addEventListener("click", () => {
+document.getElementById('eraser').addEventListener('click', () => {
   currentAction = MARCAR_BORRAR;
   btnOff();
-  document.getElementById("eraser").classList.toggle("activo");
+  document.getElementById('eraser').classList.toggle('activo');
 });
 
-document.getElementById("clear").addEventListener("click", () => {
+document.getElementById('clear').addEventListener('click', () => {
   currentAction = MARCAR_LIMPIAR;
   btnOff();
-  document.getElementById("clear").classList.toggle("activo");
+  document.getElementById('clear').classList.toggle('activo');
   createCanvas();
 });
 
-document.getElementById("puenteFijo").addEventListener("click", () => {
+document.getElementById('puenteFijo').addEventListener('click', () => {
   currentAction = MARCAR_PUENTE_FIJO;
   btnOff();
-  document.getElementById("puenteFijo").classList.toggle("activo");
+  document.getElementById('puenteFijo').classList.toggle('activo');
 });
 
-document.getElementById("removible").addEventListener("click", () => {
+document.getElementById('removible').addEventListener('click', () => {
   currentAction = MARCAR_REMOVIBLE;
   btnOff();
-  document.getElementById("removible").classList.toggle("activo");
+  document.getElementById('removible').classList.toggle('activo');
 });
 
-document.getElementById("hipersense").addEventListener("click", () => {
+document.getElementById('hipersense').addEventListener('click', () => {
   currentAction = MARCAR_HIPERSENSE;
   btnOff();
-  document.getElementById("hipersense").classList.toggle("activo");
+  document.getElementById('hipersense').classList.toggle('activo');
 });
 
-document.getElementById("apical").addEventListener("click", () => {
+document.getElementById('apical').addEventListener('click', () => {
   currentAction = MARCAR_APICAL;
   btnOff();
-  document.getElementById("apical").classList.toggle("activo");
+  document.getElementById('apical').classList.toggle('activo');
 });
 
-document.getElementById("fistula").addEventListener("click", () => {
+document.getElementById('fistula').addEventListener('click', () => {
   currentAction = MARCAR_FISTULA;
   btnOff();
-  document.getElementById("fistula").classList.toggle("activo");
+  document.getElementById('fistula').classList.toggle('activo');
 });
 
-document.getElementById("empaq-alimento").addEventListener("click", () => {
+document.getElementById('empaq-alimento').addEventListener('click', () => {
   currentAction = MARCAR_EMPAQ_ALIMENTO;
   btnOff();
-  document.getElementById("empaq-alimento").classList.toggle("activo");
+  document.getElementById('empaq-alimento').classList.toggle('activo');
 });
 
-document.getElementById("infraoclusion").addEventListener("click", () => {
+document.getElementById('infraoclusion').addEventListener('click', () => {
   currentAction = MARCAR_INFRAOCLUSION;
   btnOff();
-  document.getElementById("infraoclusion").classList.toggle("activo");
+  document.getElementById('infraoclusion').classList.toggle('activo');
 });
 
 //*********************************************************************************************** */
 
-document.getElementById("profundidad-sondaje").addEventListener("click", () => {
+document.getElementById('profundidad-sondaje').addEventListener('click', () => {
   currentAction = MARCAR_PROFUNDIDAD_SONDAJE;
   btnOff();
-  document.getElementById("profundidad-sondaje").classList.toggle("activo");
+  document.getElementById('profundidad-sondaje').classList.toggle('activo');
 });
 
-document.getElementById("nivel-insersion").addEventListener("click", () => {
+document.getElementById('nivel-insersion').addEventListener('click', () => {
   currentAction = MARCAR_INSERSION_CLINICA;
   btnOff();
-  document.getElementById("nivel-insersion").classList.toggle("activo");
+  document.getElementById('nivel-insersion').classList.toggle('activo');
 });
 
+document
+  .getElementById('sangramiento-sondaje')
+  .addEventListener('click', () => {
+    currentAction = MARCAR_SANGRAMIENTO_SONDAJE;
+    btnOff();
+    document.getElementById('sangramiento-sondaje').classList.toggle('activo');
+  });
 
-document.getElementById("sangramiento-sondaje").addEventListener("click", () => {
-  currentAction = MARCAR_SANGRAMIENTO_SONDAJE;
-  btnOff();
-  document.getElementById("sangramiento-sondaje").classList.toggle("activo");
-});
-
-document.getElementById("mucosa-masticadora").addEventListener("click", () => {
+document.getElementById('mucosa-masticadora').addEventListener('click', () => {
   currentAction = MARCAR_MUCOSA_MASTICADORA;
   btnOff();
-  document.getElementById("mucosa-masticadora").classList.toggle("activo");
+  document.getElementById('mucosa-masticadora').classList.toggle('activo');
 });
 
-document.getElementById("defecto-mucogingival").addEventListener("click", () => {
-  currentAction = MARCAR_DEFECTO_MUCOGINGIVAL;
-  btnOff();
-  document.getElementById("defecto-mucogingival").classList.toggle("activo");
-});
+document
+  .getElementById('defecto-mucogingival')
+  .addEventListener('click', () => {
+    currentAction = MARCAR_DEFECTO_MUCOGINGIVAL;
+    btnOff();
+    document.getElementById('defecto-mucogingival').classList.toggle('activo');
+  });
 
-document.getElementById("movilidad-dentaria").addEventListener("click", () => {
+document.getElementById('movilidad-dentaria').addEventListener('click', () => {
   currentAction = MARCAR_MOVILIDAD_DENTARIA;
   btnOff();
-  document.getElementById("movilidad-dentaria").classList.toggle("activo");
+  document.getElementById('movilidad-dentaria').classList.toggle('activo');
 });
 
-document.getElementById("compromiso-furcacion").addEventListener("click", () => {
-  currentAction = MARCAR_COMPROMISO_FURCACION;
-  btnOff();
-  document.getElementById("compromiso-furcacion").classList.toggle("activo");
-});
+document
+  .getElementById('compromiso-furcacion')
+  .addEventListener('click', () => {
+    currentAction = MARCAR_COMPROMISO_FURCACION;
+    btnOff();
+    document.getElementById('compromiso-furcacion').classList.toggle('activo');
+  });
 
-
-document.getElementById("protesis-defectuosa").addEventListener("click", () => {
+document.getElementById('protesis-defectuosa').addEventListener('click', () => {
   currentAction = MARCAR_PROTESIS_DEFECTUOSA;
   btnOff();
-  document.getElementById("protesis-defectuosa").classList.toggle("activo");
+  document.getElementById('protesis-defectuosa').classList.toggle('activo');
 });
 
-document.getElementById("frenillo").addEventListener("click", () => {
+document.getElementById('frenillo').addEventListener('click', () => {
   currentAction = MARCAR_FRENILLO;
   btnOff();
-  document.getElementById("frenillo").classList.toggle("activo");
+  document.getElementById('frenillo').classList.toggle('activo');
 });
 
-document.getElementById("extrusion").addEventListener("click", () => {
+document.getElementById('extrusion').addEventListener('click', () => {
   currentAction = MARCAR_EXTRUSION;
   btnOff();
-  document.getElementById("extrusion").classList.toggle("activo");
+  document.getElementById('extrusion').classList.toggle('activo');
 });
 
-document.getElementById("inclinacion").addEventListener("click", () => {
+document.getElementById('inclinacion').addEventListener('click', () => {
   currentAction = MARCAR_INCLINACION;
   btnOff();
-  document.getElementById("inclinacion").classList.toggle("activo");
+  document.getElementById('inclinacion').classList.toggle('activo');
 });
 
-document.getElementById("rotacion").addEventListener("click", () => {
+document.getElementById('rotacion').addEventListener('click', () => {
   currentAction = MARCAR_ROTACION;
   btnOff();
-  document.getElementById("rotacion").classList.toggle("activo");
+  document.getElementById('rotacion').classList.toggle('activo');
 });
 
-
-
-
-
-
-
-
-
-
-
-
 //*********************************************************************************************** */
-
-
-
-
-
-
-
-
 
 // DRAWING EVENT HANDLERS
 
-//AQUI ESTA LA ACCION PRINCIPAL DE DIBUJAR AL LEVANTER EL MOUSE 
-canvas.addEventListener('mousedown', function () { mousedown(canvas, event); });
+//AQUI ESTA LA ACCION PRINCIPAL DE DIBUJAR AL LEVANTER EL MOUSE
+canvas.addEventListener('mousedown', function () {
+  mousedown(canvas, event);
+});
 
 canvas.addEventListener('mousemove', function (e) {
   var p = getMousePos(canvas, e);
-  h3.innerHTML = "X: " + p.x + " Y: " + p.y;
+  h3.innerHTML = 'X: ' + p.x + ' Y: ' + p.y;
   mousemove(canvas, event);
 });
 
 canvas.addEventListener('mouseup', mouseup);
 
-
-
-
 // ERASER HANDLING
 function eraser() {
   currentSize = 10;
-  currentColor = "#FFFFFF";
+  currentColor = '#FFFFFF';
   currentAction = SIN_SELECCION;
 }
 
@@ -495,41 +470,39 @@ function getMousePos(canvas, evt) {
   var rect = canvas.getBoundingClientRect();
   return {
     x: evt.clientX - rect.left,
-    y: evt.clientY - rect.top
+    y: evt.clientY - rect.top,
   };
 }
-
 
 //boundaries check
 function esAplicable(pos) {
   //el click  esta dentro de la zona dibujable
-  if (!((pos.x > 20) && (pos.y > 225 && pos.y < 250))) {
-    return true
+  if (!(pos.x > 20 && pos.y > 225 && pos.y < 250)) {
+    return true;
   } else {
-    return false
+    return false;
   }
 }
 
 function esOutside(posx, posy) {
-
-  if ((posx >= 0 && posx <= 20)) {
+  if (posx >= 0 && posx <= 20) {
     return true;
   }
-  if ((posx >= 585 && posx <= 600)) {
-    return true;
-  }
-
-  if ((posy >= 0 && posy <= 20)) {
-    return true;
-  }
-  if ((posy >= 435 && posy <= 500)) {
+  if (posx >= 585 && posx <= 600) {
     return true;
   }
 
-  if ((posx > 20) && (posy > 245 && posy < 270)) {
+  if (posy >= 0 && posy <= 20) {
     return true;
   }
-  return false
+  if (posy >= 435 && posy <= 500) {
+    return true;
+  }
+
+  if (posx > 20 && posy > 245 && posy < 270) {
+    return true;
+  }
+  return false;
 }
 
 // ON MOUSE DOWN DIBUJA UNA LINEA POLIGONAL MIENTRAS SE TENGA EL MOUSE PRESIONADO
@@ -537,28 +510,23 @@ function esOutside(posx, posy) {
 function mousedown(canvas, evt) {
   if (currentAction === SIN_SELECCION) {
     //alert("No has seleccionado ningun comando")
-    return
+    return;
   }
-  (console.log("mousedown CurrenAction: ", currentAction));
   var mousePos = getMousePos(canvas, evt);
-  isMouseDown = true
+  isMouseDown = true;
   var currentPosition = getMousePos(canvas, evt);
-  ctx.moveTo(currentPosition.x, currentPosition.y)
+  ctx.moveTo(currentPosition.x, currentPosition.y);
   ctx.beginPath();
   ctx.lineWidth = currentSize;
-  ctx.lineCap = "round";
+  ctx.lineCap = 'round';
   ctx.strokeStyle = currentColor;
 
   if (currentAction === MARCAR_EXTRACCION) {
-    extraccion(currentPosition.x, currentPosition.y)
+    extraccion(currentPosition.x, currentPosition.y);
   }
   if (currentAction === DIENTE_AUSENTE) {
-    ausente(currentPosition.x, currentPosition.y)
+    ausente(currentPosition.x, currentPosition.y);
   }
-
-
-
-
 }
 
 // ON MOUSE MOVE
@@ -566,10 +534,9 @@ function mousedown(canvas, evt) {
 function mousemove(canvas, evt) {
   if (currentAction === MARCAR_AREA) {
     if (isMouseDown) {
-      console.log("el mouse esta down");
       var currentPosition = getMousePos(canvas, evt);
       if (esAplicable(currentPosition)) {
-        ctx.lineTo(currentPosition.x, currentPosition.y)
+        ctx.lineTo(currentPosition.x, currentPosition.y);
         ctx.stroke();
         store(currentPosition.x, currentPosition.y, currentSize, currentColor);
       }
@@ -581,11 +548,11 @@ function mousemove(canvas, evt) {
 
 function store(x, y, s, c) {
   var line = {
-    "x": x,
-    "y": y,
-    "size": s,
-    "color": c
-  }
+    x: x,
+    y: y,
+    size: s,
+    color: c,
+  };
   linesArray.push(line);
 }
 
@@ -596,12 +563,16 @@ function mouseup(evt) {
   var contorno = canvas.getBoundingClientRect();
 
   if (currentAction === MARCAR_CARIES) {
-
     if (esAplicable(position)) {
-
       //ctx.globalCompositeOperation = 'source-atop';
       ctx.beginPath();
-      ctx.arc(evt.clientX - contorno.left, evt.clientY - contorno.top, 5, 0, 2 * Math.PI);
+      ctx.arc(
+        evt.clientX - contorno.left,
+        evt.clientY - contorno.top,
+        5,
+        0,
+        2 * Math.PI
+      );
       ctx.fillStyle = currentColor;
       ctx.fill();
       ctx.stroke();
@@ -629,98 +600,92 @@ function mouseup(evt) {
   }
 
   if (currentAction === MARCAR_IMPLANTE) {
-    implante(position.x, position.y)
+    implante(position.x, position.y);
   }
 
   if (currentAction === MARCAR_PUENTE_FIJO) {
-    puenteFijo(position.x, position.y)
+    puenteFijo(position.x, position.y);
   }
 
   if (currentAction === MARCAR_REMOVIBLE) {
-    removible(position.x, position.y)
+    removible(position.x, position.y);
   }
 
   if (currentAction === MARCAR_HIPERSENSE) {
-    hipersense(position.x, position.y)
+    hipersense(position.x, position.y);
   }
 
   if (currentAction === MARCAR_APICAL) {
-    apical(position.x, position.y)
+    apical(position.x, position.y);
   }
 
   if (currentAction === MARCAR_FISTULA) {
-    fistula(position.x, position.y)
+    fistula(position.x, position.y);
   }
 
   if (currentAction === MARCAR_EMPAQ_ALIMENTO) {
-    empaqAlim(position.x, position.y)
+    empaqAlim(position.x, position.y);
   }
 
   if (currentAction === MARCAR_INFRAOCLUSION) {
-    infraoclusion(position.x, position.y)
+    infraoclusion(position.x, position.y);
   }
 
   if (currentAction === MARCAR_PROFUNDIDAD_SONDAJE) {
-    profundidadSondaje(position.x, position.y)
+    profundidadSondaje(position.x, position.y);
   }
 
   if (currentAction === MARCAR_INSERSION_CLINICA) {
-    nivelInsersionClinica(position.x, position.y)
+    nivelInsersionClinica(position.x, position.y);
   }
 
   if (currentAction === MARCAR_SANGRAMIENTO_SONDAJE) {
-    sangramientoSondaje(position.x, position.y)
+    sangramientoSondaje(position.x, position.y);
   }
 
   if (currentAction === MARCAR_MUCOSA_MASTICADORA) {
-    mucosaMasticadora(position.x, position.y)
+    mucosaMasticadora(position.x, position.y);
   }
 
   if (currentAction === MARCAR_DEFECTO_MUCOGINGIVAL) {
-    defectoMucogingival(position.x, position.y)
+    defectoMucogingival(position.x, position.y);
   }
 
   if (currentAction === MARCAR_MOVILIDAD_DENTARIA) {
-    movilidadDentariaI(position.x, position.y)
+    movilidadDentariaI(position.x, position.y);
   }
 
   if (currentAction === MARCAR_COMPROMISO_FURCACION) {
-    compromisoFurcacion(position.x, position.y)
+    compromisoFurcacion(position.x, position.y);
   }
 
   if (currentAction === MARCAR_PROTESIS_DEFECTUOSA) {
-    protesisDefectuosa(position.x, position.y)
+    protesisDefectuosa(position.x, position.y);
   }
 
   if (currentAction === MARCAR_FRENILLO) {
-    frenillo(position.x, position.y)
+    frenillo(position.x, position.y);
   }
 
   if (currentAction === MARCAR_EXTRUSION) {
-    extrusion(position.x, position.y)
+    extrusion(position.x, position.y);
   }
 
   if (currentAction === MARCAR_INCLINACION) {
-    inclinacion(position.x, position.y)
+    inclinacion(position.x, position.y);
   }
 
   if (currentAction === MARCAR_ROTACION) {
-    rotacion(position.x, position.y)
+    rotacion(position.x, position.y);
   }
 
-  isMouseDown = false
-  store()
+  isMouseDown = false;
+  store();
 }
 
-
-
-
-
-
-//SIMBOLOGIA DEL ODONTOGRAMA 
+//SIMBOLOGIA DEL ODONTOGRAMA
 
 function extraccion(posx, posy) {
-
   //verificar que no se hizo click en areas no dibujable (fuera del cuadro de odontograma)
   if (esOutside(posx, posy)) {
     return false;
@@ -752,7 +717,7 @@ function ausente(posx, posy) {
 }
 
 function paralelasV(x, y) {
-  ctx.strokeStyle = "rgb(0, 0,255)";
+  ctx.strokeStyle = 'rgb(0, 0,255)';
   ctx.moveTo(x - 3, y);
   ctx.lineTo(x - 3, y - 10);
   ctx.moveTo(x + 2, y);
@@ -765,12 +730,11 @@ function paralelasV(x, y) {
 }
 
 function puenteFijo(x, y) {
-  console.log("puenteFijo");
   if (esOutside(x, y)) {
     return false;
   }
 
-  let xoffset = 12
+  let xoffset = 12;
   x = x - xoffset;
   ctx.beginPath();
   ctx.arc(x, y, 4, 0, 2 * Math.PI);
@@ -788,11 +752,10 @@ function puenteFijo(x, y) {
 }
 
 function implante(x, y) {
-
-  y = y - 5
+  y = y - 5;
 
   ctx.lineWidth = 3;
-  ctx.moveTo(x, y); //295,250  
+  ctx.moveTo(x, y); //295,250
   ctx.lineTo(x + 10, y);
   ctx.moveTo(x, y);
   ctx.lineTo(x - 10, y);
@@ -809,7 +772,6 @@ function implante(x, y) {
 }
 
 function removible(x, y) {
-
   if (esOutside(x, y)) {
     return false;
   }
@@ -818,7 +780,7 @@ function removible(x, y) {
   ctx.lineWidth = 2;
 
   ctx.beginPath();
-  moveTo(x, y)
+  moveTo(x, y);
   ctx.arc(x, y, 3, 0, 2 * Math.PI);
   ctx.fillStyle = currentColor;
   ctx.fill();
@@ -839,15 +801,14 @@ function removible(x, y) {
   ctx.stroke();
 }
 
-
 function hipersense(x, y) {
   if (esOutside(x, y)) {
     return false;
   }
   y = y - 15;
-  x = x - 5
+  x = x - 5;
   ctx.lineWidth = 2;
-  console.log(x, y)
+
   ctx.beginPath();
   moveTo(x, y);
   ctx.lineTo(x, y);
@@ -887,32 +848,26 @@ function fistula(x, y) {
   ctx.stroke();
 }
 
-
 function empaqAlim(x, y) {
   if (esOutside(x, y)) {
     return false;
   }
-  ctx.font = "bold 20px serif"
+  ctx.font = 'bold 20px serif';
 
   ctx.fillStyle = currentColor;
-  ctx.fillText("E", x - 7, y + 5);
-
-
+  ctx.fillText('E', x - 7, y + 5);
 }
 
 function infraoclusion(x, y) {
-
-
-
   x = x - 5;
-  y = y - 5
+  y = y - 5;
 
   ctx.lineWidth = 2;
   ctx.fillStyle = currentColor;
   ctx.moveTo(x + 5, y - 10);
-  ctx.lineTo(x + 5, y)
+  ctx.lineTo(x + 5, y);
   ctx.moveTo(x, y);
-  ctx.lineTo(x + 10, y)
+  ctx.lineTo(x + 10, y);
   ctx.lineTo(x + 5, y + 15);
   ctx.fill();
   ctx.closePath();
@@ -921,10 +876,7 @@ function infraoclusion(x, y) {
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 
-
-
 function extrusion(x, y) {
-
   ctx.lineWidth = 2;
   ctx.fillStyle = currentColor;
   x = x - 5;
@@ -932,12 +884,11 @@ function extrusion(x, y) {
 
   //ctx.lineTo(x + 5, y)
   ctx.moveTo(x, y);
-  ctx.lineTo(x + 5, y - 15)
+  ctx.lineTo(x + 5, y - 15);
   ctx.lineTo(x + 10, y);
 
-
   ctx.moveTo(x + 5, y);
-  ctx.lineTo(x + 5, y + 10)
+  ctx.lineTo(x + 5, y + 10);
 
   ctx.fill();
   ctx.closePath();
@@ -945,27 +896,23 @@ function extrusion(x, y) {
 }
 
 function inclinacion(x, y) {
-
   ctx.lineWidth = 2;
   ctx.fillStyle = currentColor;
   y = y - 5;
   //triangulo
   ctx.moveTo(x, y);
-  ctx.lineTo(x + 10, y + 5)
+  ctx.lineTo(x + 10, y + 5);
   ctx.lineTo(x, y + 10);
 
-
   ctx.moveTo(x + 5, y + 5);
-  ctx.lineTo(x - 10, y + 5)
+  ctx.lineTo(x - 10, y + 5);
 
   ctx.fill();
   ctx.closePath();
   ctx.stroke();
 }
 
-
 function rotacion(x, y) {
-
   ctx.lineWidth = 2;
   ctx.fillStyle = currentColor;
 
@@ -973,7 +920,7 @@ function rotacion(x, y) {
 
   //ctx.lineTo(x + 5, y)
   ctx.moveTo(x, y);
-  ctx.lineTo(x + 5, y - 15)
+  ctx.lineTo(x + 5, y - 15);
   ctx.lineTo(x + 10, y);
   ctx.moveTo(x, y);
   ctx.fill();
@@ -981,18 +928,11 @@ function rotacion(x, y) {
   //ctx.moveTo(x-10, y);
   ctx.arc(x - 5, y, 10, 0, Math.PI, false);
 
-
   //ctx.moveTo(x + 5, y);
   //ctx.lineTo(x + 5, y + 10)
 
-
-
   ctx.stroke();
 }
-
-
-
-
 
 function profundidadSondaje(x, y) {
   if (esOutside(x, y)) {
@@ -1001,9 +941,9 @@ function profundidadSondaje(x, y) {
 
   x = x - 5;
 
-  ctx.font = "bold 20px serif"
+  ctx.font = 'bold 20px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("PS", x - 7, y + 5);
+  ctx.fillText('PS', x - 7, y + 5);
 }
 
 function nivelInsersionClinica(x, y) {
@@ -1012,9 +952,9 @@ function nivelInsersionClinica(x, y) {
   }
 
   x = x - 8;
-  ctx.font = "bold 20px serif"
+  ctx.font = 'bold 20px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("NIC", x - 7, y + 5);
+  ctx.fillText('NIC', x - 7, y + 5);
 }
 
 function sangramientoSondaje(x, y) {
@@ -1023,9 +963,9 @@ function sangramientoSondaje(x, y) {
   }
 
   x = x - 5;
-  ctx.font = "bold 20px serif"
+  ctx.font = 'bold 20px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("S.S", x - 7, y + 5);
+  ctx.fillText('S.S', x - 7, y + 5);
 }
 
 function mucosaMasticadora(x, y) {
@@ -1033,9 +973,9 @@ function mucosaMasticadora(x, y) {
     return false;
   }
   x = x - 5;
-  ctx.font = "bold 20px serif"
+  ctx.font = 'bold 20px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("M.M", x - 7, y + 5);
+  ctx.fillText('M.M', x - 7, y + 5);
 }
 
 function defectoMucogingival(x, y) {
@@ -1043,30 +983,29 @@ function defectoMucogingival(x, y) {
     return false;
   }
   x = x - 8;
-  ctx.font = "bold 20px serif"
+  ctx.font = 'bold 20px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("D.M.G", x - 7, y + 5);
+  ctx.fillText('D.M.G', x - 7, y + 5);
 }
-
 
 function movilidadDentariaI(x, y) {
   if (esOutside(x, y)) {
     return false;
   }
   x = x - 10;
-  ctx.font = "bold 15px serif"
+  ctx.font = 'bold 15px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("M.O.V.", x - 7, y + 5);
+  ctx.fillText('M.O.V.', x - 7, y + 5);
 }
 
 function compromisoFurcacion(x, y) {
   if (esOutside(x, y)) {
     return false;
   }
-  x = x - 5
-  ctx.font = "bold 15px serif"
+  x = x - 5;
+  ctx.font = 'bold 15px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("C.F.", x - 7, y + 5);
+  ctx.fillText('C.F.', x - 7, y + 5);
 }
 
 function protesisDefectuosa(x, y) {
@@ -1074,9 +1013,9 @@ function protesisDefectuosa(x, y) {
     return false;
   }
   x = x - 5;
-  ctx.font = "bold 15px serif"
+  ctx.font = 'bold 15px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("P.D.", x - 7, y + 5);
+  ctx.fillText('P.D.', x - 7, y + 5);
 }
 
 function frenillo(x, y) {
@@ -1084,34 +1023,32 @@ function frenillo(x, y) {
     return false;
   }
 
-  ctx.font = "20px serif"
+  ctx.font = '20px serif';
   ctx.fillStyle = currentColor;
-  ctx.fillText("Y", x - 7, y + 5);
+  ctx.fillText('Y', x - 7, y + 5);
 }
 
-
-
 function boxUp(x, y) {
-  ctx.strokeStyle = "rgb(0, 0,255)";
+  ctx.strokeStyle = 'rgb(0, 0,255)';
   ctx.moveTo(x, y); //300,250
   ctx.lineTo(x, y + 15);
-  ctx.lineTo(x + 15, y + 15)
-  ctx.lineTo(x + 15, y)
+  ctx.lineTo(x + 15, y + 15);
+  ctx.lineTo(x + 15, y);
   ctx.stroke();
 }
 
 function boxDown(x, y) {
-  ctx.strokeStyle = "rgb(0, 0,255)";
-  ctx.moveTo(x, y);//300,245
+  ctx.strokeStyle = 'rgb(0, 0,255)';
+  ctx.moveTo(x, y); //300,245
   ctx.lineTo(x, y - 15);
-  ctx.lineTo(x + 15, y - 15)
-  ctx.lineTo(x + 15, y)
+  ctx.lineTo(x + 15, y - 15);
+  ctx.lineTo(x + 15, y);
   ctx.stroke();
 }
 
 function paralelasH(x, y) {
-  ctx.strokeStyle = "rgb(0, 0,255)";
-  console.log("cordenadas recibidas: ", x, y);
+  ctx.strokeStyle = 'rgb(0, 0,255)';
+
   x = x - 10;
   y = y - 3;
   ctx.moveTo(x, y);
@@ -1120,8 +1057,6 @@ function paralelasH(x, y) {
   ctx.lineTo(x + 20, y + 5);
   ctx.stroke();
 }
-
-
 
 function fractura(x, y) {
   ctx.strokeStyle = currentColor;
@@ -1134,53 +1069,46 @@ function fractura(x, y) {
   ctx.stroke();
 }
 
-
 function lineaPerpendicular() {
   ctx.lineWidth = 3;
   ctx.moveTo(300, 250);
-  ctx.lineTo(290, 270)
+  ctx.lineTo(290, 270);
 
   ctx.stroke();
 }
 
 function extractIcon() {
   ctx.lineWidth = 3;
-  ctx.strokeStyle = "rgb(0, 0,255)";
+  ctx.strokeStyle = 'rgb(0, 0,255)';
 
   ctx.moveTo(290, 250);
-  ctx.lineTo(300, 270)
+  ctx.lineTo(300, 270);
 
   ctx.moveTo(300, 250);
-  ctx.lineTo(290, 270)
+  ctx.lineTo(290, 270);
 
   ctx.stroke();
 }
-
-
-
-
 
 //CALIBRAR POSICION AL MEDIO DEL CUADRANTE (HORIZONTALMENTE)
 
 function calibrarY(y) {
   if (y >= 237 && y <= 460) {
     let newy = 340;
-    return newy
+    return newy;
   }
   if (y >= 0 && y <= 236) {
     let newy = 130;
-    return newy
+    return newy;
   }
   return y;
-};
-
-
+}
 
 function btnOff() {
-  let comandos = document.getElementsByClassName("td-btn");
-  Array.from(comandos).forEach((el) => {
-    if (el.classList.contains("activo")) {
-      el.classList.toggle("activo");
+  let comandos = document.getElementsByClassName('td-btn');
+  Array.from(comandos).forEach(el => {
+    if (el.classList.contains('activo')) {
+      el.classList.toggle('activo');
     }
-  })
+  });
 }

@@ -1,17 +1,15 @@
-const modal__signup = document.getElementById("modal-signup");
-const modal__login = document.getElementById("modal-login");
-const modal__msg = document.getElementById("modal-msg");
-const modal__crud = document.getElementById("modal-crud");
+const modal__signup = document.getElementById('modal-signup');
+const modal__login = document.getElementById('modal-login');
+const modal__msg = document.getElementById('modal-msg');
+const modal__crud = document.getElementById('modal-crud');
 
 //configuracion de materializa para usar los modales
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
   const modals = document.querySelectorAll('.modal');
   M.Modal.init(modals);
 
   const items = document.querySelectorAll('.collapsible');
   M.Collapsible.init(items);
-
-
 });
 
 //fragmentos de los modales para simplificar el archivo index.html
@@ -20,11 +18,11 @@ modal__signup.innerHTML = `<div class="modal-content">
         <br />
         <form id="signup-form">
           <div class="input-field">
-            <input type="email" id="signup-email" required />
+            <input type="email" id="signup-email" autocomplete="username" required />
             <label for="signup-email">Direccion de Correo</label>
           </div>
           <div class="input-field">
-            <input type="password" id="signup-password" required />
+            <input type="password" id="signup-password" autocomplete="current-password"  required />
             <label for="signup-password">Ingrese una clave</label>
           </div>
           <div class="input-field">
@@ -33,22 +31,22 @@ modal__signup.innerHTML = `<div class="modal-content">
           </div>
          
         </form>
-      </div>`
+      </div>`;
 
 modal__login.innerHTML = `<div class="modal-content">
             <h4>Inicio de Sesion</h4>
               <form id="login-form">
                 <div class="input-field">
-                    <input type="email" id="login-email" required />
+                    <input type="email" id="login-email" autocomplete="username" required />
                     <label for="login-email">Ingresa una direccion de correo</label>
                 </div>
                 <div class="input-field">
-                    <input type="password" id="login-password" required />
+                    <input type="password" id="login-password"  autocomplete="current-password" required />
                     <label for="login-password">ingresa una clave (password)</label> 
                 </div>
                 <button class="btn inicio  lime darken-3 z-depth-0">Iniciar Sesion</button>
             </form>
-        </div>`
+        </div>`;
 
 modal__msg.innerHTML = `<div class="modal-content">
       <h4>Administrador</h4>
@@ -56,7 +54,7 @@ modal__msg.innerHTML = `<div class="modal-content">
     </div>
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat lime ">Cerrar</a>
-    </div>`
+    </div>`;
 
 modal__crud.innerHTML = `
 <div class="modal-content">
@@ -71,7 +69,4 @@ modal__crud.innerHTML = `
     <div class="modal-footer">
         <a href="#!" class="modal-close waves-effect waves-green btn-flat lime ">Cerrar</a>
     </div>
-`
-
-
-
+`;

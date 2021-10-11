@@ -12,7 +12,7 @@
 </head>
 
 <body>
-    <!--- version 30-junio-2021  -->
+    <!--- last updated: 11-octubre-2021 -->
     <nav class="navbar">
         <div class="brandName">
             <img class="logo-dental" src="./images/logoDental.jpg" id="img-logo" alt="logo">
@@ -23,7 +23,7 @@
                 <li>
                     <a href="#" class="menu" id="link-paciente">
                         <div class="div-navlinks">
-                            <img class="img-menu" src="images/mask-icon24.png" alt="">
+                            <img class="img-menu" src="images/mask-icon32.png" alt="">
                             <span>Pacientes</span>
                         </div>
                     </a>
@@ -41,6 +41,14 @@
                         <div class="div-navlinks">
                             <img class="img-menu" src="images/dashboard-icon.png" alt="">
                             <span>Dashboard</span>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#" class="menu" id="link-sitioweb">
+                        <div class="div-navlinks">
+                            <img class="img-menu" src="images/www-icon.png" alt="">
+                            <span>Sitio-Web</span>
                         </div>
                     </a>
                 </li>
@@ -75,8 +83,8 @@
 
         <div class="div-tabla">
             <div id="div-pacientes-titulo">
-                <span class="tooltip" data-text="Crear Nueva Historia">
-                    <a href="crearpaciente.html ">
+                <span>
+                    <a href="crearpaciente.html" target="_blank">
                         <img id="img-crear-paciente" src="images/crear-paciente-icon.png" alt="icon">
                     </a>
                 </span>
@@ -90,11 +98,10 @@
                         <span class="icono"><i class="fas fa-search"></i></span>
                     </div>
                     <button id="btn-borrar">X</button>
+
                 </div>
-
-
-
             </div>
+
             <table id="tabla-paciente" class="striped highlight">
                 <thead>
                     <tr>
@@ -118,16 +125,17 @@
 
     <section class="timeline" id="myTimeline">
         <div class="intro" id="myIntro">
-           
+
             <div class="intro-header">
                 <h1>Agenda Pendiente &darr;</h1>
+                <button class="td-btn" id="update-agenda"><i class="fas fa-sync-alt"></i></button>
             </div>
             <div class="horario" id="div-horario">
                 <ol id="listaHoras">
-                   <li>HOY:</li>
+                    <li>HOY:</li>
                 </ol>
             </div>
-           
+
         </div>
         <ul id="ul-timeline">
         </ul>
@@ -139,24 +147,21 @@
     <div id="modal-msg" class="modal"></div>
     <div id="modal-crud" class="modal"></div>
 
-
     <!---librerias (materialize,firebase y myScripts-->
 
     <script src="./materialize/js/materialize.min.js"></script>
-
     <script src="https://www.gstatic.com/firebasejs/8.4.3/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.5/firebase-storage.js"></script>
-    <!---   
-    <script src="https://www.gstatic.com/firebasejs/8.4.0/firebase-functions.js"></script>
-    -->
     <script src="js/firebase-config.js"></script>
-
     <script defer src="js/material-config.js"></script>
     <script defer src="js/auth.js"></script>
     <script defer src="js/index.js"></script>
-    <!-- <script src="js/timeline.js"></script>   -->
+    <script src="js/tableToExcel.js"></script>
+
+
+
 </body>
 
 </html>

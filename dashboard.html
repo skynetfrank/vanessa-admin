@@ -5,10 +5,11 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="images/favicon.png" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <link rel="stylesheet" href="css/dashboard.css">
-  <title>Vanessa-Dashboard</title>
+  <title>Dashboard</title>
 </head>
 
 <body>
@@ -26,41 +27,35 @@
   <label for="dash-toggle" class="dash-side-toggle"><span class="fas fa-bars"></span> </label>
 
   <div class="dash-sidebar">
-    <div class="dash-sidebar-menu">
+    <div class="dash-sidebar-menu" id="btn-general">
       <span class="fas fa-chart-line"></span>
-
       <p>General</p>
     </div>
-    <div class="dash-sidebar-menu">
+    <div class="dash-sidebar-menu" id="btn-pacientes">
       <span class="fas fa-head-side-mask"></span>
       <p>Pacientes</p>
     </div>
-    <div class="dash-sidebar-menu">
+    <div class="dash-sidebar-menu" id="btn-agenda">
       <span class="fas fa-clock"></span>
       <p>Agenda</p>
     </div>
-    <div class="dash-sidebar-menu">
-      <span class="fas fa-teeth-open"></span>
-      <p>Odograma</p>
-    </div>
-    <div class="dash-sidebar-menu">
-      <span class="fas fa-cogs"></span>
-      <p>Configurar</p>
-    </div>
-    <div class="dash-sidebar-menu">
-      <span class="fas fa-user-lock"></span>
-      <p>Acceder</p>
-    </div>
 
-    <div class="dash-sidebar-image">
-      <img src="images/foto-vanessa-2.png" href="" alt="img">
-    </div>
     <div class="dash-sidebar-menu" id="dash-instagram-div">
       <span class="fab fa-instagram"></span>
       <a href="https://www.instagram.com/od.vanessamijares/">
-        <p>@od.vanessamijares</p>
+        <p>Instagram</p>
       </a>
     </div>
+
+    <div class="dash-sidebar-menu" id="btn-salir">
+      <span class="fas fa-times-circle"></span>
+      <p>Salir</p>
+    </div>
+
+    <div class="dash-sidebar-image">
+      <img src="images/foto-vanessa-3.png" href="" alt="img">
+    </div>
+
   </div>
 
 
@@ -84,7 +79,7 @@
         <div class="dash-info">
           <div class="dash-info-detail">
             <h3>Actividad</h3>
-            <p>procedimientos</p>
+            <p>control de asist.</p>
             <h2 id="total-procedimientos">934</h2>
           </div>
           <div class="dash-info-image">
@@ -96,7 +91,7 @@
         <div class="dash-info">
           <div class="dash-info-detail">
             <h3>Pacientes</h3>
-            <p>atendidos</p>
+            <p>registrados</p>
             <h2 id="total-pacientes"></h2>
           </div>
           <div class="dash-info-image">
@@ -108,7 +103,7 @@
         <div class="dash-info">
           <div class="dash-info-detail">
             <h3>Citas Web</h3>
-            <p>Atendidas</p>
+            <p>solicitadas</p>
             <h2 id="total-citas">56</h2>
           </div>
           <div class="dash-info-image">
@@ -116,27 +111,51 @@
           </div>
         </div>
       </div>
-      <div class="agenda">
-
-      </div>
-
       <!--2 cards bottom-->
       <div class="dash-card detail">
         <div class="dash-detail-header">
           <h2>Pacientes</h2>
-          <button>Ver mas...</button>
+          <button id="btn-descargar-excel">Descargar A Excel <i class="fas fa-file-download"></i></button>
         </div>
+
         <!-- table pacientes aqui-->
-        <table id="tabla-dash-pacientes" class="striped highlight">
+        <table id="tabla-dash-pacientes" class="striped highlight" data-cols-width="10,20,15,10,15,15,
+        12,25,10,10,25,25,10,10,10,25,10,25,25,25,25,25,25,25,25,25,25,25,10,25,25">
           <thead>
             <tr>
               <th id="th-id-hidden">id</th>
-              <th><img src='images/mask-icon16.png' /></th>
+              <th data-exclude="true"><img src='images/mask-icon16.png' /></th>
               <th>Nombre</th>
               <th>Apellido</th>
               <th>Edad</th>
-              <th>Telefono</th>
-              <th>Control</th>
+              <th>Celular</th>
+              <th class="ocultar-td">Telefono Local</th>
+              <th class="ocultar-td">Fecha Nac.</th>
+              <th class="ocultar-td">Email</th>
+              <th class="ocultar-td">Genero</th>
+              <th class="ocultar-td">Edo. civil</th>
+              <th class="ocultar-td">Direccion</th>
+              <th class="ocultar-td">contacto</th>
+              <th class="ocultar-td">Estatura</th>
+              <th class="ocultar-td">Peso</th>
+              <th class="ocultar-td">Tratado por Medico?</th>
+              <th class="ocultar-td">Para que Enfermedad?</th>
+              <th class="ocultar-td">Toma Medicamentos</th>
+              <th class="ocultar-td">Cuales Medicamentos?</th>
+              <th class="ocultar-td">En que Dosis?</th>
+              <th class="ocultar-td">Alergico a?</th>
+              <th class="ocultar-td">Otra Alergia</th>
+              <th class="ocultar-td">Antecedentes Personales</th>
+              <th class="ocultar-td">Habitos</th>
+              <th class="ocultar-td">Antecedentes Familiares</th>
+              <th class="ocultar-td">Otra enfermedad?</th>
+              <th class="ocultar-td">Motivo Esta Consulta</th>
+              <th class="ocultar-td">Fecha Ultima consulta</th>
+              <th class="ocultar-td">Motivo Ultima Consulta</th>
+              <th class="ocultar-td">Complicaciones</th>
+              <th class="ocultar-td">Cuales Complicaciones?</th>
+              <th class="ocultar-td">Diagnostico-Tratamiento</th>
+              <th data-exclude="true">Control</th>
             </tr>
           </thead>
           <tbody id="dash-pacientes-tbody">
@@ -166,6 +185,7 @@
 
 
   <script src="js/dashboard.js"></script>
+  <script src="js/tableToExcel.js"></script>
 
 </body>
 

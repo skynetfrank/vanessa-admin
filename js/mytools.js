@@ -1,30 +1,16 @@
-const myModal = document.getElementById("mymodal-div");
-const myModal_btnCerrar = document.getElementById("mymodal-btncerrar");
-const myModalMsg = document.getElementById("mymodal-text");
-const myModal_btnAceptar = document.getElementById("mymodal-btnaceptar");
-const mySpinner = document.getElementById("myspinner-container");
-
-
-/* window.onload = (event) => {
-
-  setTimeout(() => myModal.classList.add("mostrar-modal"), 3000);
-
-} */
-
-myModal_btnCerrar.addEventListener('click', () => {
-  myModalMsg.innerHTML = '';
-  myModal.classList.remove("mostrar-modal");
-});
-
-
-
-function mostrarModal(msg) {
-  myModalMsg.innerHTML = '';
-  myModalMsg.innerHTML = msg;
-  myModal.classList.add("mostrar-modal")
+function formatearFecha(nfecha) {
+  var info = nfecha.split('-').reverse().join('-');
+  return info;
 }
 
+//funcion para convertir fecha a formato AAAA-MM-DD
+function convertirFecha(cfecha) {
+  let year = cfecha.getFullYear();                        // YYYY
+  let month = ("0" + (cfecha.getMonth() + 1)).slice(-2);  // MM
+  let day = ("0" + cfecha.getDate()).slice(-2);           // DD
+  return (year + "-" + month + "-" + day);
+}
 
-myModal_btnAceptar.addEventListener('click', () => {
-  mostrarModal("Esto es una prueba de modal yo!");
-})
+function autoCapital(cadena) {
+  return cadena.charAt(0).toUpperCase() + cadena.slice(1);
+}

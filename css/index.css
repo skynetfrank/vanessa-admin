@@ -7,9 +7,6 @@
 }
 body {
   font-family: sans-serif;
-  padding: 0;
-  margin: 0;
-
   overflow-x: hidden;
 }
 
@@ -29,7 +26,7 @@ h4 {
   position: fixed;
   top: 0;
   line-height: 58px;
-  z-index: 999;
+  z-index: 9999;
 }
 
 .logo-dental {
@@ -115,18 +112,13 @@ li .div-navlinks {
 
 #logout {
   display: none;
-  color: #d500f9;
+  color: black;
   font-weight: 600;
 }
 
 .signup-div {
   margin-top: 5px;
 }
-
-/* .inicio {
-  margin-right: 160px;
-  color: rgb(87, 85, 85);
-} */
 
 i.left {
   margin-right: 5px;
@@ -139,7 +131,7 @@ i.left {
   height: 100vh;
   width: 100%;
   background-color: whitesmoke;
-  background: url("../images/foto-vanessa-2.png") no-repeat top center;
+  background: url("../images/foto-vanessa-3.png") no-repeat top center;
   background-size: cover;
   background-position: 0px 60px;
 }
@@ -170,12 +162,6 @@ i.left {
 }
 
 /* Dental add-ons */
-.btn,
-.btn-large,
-.btn-small,
-.btn-flat {
-  text-transform: none;
-}
 
 .btn.cyan:hover {
   color: rgb(146, 65, 7);
@@ -238,7 +224,7 @@ table td:nth-child(6) {
   text-align: center;
 }
 
-table td:nth-child(6){
+table td:nth-child(6) {
   width: 225px;
 }
 
@@ -306,11 +292,6 @@ table td:nth-child(6){
 }
 
 /* fin de tooltip for buttons */
-
-
-
-
-
 
 .fa-tasks,
 .fa-teeth-open,
@@ -503,10 +484,13 @@ p.bottom10 {
 
 .intro {
   background: #f45b69;
-   margin-top: 60px;
+  margin-top: 60px;
 }
 
 .intro-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 90%;
   max-width: 1200px;
   margin: 0 auto;
@@ -530,31 +514,34 @@ h1 {
   display: none;
 }
 
-.horario{
-   width: 100%;
+.horario {
+  width: 100%;
   height: 50px;
   background-color: teal;
 }
-ol{
+ol {
   list-style: none;
   display: flex;
-   height: 100%;
+  height: 100%;
   justify-content: space-evenly;
   align-items: center;
   max-width: 1024px;
 }
 
-.titulo-horas{
+.titulo-horas {
   font-size: 11px;
-  
 }
 
-.fa-user-alt-slash{
-pointer-events: none;
-}
-
-.fa-trash-alt{
+.fa-user-alt-slash {
   pointer-events: none;
+}
+
+.fa-trash-alt {
+  pointer-events: none;
+  font-size: 20px;
+}
+
+.fa-file-excel {
   font-size: 20px;
 }
 
@@ -568,14 +555,12 @@ pointer-events: none;
   color: #fff;
   overflow-x: hidden;
   padding-bottom: 50px;
- 
 }
 
 .timeline ul {
   background: #456990;
-  padding: 5px 0;
   height: auto;
- min-height: 100vh;
+  min-height: 100vh;
 }
 
 .timeline ul li {
@@ -583,7 +568,7 @@ pointer-events: none;
   position: relative;
   width: 6px;
   margin: 0 auto;
-  padding-top: 50px;
+  padding-top: 20px;
   background: #fff;
 }
 
@@ -642,7 +627,6 @@ time {
   display: block;
   font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 8px;
 }
 
 /* EFFECTS
@@ -700,22 +684,18 @@ time {
     border-width: 8px 16px 8px 0;
     border-color: transparent #f45b69 transparent transparent;
   }
-  .titulo-horas{
+  .titulo-horas {
     display: none;
   }
 
-  .horario{
+  .horario {
     height: 100px;
   }
 
-#listaHoras > li{
-  font-size: 14px; 
-  text-align: center;
-}
-
-
-
-
+  #listaHoras > li {
+    font-size: 14px;
+    text-align: center;
+  }
 }
 
 /* EXTRA/CLIP PATH STYLES
@@ -796,8 +776,6 @@ time {
 }
 
 .btn-eliminar-cita {
-  
- 
   color: black;
   border: none;
   float: right;
@@ -865,3 +843,136 @@ time {
 }
 
 /*FIN DE TOOL TIP COMPONENT  */
+
+/*TOAST PARA MENSAJES  */
+
+.toast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  max-width: 400px;
+  padding: 6px;
+  background: #cccccc;
+  color: #333333;
+  font-family: sans-serif;
+  text-align: center;
+  border: 1px solid #aaaaaa;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.2s, top 0.2s, visibility 0.2s;
+}
+
+.toast--visible {
+  top: 20px;
+  opacity: 1;
+  visibility: visible;
+}
+
+.toast--success {
+  background: #00c02b;
+  border-color: #009d23;
+  color: #ffffff;
+}
+
+.toast--error {
+  background: #d50000;
+  border-color: #ba0000;
+  color: #ffffff;
+}
+
+/*FIN DE TOAST PARA MENSAJES  */
+
+/*==========================
+  MY CUSTOM TOOLTIPS 
+============================*/
+.my-tooltip {
+  position: relative;
+}
+.my-tooltip:before {
+  position: absolute;
+  z-index: 99;
+  display: none;
+  padding: 0.3rem;
+  min-width: 120px;
+  max-width: 100%;
+  border-radius: 0.3rem;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  content: attr(tip);
+  text-align: center;
+}
+.my-tooltip:after {
+  position: absolute;
+  z-index: 1;
+  display: none;
+  width: 0;
+  height: 0;
+  border: 5px solid transparent;
+  content: "";
+}
+.my-tooltip:hover:before,
+.my-tooltip:hover:after {
+  display: inline-block;
+}
+
+.my-tooltip.top:before {
+  bottom: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.my-tooltip.top:after {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-bottom-width: 0;
+  border-top-color: rgba(0, 0, 0, 0.8);
+}
+
+.my-tooltip.bottom:before {
+  top: calc(100% + 5px);
+  left: 50%;
+  transform: translateX(-50%);
+}
+.my-tooltip.bottom:after {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-width: 0;
+  border-bottom-color: rgba(0, 0, 0, 0.8);
+}
+
+.my-tooltip.left:before {
+  top: 50%;
+  right: calc(100% + 5px);
+  transform: translateY(-50%);
+}
+.my-tooltip.left:after {
+  top: 50%;
+  right: 100%;
+  transform: translateY(-50%);
+  border-right-width: 0;
+  border-left-color: rgba(0, 0, 0, 0.8);
+}
+
+.my-tooltip.right:before {
+  top: 50%;
+  left: calc(100% + 5px);
+  transform: translateY(-50%);
+}
+.my-tooltip.right:after {
+  top: 50%;
+  left: 100%;
+  transform: translateY(-50%);
+  border-left-width: 0;
+  border-right-color: rgba(0, 0, 0, 0.8);
+}
+
+/*==========================
+  FIN DE MY CUSTOM TOOLTIPS 
+============================*/

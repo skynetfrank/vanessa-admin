@@ -34,7 +34,7 @@ h2 {
 
 .dash-navbar h4 {
   font-size: 25px;
-  margin-left: -37px;
+  margin-left: -60px;
   margin-top: 13px;
 }
 
@@ -64,7 +64,7 @@ h2 {
   position: fixed;
   z-index: 2;
   top: 11px;
-  left: 20px;
+  left: 5px;
   float: right;
   font-size: 30px;
   cursor: pointer;
@@ -81,22 +81,24 @@ h2 {
 .dash-sidebar {
   position: fixed;
   height: 100%;
-  width: 200px;
+  width: 170px;
   left: 0;
   top: 0;
   padding: 80px 0 20px 0;
   color: rgb(230, 227, 227);
-  background-color: #2d2b98;
+  background-color: #2d2b98ec;
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
 }
 
 .dash-sidebar-menu {
   display: flex;
   align-items: center;
-  padding: 15px 25px;
+  padding: 15px;
   width: 100%;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
+  pointer-events: all;
+  cursor: pointer;
 }
 
 .dash-sidebar-menu.active span {
@@ -105,8 +107,7 @@ h2 {
 
 .dash-sidebar-menu span {
   font-size: 20px;
-  padding-right: 20px;
-  min-width: 45px;
+  min-width: 40px;
 }
 
 .dash-sidebar-menu p {
@@ -119,21 +120,8 @@ h2 {
 }
 
 .dash-sidebar-menu a p {
-  color: deeppink;
-  font-size: 12px;
-  letter-spacing: 1px;
-  font-weight: lighter;
-}
-
-#dash-instagram-div {
-  padding: 0 0 0 22px;
-}
-
-#dash-instagram-div span {
-  font-size: 25px;
-  color: deeppink;
-  padding-right: 5px;
-  min-width: 20px;
+  color: white;
+  font-size: 18px;
 }
 
 .dash-sidebar-menu:hover {
@@ -145,10 +133,10 @@ h2 {
   width: 140px;
   height: 140px;
   object-fit: cover;
-  opacity: 0.5;
+ 
   border-radius: 50%;
   margin-top: 10px;
-  margin-left: 25px;
+  margin-left: 15px;
 }
 
 #dash-toggle:checked ~ .dash-sidebar {
@@ -159,19 +147,23 @@ h2 {
   display: none;
 }
 
+#dash-toggle:checked ~ .dash-sidebar .dash-sidebar-menu {
+  text-align: center;
+}
+
 #dash-toggle:checked ~ .dash-sidebar .dash-sidebar-image {
   display: none;
 }
 
 #dash-toggle:checked ~ main {
-  padding: 3.5rem 2rem 2rem 5.5rem;
+  padding: 3.5rem 2rem 2rem 5rem;
 }
 
 /*-------------------------*/
 
 main {
   min-height: 100%;
-  padding: 3.5rem 1rem 2rem 13rem;
+  padding: 3.5rem 1rem 2rem 11.5rem;
   color: #201f2b;
 }
 
@@ -191,6 +183,10 @@ main {
   background-color: #fff;
   padding: 1rem;
   border-radius: 10px;
+}
+
+.dash-card.detail {
+  padding: 0;
 }
 
 .total1 {
@@ -269,24 +265,23 @@ h2 > span {
 
 .dash-detail-header button {
   height: 30px;
-  width: 120px;
+  width: 150px;
   border: 1px solid rgb(48, 182, 137);
-  background-color: aquamarine;
-  color: #76757c;
+  background-color: #4db6ac;
+  color: white;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.2s ease-in;
-  font-weight: 700;
 }
 
 .dash-detail-header button:hover {
-  background-color: transparent;
-  color: #2d2b98;
+  background-color: rgb(65, 163, 131);
+  color: black;
 }
 
 .dash-detail-header h2 {
   font-size: 20px;
-  padding: 15px 0 2px 0;
+  padding: 0px 0 2px 0;
 }
 
 .td-id-hidden,
@@ -298,6 +293,14 @@ h2 > span {
   width: 100%;
   border-collapse: collapse;
   background: #15a1fe;
+  table-layout: auto;
+}
+td {
+  word-wrap: break-word;
+}
+
+.ocultar-td {
+  display: none;
 }
 
 .detail table:nth-child(odd) {
@@ -480,4 +483,10 @@ h2 > span {
   .detail table {
     font-size: 0.9rem;
   }
+}
+
+.fa-file-download {
+  margin-left: 5px;
+  font-size: 15px;
+  color: #201f2b;
 }

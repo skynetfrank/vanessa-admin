@@ -4,6 +4,16 @@ const cardIngresos = document.getElementById("total-ingresos");
 const cardActividad = document.getElementById("total-procedimientos");
 const cardPacientes = document.getElementById("total-pacientes");
 const cardCitas = document.getElementById("total-citas");
+const btnPacientes = document.getElementById("btn-pacientes");
+const btnAgenda = document.getElementById("btn-agenda");
+const btnSalir = document.getElementById("btn-salir");
+const btnGeneral = document.getElementById("btn-general");
+const btnDescargarExcel = document.getElementById("btn-descargar-excel");
+
+
+
+
+
 let ingresos = 0;
 var pacientex = [];
 
@@ -40,11 +50,25 @@ window.addEventListener('load', async () => {
       queryActividad.forEach((actividad) => {
         let thenum = actividad.data().monto.replace(/\D/g, '');
         ingresos += Number(thenum);
-        console.log("Actividad acumulada: ", ingresos);
+
       })
       //cardIngresos.innerHTML = ingresos.toLocaleString('en-US', { minimumFractionDigits: 2 });
       cardIngresos.innerHTML = 'US$ 0.00';
     });
+
+
+  btnGeneral.addEventListener("click", () => {
+    window.scrollTo(0, 0);
+  });
+
+  btnPacientes.addEventListener("click", () => {
+    window.scrollTo(0, 160);
+  });
+
+  btnSalir.addEventListener("click", () => {
+    window.close();
+  });
+
 
   //CITAS PENDIENTES DASHBOARD
 
@@ -167,28 +191,86 @@ function populateTabla() {
         querysnapshot.forEach((doc) => {
 
           let data = doc.data();
+          let myAlergias = [];
+          let myPersonales = [];
+          let myFamiliares = [];
+          data.alergias.forEach((el1) => {
+            if (el1 === "") {
+              console.log("Alergia vacio");
+            } else {
+              myAlergias.push(el1);
+            }
+          })
+
+          data.antecedentesPersonales.forEach((el2) => {
+            if (el2 === "") {
+              console.log("antecedente Personal vacio");
+            } else {
+              myPersonales.push(el2);
+            }
+          })
+
+          data.antecedentesFamiliares.forEach((el3) => {
+            if (el3 === "") {
+              console.log("Antecedente Familiar vacio");
+            } else {
+              myFamiliares.push(el3);
+            }
+          })
+
+
+
+
+
+
+
+
+
           let row = `<tr> 
                         <td class="td-id-hidden">${doc.id}</td> 
-                        <td><img src='images/mask-icon24.png'/></td>
+                        <td data-exclude="true"><img src='images/mask-icon24.png'/></td>
                         <td>${data.nombre}</td>
                         <td>${data.apellido}</td>
-                        <td>${data.edad}</td>                       
+                        <td data-a-h="center">${data.edad}</td>
                         <td>${data.celular}</td>
+                        <td class="ocultar-td">${data.tlflocal}</td>
+                        <td  class="ocultar-td">${data.fnacimiento}</td>
+                        <td  class="ocultar-td">${data.email}</td>
+                        <td  class="ocultar-td">${data.genero}</td>
+                        <td  class="ocultar-td">${data.edocivil}</td>
+                        <td  class="ocultar-td">${data.direccion1}</td>
+                        <td  class="ocultar-td">${data.contacto}</td>
+                        <td  class="ocultar-td">${data.estatura}</td>
+                        <td  class="ocultar-td">${data.peso}</td>
+                        <td  class="ocultar-td">${data.tratadopormedico == "true" ? "SI" : "NO"}</td>
+                        <td  class="ocultar-td">${data.tratadoporenfermedad}</td>
+                        <td  class="ocultar-td">${data.checktomamedicamento == "true" ? "SI" : "NO"}</td>
+                        <td  class="ocultar-td">${data.cualesmedicamentos}</td>
+                        <td  class="ocultar-td">${data.dosismeds}</td>
+                        <td  class="ocultar-td">${myAlergias}</td>
+                        <td  class="ocultar-td">${data.textalergicootros}</td>
+                        <td  class="ocultar-td">${myPersonales}</td>
+                        <td  class="ocultar-td">${data.texthabitos}</td>
+                        <td  class="ocultar-td">${myFamiliares}</td>
+                        <td  class="ocultar-td">${data.otraenfermedad}</td>
+                        <td  class="ocultar-td">${data.motivoprincipalconsulta}</td>
+                        <td  class="ocultar-td">${data.fechaultimaconsulta}</td>
+                        <td  class="ocultar-td">${data.motivoultimaconsulta}</td>
+                        <td  class="ocultar-td">${data.checkcomplicaciones == "true" ? "SI" : "NO"}</td>
+                        <td  class="ocultar-td">${data.cualescomplicaciones}</td>
+                        <td  class="ocultar-td">${data.texttratamiento}</td>
                         
-                        <td class="ver-paciente">  
-                       
+                        <td class="ver-paciente" data-exclude="true">                       
                            <button class="td-btn" id="btn-control-paciente" data-id=${doc.id}  data-nom=${data.nombre} data-ape=${data.apellido}>
                                <i class="fas fa-search"></i>
-                           </button>
-                      
-                        
-                       
-                          
+                           </button>                        
                         </td>
                      </tr>`;
 
           table.innerHTML += row;
-
+          myAlergias = [];
+          myFamiliares = [];
+          myPersonales = [];
           //filtrar datos en base al buscador  
 
           /*  console.log("textoBusqueda Lenth =>: ", textoBusqueda.length);
@@ -227,13 +309,6 @@ function populateTabla() {
 
         }) //Fin del forEach del querysnapshot (loop de la consulta de todos los pacientes)
 
-
-
-
-        /*  if (table.innerHTML === '') {
-           document.getElementById("mostrar-citas").style.display = "none";
-         } */
-
       });
   }
   allPacientes();
@@ -242,3 +317,24 @@ function populateTabla() {
 };
 
 populateTabla();
+
+
+
+btnDescargarExcel.addEventListener("click", () => {
+  var mytimestamp = new Date();
+  var stampid = mytimestamp.toString();
+
+  TableToExcel.convert(document.getElementById("tabla-dash-pacientes"), {
+    name: "Pacientes-" + stampid.substring(4, 15) + ".xlsx",
+    sheet: {
+      name: "Info-Pacientes"
+    }
+  });
+
+});
+
+
+function myLoop(myArray) {
+
+
+}
